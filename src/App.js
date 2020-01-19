@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useQuery } from '@apollo/react-hooks'
+import gql from "graphql-tag"
 
-function App() {
+const LOGIN_USER = gql`
+  {
+    loginUser(
+      email: "testhaig1@haig.com",
+      password: "password"
+    )
+    {
+      id
+      name
+      email
+      password
+      dateCreated
+      errors
+      totalScoreAllTime
+      totalScoreDay
+      totalScoreWeek
+      totalScoreMonth
+      totalScoreGroup {
+        groupId
+        score
+      }
+      groups
+      completedGoals
+      jwt
+    } 
+  }
+`
+
+const App = () => {
+  const { data, loading, error } = useQuery(LOGIN_USER)
+
+  if (loading) return <p>Connecting to GraphQL...</p>
+  if (error) return <p>Error Connecting to GraphQL</p>
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      YUHEET
     </div>
   );
 }
