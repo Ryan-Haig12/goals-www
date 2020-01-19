@@ -1,34 +1,11 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import gql from "graphql-tag"
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-const LOGIN_USER = gql`
-  {
-    loginUser(
-      email: "testhaig1@haig.com",
-      password: "password"
-    )
-    {
-      id
-      name
-      email
-      password
-      dateCreated
-      errors
-      totalScoreAllTime
-      totalScoreDay
-      totalScoreWeek
-      totalScoreMonth
-      totalScoreGroup {
-        groupId
-        score
-      }
-      groups
-      completedGoals
-      jwt
-    } 
-  }
-`
+import test from './components/test'
+
+import { LOGIN_USER } from './graphql/tags/user'
 
 const App = () => {
   const { data, loading, error } = useQuery(LOGIN_USER)
@@ -37,10 +14,12 @@ const App = () => {
   if (error) return <p>Error Connecting to GraphQL</p>
 
   return (
-    <div className="App">
-      YUHEET
-    </div>
-  );
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/' component={ test } />
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
 export default App;
