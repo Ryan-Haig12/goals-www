@@ -8,6 +8,7 @@ import './App.css'
 import AllGoals from './components/AllGoals'
 import Home from './components/Home'
 import Header from './components/header/Header'
+import Register from './components/auth/Register'
 
 import { LOGIN_USER } from './graphql/tags/user'
 
@@ -22,6 +23,7 @@ const App = () => {
       <Switch>
         <Route exact path='/' component={ Home } />
         <Route path='/allGoals' component={ AllGoals } />
+        <Route path='/register' component={ Register } />
       </Switch>
     </BrowserRouter>
   )

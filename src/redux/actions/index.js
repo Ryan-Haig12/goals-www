@@ -9,27 +9,16 @@ import {
     LOGOUT,
 } from '../actions/types' 
 
-// Taken from another project, needs to be tweaked
-//
-//
 // Register a user
-// export const register = ({ name, email, password, screenName }) => async dispatch => {
-//     const config = {
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     }
-//     const body = JSON.stringify({ name, email, password, screenName })
-
-//     try {
-//         const res = await axios.post('/api/users', body, config)
-//         dispatch({ type: REGISTER_SUCCESS, payload: res.data })
-//         dispatch(loadUser())
-//     } catch(err) {
-//         const errors = err.response.data.errors
-//         if(errors){
-//             console.log( errors.forEach(error => error.msg) )
-//         }
-//         dispatch({ type: REGISTER_FAIL })
-//     }
-// }
+export const createUserAction = ( data, error ) => async dispatch => {
+    try {
+        console.log(data, error)
+        dispatch({ type: REGISTER_SUCCESS, payload: data })
+    } catch(err) {
+        const errors = err.response.data.errors
+        if(errors){
+            console.log( errors.forEach(error => error.msg) )
+        }
+        dispatch({ type: REGISTER_FAIL })
+    }
+}

@@ -27,3 +27,22 @@ export const LOGIN_USER = gql`
     } 
   }
 `
+
+// dunno why I didn't name this registerUser, but that's
+// the waaaaay the news goes
+export const CREATE_USER = gql`
+    mutation CreateUser($newUserData: CreateUserInput!) {
+        createUser(data: $newUserData) {
+            id
+            name
+            email
+            errors
+            dateCreated
+            totalScoreDay
+            totalScoreWeek
+            totalScoreMonth
+            totalScoreAllTime
+            jwt
+        }
+    }
+`
