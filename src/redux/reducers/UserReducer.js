@@ -4,7 +4,7 @@ import {
 } from '../actions/types' 
 
 const INITIAL_STATE = {
-    userData: null
+    userData: undefined
 }
 
 const AuthReducer = (state = INITIAL_STATE, action) => {

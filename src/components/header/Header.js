@@ -16,6 +16,7 @@ const Header = (props) => {
         <StyledHeader>
             <HeaderChunk toLink="/" toText="Home" />
             <HeaderChunk toLink="/allGoals" toText="All Goals" />
+            <HeaderChunk toLink="/register" toText="Register" />
         </StyledHeader>
     )
 }

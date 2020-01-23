@@ -1,21 +1,33 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 const StyledHomePage = styled.div`
     text-align: center;
+    padding-top: 50px;
 `
 
-const Home = props => {
+const Home = ({ userData }) => {
+    if(userData !== undefined) {
+        const { id, name, email, jwt } = userData
+
+        return (
+            <StyledHomePage> 
+                This is the Homepage
+
+                { name && <p>Your name is { name } and you are logged in</p> }
+            </StyledHomePage>
+        )
+    }
     return (
-        <StyledHomePage> 
-            This is the Homepage
-        </StyledHomePage>
+        <p>User Is Un-authenticated</p>
     )
 }
 
-Home.propTypes = {
-
+const mapStateToProps = ( state ) => {
+    return {
+        userData: state.User.userData
+    }
 }
 
-export default Home
+export default connect(mapStateToProps)(Home)

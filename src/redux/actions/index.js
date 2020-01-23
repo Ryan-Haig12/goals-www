@@ -10,15 +10,12 @@ import {
 } from '../actions/types' 
 
 // Register a user
-export const createUserAction = ( data, error ) => async dispatch => {
+export const createUserAction = ( createdUserData, error ) => async dispatch => {
     try {
-        console.log(data, error)
-        dispatch({ type: REGISTER_SUCCESS, payload: data })
+        console.log(createdUserData, error)
+        dispatch({ type: REGISTER_SUCCESS, payload: createdUserData })
     } catch(err) {
-        const errors = err.response.data.errors
-        if(errors){
-            console.log( errors.forEach(error => error.msg) )
-        }
+        console.log(err)
         dispatch({ type: REGISTER_FAIL })
     }
 }
