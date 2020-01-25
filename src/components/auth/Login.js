@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { withFormik, Form } from 'formik'
-import { useMutation } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import { Redirect } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { CREATE_USER } from '../../graphql/tags/user'
-import { createUserAction } from '../../redux/actions'
+import { LOGIN_USER } from '../../graphql/tags/user'
+import { loginUserAction } from '../../redux/actions'
 import { StyledForm, StyledInputBar, StyledButton } from '../syledComponents/auth'
 
 const createInputBar = ({ type, placeholder, handleChange, values }) => {
@@ -25,10 +25,8 @@ const createInputBar = ({ type, placeholder, handleChange, values }) => {
 
 const renderInputBars = ( handleChange, values ) => {
     const inputTypes = {
-        name: { type: 'name', placeholder: 'Name' },
         email: { type: 'email', placeholder: 'Email' },
         password: { type: 'password', placeholder: 'Password' },
-        password2: { type: 'password2', placeholder: 'Password2' },
     }
     let inputBars = []
     Object.keys(inputTypes).forEach(key => {
@@ -37,38 +35,44 @@ const renderInputBars = ( handleChange, values ) => {
     return inputBars
 }
 
-const Register = ({ values, errors, touched, isSubmitting, createUserAction, handleChange }) => {
-    
-    const [ createUser, { data, loading, error }] = useMutation(CREATE_USER)
+const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleChange }) => {
+    const [ loginUser, { data }] = useLazyQuery(LOGIN_USER)
+    const [ graphQLErrors, setGraphQLErrors ] = useState([])
+    const [ queryCanFire, setQueryCanFire ] = useState(true)
 
-    if(error) {
-        console.log(error)
-    }
+    // If the graphQL query has run, and there are no errors
+    // load the user into redux and nav back to the homepage
+    // if errors, show errors
+    if(data !== undefined) {
+        if(data.loginUser.errors !== undefined && queryCanFire) {
+            setGraphQLErrors(data.loginUser.errors)
+            setQueryCanFire(false)
+        }
 
-    if(!loading && data) {
-        console.log(data)
-        createUserAction(data.createUser)
-        return <Redirect to="/" />
+        if(data.loginUser.errors === null) {
+            loginUserAction(data.loginUser)
+            return <Redirect to="/" />
+        }
     }
 
     return (
         <Form
             onSubmit={ async e => {
                 e.preventDefault()
+                setGraphQLErrors([])
+                setQueryCanFire(true)
 
-                const { name, email, password, password2 } = values
-                await createUser({ variables: { newUserData: { name, email, password, password2 } } })
+                const { email, password } = values
+                await loginUser({ variables: { email, password }})
             }}
         >
             <StyledForm>
 
-                <h1>Register</h1>
+                <h1>Login</h1>
                 { renderInputBars(handleChange, values) }
-                { touched.name && errors.name && <p>{ errors.name }</p> }
                 { touched.email && errors.email && <p>{ errors.email }</p> }
                 { touched.password && errors.password && <p>{ errors.password }</p> }
-                { touched.password2 && errors.password2 && <p>{ errors.password2 }</p> }
-
+                { graphQLErrors && <p>{ graphQLErrors[0] }</p> }
                 <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
             </StyledForm>   
         </Form>
@@ -78,17 +82,14 @@ const Register = ({ values, errors, touched, isSubmitting, createUserAction, han
 const FormkEnhancer = withFormik({
     mapPropsToValues: (props) => {
         return {
-            name: '',
             email: '',
             password: '',
-            password2: ''
         }
     },
     validationSchema: Yup.object().shape({
-        name: Yup.string().required('Name is Required'),
         email: Yup.string().email('Email is not valid').required('Email is required'),
-        password: Yup.string().min(6, 'Password must be 6 characters or longer').required('Password is required')
+        password: Yup.string().required('Password is required'),
     })
-})(Register)
+})(Login)
 
-export default connect(null, { createUserAction })(FormkEnhancer)
+export default connect(null, { loginUserAction })(FormkEnhancer)

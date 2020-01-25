@@ -1,10 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import HeaderChunk from './HeaderChunk'
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
     height: 60px;
     width: 100%;
     background: #579190;
@@ -16,13 +15,8 @@ const Header = (props) => {
         <StyledHeader>
             <HeaderChunk toLink="/" toText="Home" />
             <HeaderChunk toLink="/allGoals" toText="All Goals" />
-            <HeaderChunk toLink="/register" toText="Register" />
         </StyledHeader>
     )
-}
-
-Header.propTypes = {
-
 }
 
 export default Header

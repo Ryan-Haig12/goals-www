@@ -1,5 +1,4 @@
-import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -8,25 +7,31 @@ import './App.css'
 import AllGoals from './components/AllGoals'
 import Home from './components/Home'
 import Header from './components/header/Header'
-import Register from './components/auth/Register'
+import UnAuthenticatedPage from './components/auth/UnAuthenticatedPage'
 
-import { LOGIN_USER } from './graphql/tags/user'
+const App = ({ userData }) => {
 
-const App = () => {
-  // const { data, loading, error } = useQuery(LOGIN_USER)
-  // if (loading) return <p>Connecting to GraphQL...</p>
-  // if (error) return <p>Error Connecting to GraphQL</p>
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false)
+  useEffect(() => {
+    setIsAuthenticated( userData !== undefined && userData.jwt !== undefined )
+  }, [ userData ])
 
   return (
     <BrowserRouter>
-      <Header />
+      { isAuthenticated ? <Header /> : null }
       <Switch>
         <Route exact path='/' component={ Home } />
         <Route path='/allGoals' component={ AllGoals } />
-        <Route path='/register' component={ Register } />
+        <Route path='/unauthed' component={ UnAuthenticatedPage } />
       </Switch>
     </BrowserRouter>
   )
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    userData: state.User.userData
+  }
+}
+
+export default connect(mapStateToProps)(App)
