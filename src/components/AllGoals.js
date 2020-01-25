@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
 
@@ -21,6 +20,10 @@ const AllGoalCards = styled.div`
     grid-template-columns: repeat(6, 1fr);
     width: 100%;
     justify: center;
+`
+
+const StyledGoalList = styled.div`
+    
 `
 
 const renderGoalCards = ( allGoals ) => {
@@ -46,14 +49,15 @@ const renderGoalCards = ( allGoals ) => {
             currentCategoryList = []
         }
         currentCategoryList.push(goal)
+        return 0 // <- just to remove console error
     })
     splitCategories[currentCategory] = currentCategoryList // <- be sure to add the last array to the object
 
     let sortedCardsAndHeaders = []
     for(let category in splitCategories) {
-        //sortedCardsAndHeaders.push(<h2>{ category }</h2>)
         sortedCardsAndHeaders.push(splitCategories[category].map(goal => {
             const ptsMessage = goal.points > 1 ? 'points' : 'point'
+            
             return (
                 <div key={ goal.id }>
                     <StyledGoalCard cardColor={ categoryColors[goal.category] } >
@@ -64,29 +68,45 @@ const renderGoalCards = ( allGoals ) => {
             )
         }))
     }
+
     return sortedCardsAndHeaders
+}
 
-    // return allGoals.map(goal => {
-
-    //     const ptsMessage = goal.points > 1 ? 'points' : 'point'
-    //     return (
-    //         <StyledGoalCard cardColor={ categoryColors[goal.category] } key={ goal.id } >
-    //             <h4>{ goal.title} ({ goal.points } { ptsMessage })</h4>
-    //             <h4>{ goal.category }</h4>
-    //         </StyledGoalCard>
-    //     )
-    // })
+// returns array of different goals in a set, i really don't know what to call this so.....
+const createGoalList = ( arrayOfGoals ) => {
+    return arrayOfGoals.map(list => {
+        // grab the category from the first react component card in arrayOfGoals
+        // reaching into a nested react component in a react component, neato
+        const category = list[0].props.children.props.children[1].props.children
+        return (
+            <StyledGoalList>
+                <h2>{ category }</h2>
+                { list }
+            </StyledGoalList>
+        )
+    })
 }
 
 const AllGoals = (props) => {
 
     const { data, loading, error } = useQuery(GET_ALL_GOALS)
+    const [ allRenderedGoals, setAllRenderedGoals ] = useState([])
+
+    useEffect(() => {
+        if(data !== undefined && data !== null) {
+            setAllRenderedGoals(renderGoalCards(data.getAllGoals))
+        }
+        return
+    }, [ data ])
+
+    if(error) {
+        console.log(error)
+    }
     
     if(!loading) {
-        
         return (
             <AllGoalCards>
-                { renderGoalCards(data.getAllGoals) }
+                { createGoalList(allRenderedGoals) }
             </AllGoalCards>
         )
     }
@@ -94,9 +114,4 @@ const AllGoals = (props) => {
         <p>Loading All Goals...</p>
     )
 }
-
-AllGoals.propTypes = {
-
-}
-
 export default AllGoals
