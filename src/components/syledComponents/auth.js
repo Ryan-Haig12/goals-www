@@ -64,3 +64,7 @@ export const StyledButton = styled.button`
     cursor: pointer;
     bottom: 0%;
 `
+
+export const StyledErrorMessage = styled.p`
+    color: red;
+`

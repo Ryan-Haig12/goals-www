@@ -16,14 +16,19 @@ const StyledGoalCard = styled.div`
 `
 
 const AllGoalCards = styled.div`
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
     width: 100%;
     justify: center;
 `
 
 const StyledGoalList = styled.div`
-    
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+`
+
+const StyledCategoryHeader = styled.div`
+    margin: 30px;
+    margin-top: 50px;
+    border-bottom: 1px solid black;
 `
 
 const renderGoalCards = ( allGoals ) => {
@@ -49,12 +54,14 @@ const renderGoalCards = ( allGoals ) => {
             currentCategoryList = []
         }
         currentCategoryList.push(goal)
-        return 0 // <- just to remove console error
+        return 0 // <- just to remove console
     })
     splitCategories[currentCategory] = currentCategoryList // <- be sure to add the last array to the object
 
     let sortedCardsAndHeaders = []
     for(let category in splitCategories) {
+        // sort goals into alphabetical order by name of card inside of each category
+        splitCategories[category].sort((a, b) => (a.title > b.title) ? 1 : -1)
         sortedCardsAndHeaders.push(splitCategories[category].map(goal => {
             const ptsMessage = goal.points > 1 ? 'points' : 'point'
             
@@ -74,15 +81,18 @@ const renderGoalCards = ( allGoals ) => {
 
 // returns array of different goals in a set, i really don't know what to call this so.....
 const createGoalList = ( arrayOfGoals ) => {
+
     return arrayOfGoals.map(list => {
+        console.log('yeet', list)
+
         // grab the category from the first react component card in arrayOfGoals
         // reaching into a nested react component in a react component, neato
         const category = list[0].props.children.props.children[1].props.children
         return (
-            <StyledGoalList>
-                <h2>{ category }</h2>
-                { list }
-            </StyledGoalList>
+            <div key={ category } >
+                <StyledCategoryHeader>{ category }</StyledCategoryHeader>
+                <StyledGoalList key={ list[0].key }>{ list }</StyledGoalList>       
+            </div>
         )
     })
 }
@@ -96,7 +106,6 @@ const AllGoals = (props) => {
         if(data !== undefined && data !== null) {
             setAllRenderedGoals(renderGoalCards(data.getAllGoals))
         }
-        return
     }, [ data ])
 
     if(error) {
@@ -104,6 +113,7 @@ const AllGoals = (props) => {
     }
     
     if(!loading) {
+        console.log(allRenderedGoals)
         return (
             <AllGoalCards>
                 { createGoalList(allRenderedGoals) }

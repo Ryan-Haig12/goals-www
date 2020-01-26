@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 
 import { LOGIN_USER } from '../../graphql/tags/user'
 import { loginUserAction } from '../../redux/actions'
-import { StyledForm, StyledInputBar, StyledButton } from '../syledComponents/auth'
+import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../syledComponents/auth'
 
 const createInputBar = ({ type, placeholder, handleChange, values }) => {
     return (
@@ -33,6 +33,14 @@ const renderInputBars = ( handleChange, values ) => {
         inputBars.push( createInputBar({ type: inputTypes[key].type, placeholder: inputTypes[key].placeholder, handleChange, values }) )
     })
     return inputBars
+}
+
+const renderErrors = ( errors ) => {
+    return errors.map(err => {
+        return (
+            <StyledErrorMessage>{ err }</StyledErrorMessage>
+        )
+    })
 }
 
 const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleChange }) => {
@@ -72,7 +80,7 @@ const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleC
                 { renderInputBars(handleChange, values) }
                 { touched.email && errors.email && <p>{ errors.email }</p> }
                 { touched.password && errors.password && <p>{ errors.password }</p> }
-                { graphQLErrors && <p>{ graphQLErrors[0] }</p> }
+                { graphQLErrors && renderErrors(graphQLErrors) }
                 <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
             </StyledForm>   
         </Form>
