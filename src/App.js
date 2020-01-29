@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import './App.css'
 
 import AllGoals from './components/AllGoals'
+import CreateGroup from './components/groups/CreateGroup'
 import Home from './components/Home'
 import Header from './components/header/Header'
 import UnAuthenticatedPage from './components/auth/UnAuthenticatedPage'
@@ -23,6 +24,7 @@ const App = ({ userData }) => {
         <Route exact path='/' component={ Home } />
         <Route path='/allGoals' component={ AllGoals } />
         <Route path='/unauthed' component={ UnAuthenticatedPage } />
+        <Route path="/createGroup" component={ CreateGroup } />
       </Switch>
     </BrowserRouter>
   )

@@ -30,6 +30,7 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
         <StyledHeader>
             <HeaderChunk toLink="/" toText="Home" />
             <HeaderChunk toLink="/allGoals" toText="All Goals" />
+            <HeaderChunk toLink="/createGroup" toText="Create Group" />
             { isAuthenticated ? <StyledLogoutButton onClick={() => { logoutUserAction() }} >Logout</StyledLogoutButton> : null }
         </StyledHeader>
     )

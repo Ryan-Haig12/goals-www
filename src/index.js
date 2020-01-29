@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
+import { ApolloLink, concat } from 'apollo-link'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
@@ -14,13 +15,25 @@ import App from './App'
 import reducers from './redux/reducers/index'
 
 // Set up Apollo client
-const cache = new InMemoryCache();
-const link = new HttpLink({
+const cache = new InMemoryCache()
+
+const httpLink = new HttpLink({
   uri: graphqlEndpoint
 })
+
+// add the authorization to the headers
+const authMiddleware = new ApolloLink((operation, forward) => {
+  operation.setContext({
+    headers: {
+      authorization: `Bearer ${ localStorage.getItem('userJWT') || null }`
+    }
+  })
+  return forward(operation);
+})
+
 const client = new ApolloClient({
   cache,
-  link
+  link: concat(authMiddleware, httpLink),
 })
 
 // Set up Redux and Redux dev tools
