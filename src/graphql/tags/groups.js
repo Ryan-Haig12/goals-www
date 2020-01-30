@@ -11,3 +11,16 @@ export const CREATE_GROUP = gql`
         }
     }
 `
+
+export const GET_GROUP = gql`
+    query GetGroup($groupId: ID!) {
+        getGroup(groupId: $groupId) {
+            id
+            groupCreator
+            groupName
+            groupMembers
+            errors
+        }
+        
+    }
+`

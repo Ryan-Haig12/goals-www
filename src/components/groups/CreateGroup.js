@@ -40,7 +40,8 @@ const CreateGroup = ({ isSubmitting, isAuthenticated, values, handleChange, crea
 
         if(data.createGroup.errors === null) {
             createGroupAction(data.createGroup) // create group action/reducer etc
-            return <Redirect to="/" />
+            const route = `/group/${ data.createGroup.id }`
+            return <Redirect to={ route } />
         }
     }
 
