@@ -49,7 +49,7 @@ const renderErrors = ( errors ) => {
 
 const Register = ({ values, errors, touched, isSubmitting, createUserAction, handleChange }) => {
     
-    const [ createUser, { data, loading, error }] = useMutation(CREATE_USER)
+    const [ createUser, { data, error }] = useMutation(CREATE_USER)
     const [ graphQLErrors, setGraphQLErrors ] = useState([])
     const [ queryCanFire, setQueryCanFire ] = useState(true)
 

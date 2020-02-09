@@ -24,3 +24,14 @@ export const GET_GROUP = gql`
         
     }
 `
+
+export const GET_ALL_USERS_GROUPS = gql`
+    query GetAllUsersGroups($userId: ID!) {
+        getAllUsersGroups(userId: $userId) {
+            id
+            errors
+            groupName
+            groupCreator
+        } 
+    }
+`

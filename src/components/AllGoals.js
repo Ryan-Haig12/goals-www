@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
-import { GET_ALL_GOALS } from '../graphql/tags/goals'
+import { GET_DEFAULT_GOALS } from '../graphql/tags/goals'
 
 const StyledGoalCard = styled.div`
     border: 1px solid black;
@@ -99,7 +100,7 @@ const createGoalList = ( arrayOfGoals ) => {
 
 const AllGoals = (props) => {
 
-    const { data, loading, error } = useQuery(GET_ALL_GOALS)
+    const { data, loading, error } = useQuery(GET_DEFAULT_GOALS)
     const [ allRenderedGoals, setAllRenderedGoals ] = useState([])
 
     useEffect(() => {
@@ -124,4 +125,5 @@ const AllGoals = (props) => {
         <p>Loading All Goals...</p>
     )
 }
-export default AllGoals
+
+export default connect(null, {  })(AllGoals)

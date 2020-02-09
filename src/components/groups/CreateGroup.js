@@ -20,18 +20,13 @@ const renderErrors = ( errors ) => {
 }
 
 const CreateGroup = ({ isSubmitting, isAuthenticated, values, handleChange, createGroupAction }) => {
-    const [ createGroup, { data, loading, error }] = useMutation(CREATE_GROUP)
+    const [ createGroup, { data, error }] = useMutation(CREATE_GROUP)
     const [ graphQLErrors, setGraphQLErrors ] = useState([])
     const [ queryCanFire, setQueryCanFire ] = useState(true)
 
     if(!isAuthenticated) return <UnAuthedNavHome />
-
-    if(error) {
-        console.log(error)
-    }
-
-    console.log('dfsadfs', data)
-
+    if(error) console.log(error)
+    
     if(data !== undefined) {
         if(data.createGroup.errors !== undefined && queryCanFire) {
             setGraphQLErrors(data.createGroup.errors)
