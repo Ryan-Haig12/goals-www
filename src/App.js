@@ -7,7 +7,7 @@ import './App.css'
 
 import AllGoals from './components/AllGoals'
 import CreateGroup from './components/groups/CreateGroup'
-import Home from './components/Home'
+import Home from './components/home/Home'
 import Header from './components/header/Header'
 import UnAuthenticatedPage from './components/auth/UnAuthenticatedPage'
 import GroupLandingPage from './components/groups/GroupLandingPage'
@@ -15,8 +15,8 @@ import GroupLandingPage from './components/groups/GroupLandingPage'
 import {
   GET_DEFAULT_GOALS,
   //GET_CUSTOM_GOAL,
-  GET_CUSTOM_GOALS_BY_GROUPID_ARRAY }
-from './graphql/tags/goals'
+  GET_CUSTOM_GOALS_BY_GROUPID_ARRAY 
+} from './graphql/tags/goals'
 import { GET_ALL_USERS_GROUPS } from './graphql/tags/groups'
 import { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction } from './redux/actions/index'
 

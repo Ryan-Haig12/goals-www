@@ -10,7 +10,8 @@ import {
     GET_DEFAULT_GOALS,
     GET_ALL_USERS_GROUPS,
     GET_CUSTOM_GOAL,
-    GET_CUSTOM_GOALS_BY_GROUPID_ARRAY
+    GET_CUSTOM_GOALS_BY_GROUPID_ARRAY,
+    GET_ALL_GROUPS_FULL_DATA
 } from '../actions/types' 
 
 // Register a user
@@ -73,6 +74,7 @@ export const getAllUserGroupsAction = ( userId, allUserGroups ) => async dispatc
 
     try {
         dispatch({ type: GET_ALL_USERS_GROUPS, payload: { groupsMember, groupsAdmin }})
+        dispatch({ type: GET_ALL_GROUPS_FULL_DATA, payload: allUserGroups })
     } catch(err) {
         console.log(err)
     }
@@ -104,4 +106,3 @@ export const getCustomGoalsByGroupIdArrayAction = ( allCustomGoals ) => async di
         console.log(err)
     }
 }
-//GET_CUSTOM_GOALS_BY_GROUPID_ARRAY

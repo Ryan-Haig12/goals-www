@@ -6,6 +6,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL'
 export const USER_LOADED = 'USER_LOADED'
 export const LOGOUT = 'LOGOUT'
 export const LOGOUT_ERROR = 'LOGOUT_ERROR'
+export const GET_USER = 'GET_USER'
 
 // Goals
 export const GET_ALL_GOALS = 'GET_ALL_GOALS'
@@ -27,3 +28,4 @@ export const DELETE_GROUP = 'DELETE_GROUP'
 export const CREATE_NEW_GROUP_MESSAGE = 'CREATE_NEW_GROUP_MESSAGE'
 export const GET_ALL_GROUP_MESSAGE = 'GET_ALL_GROUP_MESSAGE'
 export const GET_ALL_USERS_GROUPS = 'GET_ALL_USERS_GROUPS'
+export const GET_ALL_GROUPS_FULL_DATA = 'GET_ALL_GROUPS_FULL_DATA'

@@ -4,22 +4,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { GET_DEFAULT_GOALS } from '../graphql/tags/goals'
-
-const StyledGoalCard = styled.div`
-    border: 1px solid black;
-    margin: 5px;
-    width: 150px;
-    height: 200px;
-    text-align: center;
-    align-self: center;
-    background: ${ props => props.cardColor };
-    box-shadow: 5px 10px 8px 10px #b5eeff;
-`
-
-const AllGoalCards = styled.div`
-    width: 100%;
-    justify: center;
-`
+import { StyledGoalCard, AllGoalCards } from './syledComponents/GoalCard'
 
 const StyledGoalList = styled.div`
     display: grid;
@@ -84,8 +69,6 @@ const renderGoalCards = ( allGoals ) => {
 const createGoalList = ( arrayOfGoals ) => {
 
     return arrayOfGoals.map(list => {
-        console.log('yeet', list)
-
         // grab the category from the first react component card in arrayOfGoals
         // reaching into a nested react component in a react component, neato
         const category = list[0].props.children.props.children[1].props.children
@@ -114,7 +97,6 @@ const AllGoals = (props) => {
     }
     
     if(!loading) {
-        console.log(allRenderedGoals)
         return (
             <AllGoalCards>
                 { createGoalList(allRenderedGoals) }

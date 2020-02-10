@@ -42,3 +42,30 @@ export const CREATE_USER = gql`
         }
     }
 `
+
+// i think grabbing user data might be handy here or there
+// idk felt cute, might delete later
+export const GET_USER = gql`
+    query GetUser($userId: ID, $userEmail: String) {
+        getUser(id: $userId, email: $userEmail) {
+            id
+            name
+            email
+            password
+            dateCreated
+            errors
+            totalScoreAllTime
+            totalScoreDay
+            totalScoreWeek
+            totalScoreMonth
+            totalScoreGroup {
+                groupId
+                score
+            }
+            groups
+            completedGoals
+            jwt
+        }
+    }
+    
+`
