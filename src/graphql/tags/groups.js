@@ -32,6 +32,32 @@ export const GET_ALL_USERS_GROUPS = gql`
             errors
             groupName
             groupCreator
+            groupMembers
         } 
+    }
+`
+
+export const ADD_USER_TO_GROUP = gql`
+    mutation AddUserToGroup($addUserData: AddUserToGroupInput!){
+        addUserToGroup(data: $addUserData) {
+            id
+            groupCreator
+            groupName
+            groupMembers
+            errors
+        }
+    }
+`
+
+
+export const ADD_USER_TO_GROUP_BY_EMAIL = gql`
+    mutation AddUserToGroupByEmail($addUserData: AddUserToGroupInput!){
+        addUserToGroupByEmail(data: $addUserData) {
+            id
+            groupCreator
+            groupName
+            groupMembers
+            errors
+        }
     }
 `

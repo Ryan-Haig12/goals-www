@@ -11,7 +11,8 @@ import {
     GET_ALL_USERS_GROUPS,
     GET_CUSTOM_GOAL,
     GET_CUSTOM_GOALS_BY_GROUPID_ARRAY,
-    GET_ALL_GROUPS_FULL_DATA
+    GET_ALL_GROUPS_FULL_DATA,
+    ADD_USER_TO_GROUP
 } from '../actions/types' 
 
 // Register a user
@@ -102,6 +103,15 @@ export const getCustomGoalsAction = ( customGoals ) => async dispatch => {
 export const getCustomGoalsByGroupIdArrayAction = ( allCustomGoals ) => async dispatch => {
     try {
         dispatch({ type: GET_CUSTOM_GOALS_BY_GROUPID_ARRAY, payload: allCustomGoals })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+// Add a brand new user to the list of users belonging to a group
+export const addUserToGroupAction = ( groupData ) => async dispatch => {
+    try {
+        dispatch({ type: ADD_USER_TO_GROUP, payload: groupData })
     } catch(err) {
         console.log(err)
     }

@@ -9,16 +9,6 @@ export const LOGIN_USER = gql`
             password
             dateCreated
             errors
-            totalScoreAllTime
-            totalScoreDay
-            totalScoreWeek
-            totalScoreMonth
-            totalScoreGroup {
-                groupId
-                score
-            }
-            groups
-            completedGoals
             jwt
         } 
     }
@@ -34,10 +24,6 @@ export const CREATE_USER = gql`
             email
             errors
             dateCreated
-            totalScoreDay
-            totalScoreWeek
-            totalScoreMonth
-            totalScoreAllTime
             jwt
         }
     }
@@ -54,18 +40,23 @@ export const GET_USER = gql`
             password
             dateCreated
             errors
-            totalScoreAllTime
-            totalScoreDay
-            totalScoreWeek
-            totalScoreMonth
-            totalScoreGroup {
-                groupId
-                score
-            }
-            groups
-            completedGoals
             jwt
         }
     }
     
+`
+
+// grab multiple users by userId
+export const GET_USERS_BY_ID = gql`
+    query GetUsersById($userIds: [ID]!) {
+        getMultipleUsersById(userIds: $userIds) {
+            id
+            name
+            email
+            password
+            dateCreated
+            errors
+            jwt   
+        }
+    }
 `
