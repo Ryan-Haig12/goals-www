@@ -18,6 +18,10 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
                 defaultGoals: [ ...action.payload ]
             }
         case GET_CUSTOM_GOAL:
+            return {
+                ...state,
+                customGoals: action.payload
+            }
         case GET_CUSTOM_GOALS_BY_GROUPID_ARRAY:
             return {
                 ...state,

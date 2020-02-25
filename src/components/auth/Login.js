@@ -75,7 +75,6 @@ const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleC
             }}
         >
             <StyledForm>
-
                 <h1>Login</h1>
                 { renderInputBars(handleChange, values) }
                 { touched.email && errors.email && <p>{ errors.email }</p> }

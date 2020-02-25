@@ -4,7 +4,7 @@ import {
     ERROR_CREATING_GROUP,
     GET_ALL_USERS_GROUPS,
     GET_ALL_GROUPS_FULL_DATA,
-    ADD_USER_TO_GROUP
+    ADD_USER_TO_GROUP,
 } from '../actions/types'
 
 const INITIAL_STATE = {

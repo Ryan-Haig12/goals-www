@@ -27,15 +27,18 @@ export const GET_CUSTOM_GOAL = gql`
 `
 
 export const GET_CUSTOM_GOALS_BY_GROUPID_ARRAY = gql`
-    query GetCustomGoalByGroupIdArray($groupIds: [ID]) {
+    query GetAllCustomGoalsByGroupArray($groupIds: [ID]) {
         getAllCustomGoalsByGroupArray(groupIds: $groupIds) {
-            id
             groupId
-            category
-            title
-            points
-            errors
-            customGoalCreator
+            customGoals {
+                id
+                groupId
+                category
+                customGoalCreator
+                errors
+                points
+                title
+            }
         }
     }
 `   

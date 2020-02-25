@@ -15,12 +15,12 @@ import GroupLandingPage from './components/groups/GroupLandingPage'
 import {
   GET_DEFAULT_GOALS,
   //GET_CUSTOM_GOAL,
-  GET_CUSTOM_GOALS_BY_GROUPID_ARRAY 
+  GET_CUSTOM_GOALS_BY_GROUPID_ARRAY
 } from './graphql/tags/goals'
 import { GET_ALL_USERS_GROUPS } from './graphql/tags/groups'
-import { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction } from './redux/actions/index'
+import { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction, getCustomGoalsByGroupIdArrayAction } from './redux/actions/index'
 
-const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction, groupIds }) => {
+const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction, groupIds, getCustomGoalsByGroupIdArrayAction }) => {
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
   const { data: defaultGoals, loading, error } = useQuery(GET_DEFAULT_GOALS)
   const [
@@ -49,7 +49,7 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
       getDefaultGoalsAction(defaultGoals.getAllGoals)
       getAllUsersGroupsQuery()
     }
-  }, [isAuthenticated, loading, getDefaultGoalsAction, defaultGoals, getAllUsersCustomGoalsQuery, getAllUsersGroupsQuery, groupIds])
+  }, [isAuthenticated, loading, getDefaultGoalsAction, defaultGoals, getAllUsersGroupsQuery, groupIds])
 
   useEffect(() => {
     if(usersGroups !== undefined && usersGroups !== null && isAuthenticated) {
@@ -65,9 +65,10 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
 
   useEffect(() => {
     if(usersCustomGoalsData !== undefined && usersCustomGoalsData !== null && isAuthenticated) {
-      getCustomGoalsAction(usersCustomGoalsData.getAllCustomGoalsByGroupArray)
+      console.log('useEffect App.js', usersCustomGoalsData)
+      getCustomGoalsByGroupIdArrayAction(usersCustomGoalsData.getAllCustomGoalsByGroupArray)
     }
-  }, [usersCustomGoalsData, isAuthenticated, getCustomGoalsAction])
+  }, [usersCustomGoalsData, isAuthenticated, getCustomGoalsByGroupIdArrayAction])
 
   return (
     <BrowserRouter>
@@ -93,4 +94,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction })(App)
+export default connect(mapStateToProps, { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction, getCustomGoalsByGroupIdArrayAction })(App)
