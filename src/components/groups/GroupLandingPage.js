@@ -6,6 +6,7 @@ import { GET_USERS_BY_ID } from '../../graphql/tags/user'
 
 import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
+import GroupGoalsTable from './GroupGoalsTable'
 import GroupMessageBoard from './GroupMessageBoard'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 
@@ -49,7 +50,8 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 { <h3>Members</h3> }
                 <ol>{ mapMembers(currentGroup.groupMembers) }</ol>
                 { isAdmin ? <AdminOptions group={ currentGroup } /> : '' }
-                { <FinishedGoalForm goalData={{ userId, groupId: currentGroup.id }} /> }
+                <FinishedGoalForm groupData={{ userId, groupId: currentGroup.id }} />
+                <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} />
                 <GroupMessageBoard />
             </div>
         )

@@ -103,7 +103,7 @@ export const getCustomGoalsAction = ( customGoals ) => async dispatch => {
 // grab all custom goals from mongo by groupid array
 // saves to Goals reducer
 export const getCustomGoalsByGroupIdArrayAction = ( allCustomGoals ) => async dispatch => {
-    console.log('action', allCustomGoals)
+    //console.log('action', allCustomGoals)
     try {
         dispatch({ type: GET_CUSTOM_GOALS_BY_GROUPID_ARRAY, payload: allCustomGoals })
     } catch(err) {

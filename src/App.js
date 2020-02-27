@@ -18,9 +18,9 @@ import {
   GET_CUSTOM_GOALS_BY_GROUPID_ARRAY
 } from './graphql/tags/goals'
 import { GET_ALL_USERS_GROUPS } from './graphql/tags/groups'
-import { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction, getCustomGoalsByGroupIdArrayAction } from './redux/actions/index'
+import { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsByGroupIdArrayAction } from './redux/actions/index'
 
-const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction, groupIds, getCustomGoalsByGroupIdArrayAction }) => {
+const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, groupIds, getCustomGoalsByGroupIdArrayAction }) => {
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
   const { data: defaultGoals, loading, error } = useQuery(GET_DEFAULT_GOALS)
   const [
@@ -65,7 +65,7 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
 
   useEffect(() => {
     if(usersCustomGoalsData !== undefined && usersCustomGoalsData !== null && isAuthenticated) {
-      console.log('useEffect App.js', usersCustomGoalsData)
+      //console.log('useEffect App.js', usersCustomGoalsData)
       getCustomGoalsByGroupIdArrayAction(usersCustomGoalsData.getAllCustomGoalsByGroupArray)
     }
   }, [usersCustomGoalsData, isAuthenticated, getCustomGoalsByGroupIdArrayAction])
@@ -94,4 +94,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsAction, getCustomGoalsByGroupIdArrayAction })(App)
+export default connect(mapStateToProps, { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsByGroupIdArrayAction })(App)
