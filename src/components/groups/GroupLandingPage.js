@@ -52,7 +52,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 { isAdmin ? <AdminOptions group={ currentGroup } /> : '' }
                 { goalIsSelected && <FinishedGoalForm groupData={{ userId, groupId: currentGroup.id }} /> }
                 <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} />
-                <GroupMessageBoard />
+                <GroupMessageBoard groupData={{ userId, groupId: currentGroup.id }} />
             </div>
         )
     }

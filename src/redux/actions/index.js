@@ -13,7 +13,9 @@ import {
     GET_CUSTOM_GOALS_BY_GROUPID_ARRAY,
     GET_ALL_GROUPS_FULL_DATA,
     ADD_USER_TO_GROUP,
-    FINISHED_GOAL_SELECTED
+    FINISHED_GOAL_SELECTED,
+    CREATE_NEW_GROUP_MESSAGE,
+    GET_ALL_GROUP_MESSAGE
 } from '../actions/types' 
 
 // Register a user
@@ -126,6 +128,15 @@ export const addUserToGroupAction = ( groupData ) => async dispatch => {
 export const onGoalSelectedHandlerAction = ( goalData ) => async dispatch => {
     try {
         dispatch({ type: FINISHED_GOAL_SELECTED, payload: goalData })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+// grab every groupMessage currently existing for the given groupId
+export const getAllGroupMessages = ( allMessages ) => async dispatch => {
+    try {
+        dispatch({ type: GET_ALL_GROUP_MESSAGE, payload: allMessages })
     } catch(err) {
         console.log(err)
     }
