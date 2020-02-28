@@ -3,11 +3,14 @@ import gql from 'graphql-tag'
 export const GET_DEFAULT_GOALS = gql`
     query {
         getAllGoals {
-            id
-            title
-            points
             category
-            errors
+            goals {
+                id
+                points
+                category
+                title
+                errors
+            }
         }
     }
 `

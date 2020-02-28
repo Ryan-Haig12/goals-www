@@ -5,14 +5,16 @@ import { onGoalSelectedHandlerAction } from '../../redux/actions/index'
 
 // render portion of table for default goals
 const defaultGoalsTable = ( defaultGoals, onGoalSelectedHandlerAction ) => {
-    return defaultGoals.map(goal => {
-        return (
-            <tr key={ goal.id } onClick={ () => onGoalSelectedHandlerAction(goal) } >
-                <td>{goal.category}</td>
-                <td>{goal.title}</td>
-                <td>{goal.points}</td>
-            </tr>
-        )
+    return defaultGoals.map(category => {
+        return category.goals.map(goal => {
+            return (
+                <tr key={ goal.id } onClick={ () => onGoalSelectedHandlerAction(goal) } >
+                    <td>{goal.category}</td>
+                    <td>{goal.title}</td>
+                    <td>{goal.points}</td>
+                </tr>
+            )
+        })
     })
 }
 
