@@ -1,18 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-// handler for when a goal is clicked
-// fires off 
-const goalOnClickHandler = ( goal ) => {
-    console.log('clickedfddfdf', goal.id)
-    return <p>test</p>
-}
+import { onGoalSelectedHandlerAction } from '../../redux/actions/index'
 
 // render portion of table for default goals
-const defaultGoalsTable = ( defaultGoals ) => {
+const defaultGoalsTable = ( defaultGoals, onGoalSelectedHandlerAction ) => {
     return defaultGoals.map(goal => {
         return (
-            <tr key={ goal.id } onClick={ () => goalOnClickHandler(goal) } >
+            <tr key={ goal.id } onClick={ () => onGoalSelectedHandlerAction(goal) } >
                 <td>{goal.category}</td>
                 <td>{goal.title}</td>
                 <td>{goal.points}</td>
@@ -22,7 +17,7 @@ const defaultGoalsTable = ( defaultGoals ) => {
 }
 
 // render portion of table for custom goals
-const customGoalsTable = ( customGoalsAllGroups, groupId ) => {
+const customGoalsTable = ( customGoalsAllGroups, groupId, onGoalSelectedHandlerAction ) => {
     const group = customGoalsAllGroups.filter(group => group.groupId === groupId)[0]
     const customGoals = group.customGoals
     
@@ -30,7 +25,7 @@ const customGoalsTable = ( customGoalsAllGroups, groupId ) => {
 
     return customGoals.map(goal => {
         return (
-            <tr key={ goal.id } onClick={ () => goalOnClickHandler(goal) } >
+            <tr key={ goal.id } onClick={ () => onGoalSelectedHandlerAction(goal) } >
                 <td>{goal.category}</td>
                 <td>{goal.title}</td>
                 <td>{goal.points}</td>
@@ -39,7 +34,7 @@ const customGoalsTable = ( customGoalsAllGroups, groupId ) => {
     })
 }
 
-const GroupGoalsTable = ({ defaultGoals, customGoalsAllGroups, groupData }) => {
+const GroupGoalsTable = ({ defaultGoals, customGoalsAllGroups, groupData, onGoalSelectedHandlerAction }) => {
     const { userId, groupId } = groupData
 
     return (
@@ -53,8 +48,8 @@ const GroupGoalsTable = ({ defaultGoals, customGoalsAllGroups, groupData }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    { defaultGoalsTable(defaultGoals) }
-                    { customGoalsTable(customGoalsAllGroups, groupId) }
+                    { defaultGoalsTable(defaultGoals, onGoalSelectedHandlerAction) }
+                    { customGoalsTable(customGoalsAllGroups, groupId, onGoalSelectedHandlerAction) }
                 </tbody>
             </table>
         </div>
@@ -68,4 +63,4 @@ const mapStateToProps = ( state ) => {
     }
 }
 
-export default connect(mapStateToProps)(GroupGoalsTable)
+export default connect(mapStateToProps, { onGoalSelectedHandlerAction })(GroupGoalsTable)

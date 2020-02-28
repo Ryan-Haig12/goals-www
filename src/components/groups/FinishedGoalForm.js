@@ -1,19 +1,68 @@
 import React, { useState } from 'react'
+import { withFormik, Form } from 'formik'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
+import * as Yup from 'yup'
 
 import { ADD_FINISHED_GOAL } from '../../graphql/tags/finishedGoal'
 
+import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../syledComponents/auth'
 
-const FinishedGoalForm = ({ groupData }) => {
+const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selectedGoal, touched, handleBlur }) => {
     const [ CreateFinishedGoal, { data, error } ] = useMutation(ADD_FINISHED_GOAL)
     const { userId, groupId } = groupData
+    const [ successMessage, setSuccessMessage ] = useState()
+
+    if(error) console.log(error)
 
     return (
-        <div>
-            <h2>Log Finished Goal</h2>
-        </div>
+        <Form 
+            onSubmit={ async e => {
+                e.preventDefault()
+
+                // prevents sending graphql a null value for minutesLogged
+                if(!values.minutesLogged) return
+
+                const newFinishedGoal = await CreateFinishedGoal({ variables: {finishedGoalData: {
+                    goalId: selectedGoal.id,
+                    userId,
+                    groupId,
+                    timeCompleted: Date.now().toString(),
+                    minutesLogged: parseInt(values.minutesLogged),
+                    points: selectedGoal.points
+                }}})
+
+                if(newFinishedGoal) setSuccessMessage(`Goal Logged Successfully!`)
+                await setTimeout(() => {
+                    setSuccessMessage(null)
+                }, 3000)
+            }}
+        >
+            <StyledForm>
+                Log Your Completed Goal!
+                <p>Category: { selectedGoal.category }</p>
+                <p>Title: { selectedGoal.title }</p>
+                <p>Points: { selectedGoal.points }</p>
+                <div>
+                    <select
+                        name="minutesLogged"
+                        value={values.minutesLogged}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        style={{ display: 'block' }}
+                    >
+                        <option value="" label="Log Time Here" />
+                        <option value="15" label="15 Minutes" />
+                        <option value="30" label="30 Minutes" />
+                        <option value="45" label="45 Minutes" />
+                        <option value="60" label="60 Minutes" />
+                    </select>
+                </div>
+                { successMessage && <p>{ successMessage }</p> }
+                <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
+            </StyledForm>
+        </Form>
     )
 }
 
@@ -21,4 +70,21 @@ FinishedGoalForm.propTypes = {
     goalData: PropTypes.object
 }
 
-export default connect()(FinishedGoalForm)
+const mapStateToProps = state => {
+    return {
+        selectedGoal: state.FinishedGoals.currentGoalData
+    }
+}
+
+const FormikEnhancer = withFormik({
+    mapPropsToValues: (props) => {
+        return {
+            minutesLogged: ''
+        }
+    },
+    validationSchema: Yup.object().shape({
+        minutesLogged: Yup.string().required('minutesLogged is Required')
+    })
+})(FinishedGoalForm)
+
+export default connect(mapStateToProps)(FormikEnhancer)

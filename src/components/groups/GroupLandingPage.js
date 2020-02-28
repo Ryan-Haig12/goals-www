@@ -16,7 +16,7 @@ const mapMembers = (allMembers) => {
     })
 }
 
-const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId }) => {
+const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, goalIsSelected }) => {
     const [ currentGroup, setCurrentGroup ] = useState(null)
     const [ isAdmin, setIsAdmin ] = useState(false)
     const [ getAllUsers, { data, loading, error } ] = useLazyQuery(GET_USERS_BY_ID, { variables: { userIds: currentGroup ? currentGroup.groupMembers : [] } })
@@ -50,7 +50,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 { <h3>Members</h3> }
                 <ol>{ mapMembers(currentGroup.groupMembers) }</ol>
                 { isAdmin ? <AdminOptions group={ currentGroup } /> : '' }
-                <FinishedGoalForm groupData={{ userId, groupId: currentGroup.id }} />
+                { goalIsSelected && <FinishedGoalForm groupData={{ userId, groupId: currentGroup.id }} /> }
                 <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} />
                 <GroupMessageBoard />
             </div>
@@ -65,6 +65,7 @@ const mapStateToProps = (state) => {
     const groupsAdmin = state.Group.groupsAdmin ? state.Group.groupsAdmin : []
     return {
         isAuthenticated: state.User.isAuthenticated,
+        goalIsSelected: state.FinishedGoals.goalIsSelected,
         userId,
         usersGroups,
         groupsAdmin

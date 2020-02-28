@@ -12,7 +12,8 @@ import {
     GET_CUSTOM_GOAL,
     GET_CUSTOM_GOALS_BY_GROUPID_ARRAY,
     GET_ALL_GROUPS_FULL_DATA,
-    ADD_USER_TO_GROUP
+    ADD_USER_TO_GROUP,
+    FINISHED_GOAL_SELECTED
 } from '../actions/types' 
 
 // Register a user
@@ -115,6 +116,16 @@ export const getCustomGoalsByGroupIdArrayAction = ( allCustomGoals ) => async di
 export const addUserToGroupAction = ( groupData ) => async dispatch => {
     try {
         dispatch({ type: ADD_USER_TO_GROUP, payload: groupData })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+// store currently selected finished goal to redux
+// solution to having the FinishedGoalForm and GroupGoalsTable
+export const onGoalSelectedHandlerAction = ( goalData ) => async dispatch => {
+    try {
+        dispatch({ type: FINISHED_GOAL_SELECTED, payload: goalData })
     } catch(err) {
         console.log(err)
     }
