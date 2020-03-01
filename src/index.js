@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
-import { ApolloLink, concat } from 'apollo-link'
+import { ApolloLink, concat, split } from 'apollo-link'
+import { WebSocketLink } from 'apollo-link-ws'
+import { getMainDefinition } from 'apollo-utilities'
 import { ApolloProvider } from '@apollo/react-hooks'
+import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
@@ -14,12 +17,17 @@ import { graphqlEndpoint } from './graphql/envVars'
 import App from './App'
 import reducers from './redux/reducers/index'
 
-// Set up Apollo client
-const cache = new InMemoryCache()
-
 const httpLink = new HttpLink({
   uri: graphqlEndpoint
 })
+
+// subscription uri
+const wsClient = new SubscriptionClient('ws://localhost:4000/')
+const wsLink = new WebSocketLink(wsClient)
+const subLink = split(({ query }) => {
+  const { kind, operation } = getMainDefinition(query)
+  return kind === 'OperationDefinition' && operation === 'subscription'
+}, wsLink, httpLink)
 
 // add the authorization to the headers
 const authMiddleware = new ApolloLink((operation, forward) => {
@@ -32,8 +40,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 })
 
 const client = new ApolloClient({
-  cache,
-  link: concat(authMiddleware, httpLink),
+  cache: new InMemoryCache(),
+  link: concat(authMiddleware, subLink),
 })
 
 // Set up Redux and Redux dev tools

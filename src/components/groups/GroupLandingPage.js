@@ -8,6 +8,7 @@ import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
 import GroupGoalsTable from './GroupGoalsTable'
 import GroupMessageBoard from './Messages/GroupMessageBoard'
+import InputBar from './Messages/InputBar'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 
 const mapMembers = (allMembers) => {
@@ -53,6 +54,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 { goalIsSelected && <FinishedGoalForm groupData={{ userId, groupId: currentGroup.id }} /> }
                 <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} />
                 <GroupMessageBoard groupData={{ userId, groupId: currentGroup.id }} />
+                <InputBar groupData={{ userId, groupId: currentGroup.id }} />
             </div>
         )
     }
