@@ -7,15 +7,10 @@ import { GET_USERS_BY_ID } from '../../graphql/tags/user'
 import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
 import GroupGoalsTable from './GroupGoalsTable'
+import GroupMembers from './GroupMembers'
 import GroupMessageBoard from './Messages/GroupMessageBoard'
 import InputBar from './Messages/InputBar'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
-
-const mapMembers = (allMembers) => {
-    return allMembers.map(member => {
-        return <li key={ member.id } >{ member.name }</li>
-    })
-}
 
 const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, goalIsSelected }) => {
     const [ currentGroup, setCurrentGroup ] = useState(null)
@@ -49,7 +44,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
             <div>
                 <h1>Welcome to { currentGroup.groupName }</h1>
                 { <h3>Members</h3> }
-                <ol>{ mapMembers( data.getMultipleUsersById ) }</ol>
+                <GroupMembers groupId={currentGroup.id} allMembers={data.getMultipleUsersById} />
                 { isAdmin ? <AdminOptions group={ currentGroup } /> : '' }
                 { goalIsSelected && <FinishedGoalForm groupData={{ userId, groupId: currentGroup.id }} /> }
                 <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} />
