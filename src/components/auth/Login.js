@@ -38,7 +38,7 @@ const renderInputBars = ( handleChange, values ) => {
 const renderErrors = ( errors ) => {
     return errors.map(err => {
         return (
-            <StyledErrorMessage>{ err }</StyledErrorMessage>
+            <StyledErrorMessage key={ err } >{ err }</StyledErrorMessage>
         )
     })
 }

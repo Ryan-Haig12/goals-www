@@ -37,7 +37,7 @@ const customGoalsTable = ( customGoalsAllGroups, groupId, onGoalSelectedHandlerA
 }
 
 const GroupGoalsTable = ({ defaultGoals, customGoalsAllGroups, groupData, onGoalSelectedHandlerAction }) => {
-    const { userId, groupId } = groupData
+    const { groupId } = groupData
 
     return (
         <div>

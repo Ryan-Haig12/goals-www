@@ -16,6 +16,8 @@ const GroupMembers = ({ allMembers, groupId }) => {
         }
     }})
 
+    if(error) console.log(error)
+
     useEffect(() => {
         if(data !== undefined && data !== null) {
             setMemberData(data.calcUserScore)

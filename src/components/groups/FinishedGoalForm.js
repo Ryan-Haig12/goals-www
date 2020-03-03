@@ -7,10 +7,10 @@ import * as Yup from 'yup'
 
 import { ADD_FINISHED_GOAL } from '../../graphql/tags/finishedGoal'
 
-import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../syledComponents/auth'
+import { StyledForm, StyledButton } from '../syledComponents/auth'
 
 const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selectedGoal, touched, handleBlur }) => {
-    const [ CreateFinishedGoal, { data, error } ] = useMutation(ADD_FINISHED_GOAL)
+    const [ CreateFinishedGoal, { error } ] = useMutation(ADD_FINISHED_GOAL)
     const { userId, groupId } = groupData
     const [ successMessage, setSuccessMessage ] = useState()
 

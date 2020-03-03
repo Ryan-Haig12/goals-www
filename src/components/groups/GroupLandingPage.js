@@ -19,7 +19,10 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
 
     useEffect(() => {
         usersGroups.map(group => {
-            if(group.id === match.params.groupId) setCurrentGroup(group)
+            if(group.id === match.params.groupId) {
+                setCurrentGroup(group)
+            }
+            return 0
         })
     }, [ usersGroups, match.params.groupId ])
 
@@ -27,14 +30,14 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
         if(currentGroup !== null && currentGroup !== undefined) {
             getAllUsers()
         }
-    }, [ currentGroup ])
+    }, [ currentGroup, getAllUsers ])
     if(error) console.log(error)
 
     useEffect(() => {
         if(!loading && data && currentGroup !== null & currentGroup !== undefined) {
             if(groupsAdmin.includes(currentGroup.id.toString())) setIsAdmin(true)
         }
-    }, [ loading, data, currentGroup, setIsAdmin ])
+    }, [ loading, data, currentGroup, setIsAdmin, groupsAdmin ])
 
     if(!isAuthenticated) return <UnAuthedNavHome />
     if(!currentGroup) return <p>Loading...</p>

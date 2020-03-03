@@ -5,12 +5,12 @@ import { withFormik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 
-import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../../syledComponents/auth'
+import { StyledForm, StyledInputBar, StyledButton } from '../../syledComponents/auth'
 import { CREATE_NEW_GROUP_MESSAGE } from '../../../graphql/tags/groupMessages'
 
 const InputBar = ({ isSubmitting, values, handleChange, groupData }) => {
     const { userId, groupId } = groupData
-    const [ createNewGroupMessage, { data, error }] = useMutation(CREATE_NEW_GROUP_MESSAGE, { variables: {
+    const [ createNewGroupMessage, { error }] = useMutation(CREATE_NEW_GROUP_MESSAGE, { variables: {
         newGroupMessageData: {
             message: values.messageText,
             authorId: userId,

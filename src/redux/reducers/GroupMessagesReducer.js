@@ -1,4 +1,7 @@
-import { CREATE_NEW_GROUP_MESSAGE, GET_ALL_GROUP_MESSAGE } from '../actions/types'
+import { 
+    //CREATE_NEW_GROUP_MESSAGE,
+    GET_ALL_GROUP_MESSAGE
+} from '../actions/types'
 
 const INITIAL_STATE = {
     groupMessages: [],

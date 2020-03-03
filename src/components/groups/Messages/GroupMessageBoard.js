@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery, useSubscription } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -26,10 +26,10 @@ const mapGroupMessages = ( allMessages ) => {
 }
 
 const GroupMessageBoard = ({ groupData, getAllGroupMessages }) => {
-    const { userId, groupId } = groupData
+    const { groupId } = groupData
     const [ messagesToRender, setMessagesToRender ] = useState(null)
     const [ update, setUpdate ] = useState(false)
-    const { data: allGroupMessageData, loading, error } = useQuery(GET_ALL_GROUP_MESSAGE, {
+    const { data: allGroupMessageData, error } = useQuery(GET_ALL_GROUP_MESSAGE, {
         variables: { groupId }
     })
     const { data, error: subError } = useSubscription(
@@ -54,7 +54,7 @@ const GroupMessageBoard = ({ groupData, getAllGroupMessages }) => {
             setMessagesToRender(d)
             setUpdate(true)
         }
-    }, [ data, setMessagesToRender ])
+    }, [ data, setMessagesToRender, messagesToRender ])
 
     useEffect(() => {
         setUpdate(false)
