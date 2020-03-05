@@ -12,13 +12,10 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
-//import { graphqlEndpoint, graphqlWebservice } from './graphql/envVars'
+import { graphqlEndpoint, graphqlWebservice } from './graphql/envVars'
 
 import App from './App'
 import reducers from './redux/reducers/index'
-
-const graphqlEndpoint="https://goals-graphql.herokuapp.com/"
-const graphqlWebservice="ws://goals-graphql.herokuapp.com/"
 
 const httpLink = new HttpLink({
   uri: graphqlEndpoint
