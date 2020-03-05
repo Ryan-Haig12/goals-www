@@ -12,7 +12,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
-import { graphqlEndpoint } from './graphql/envVars'
+import { graphqlEndpoint, graphqlWebservice } from './graphql/envVars'
 
 import App from './App'
 import reducers from './redux/reducers/index'
@@ -22,8 +22,7 @@ const httpLink = new HttpLink({
 })
 
 // subscription uri
-// const wsClient = new SubscriptionClient('ws://localhost:4000/')
-const wsClient = new SubscriptionClient('ws://goals-graphql.herokuapp.com/')
+const wsClient = new SubscriptionClient(graphqlWebservice)
 const wsLink = new WebSocketLink(wsClient)
 const subLink = split(({ query }) => {
   const { kind, operation } = getMainDefinition(query)
