@@ -5,6 +5,7 @@
 package-lock.json
 /.pnp
 .pnp.js
+src/graphql/vars/dev.js
 
 # testing
 /coverage

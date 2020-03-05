@@ -1,6 +1,5 @@
-module.exports = {
-    //graphqlEndpoint: process.env.GRAPHQL_ENDPOINT || 'http://localhost:4000' || 'https://goals-graphql.herokuapp.com/'
-    //graphqlEndpoint: process.env.DEV_ENV === 'true' ? process.env.GRAPHQL_ENDPOINT : 'http://localhost:4000',
-    graphqlWebservice: process.env.GRAPQL_WS || 'ws://localhost:4000/',
-    graphqlEndpoint: process.env.GRAPHQL_ENDPOINT || 'http://localhost:4000'
-}
+if(process.env.NODE_ENV === 'production') {
+    module.exports = require('./vars/prod');
+  } else {
+    module.exports = require('./vars/dev');
+  }
