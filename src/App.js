@@ -20,6 +20,9 @@ import { GET_ALL_USERS_GROUPS } from './graphql/tags/groups'
 import { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsByGroupIdArrayAction } from './redux/actions/index'
 
 const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, groupIds, getCustomGoalsByGroupIdArrayAction }) => {
+  // const token = localStorage.getItem('token')
+  // console.log(token.length)
+  // const authed = token.length > 1 ? false : true
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
   const { data: defaultGoals, loading, error } = useQuery(GET_DEFAULT_GOALS)
   const [

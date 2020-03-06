@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useQuery } from '@apollo/react-hooks'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import Login from './Login'
 import Register from './Register'
+
+import { GET_USER_BY_JWT } from '../../graphql/tags/user'
+import { loginUserAction } from '../../redux/actions/index'
 
 const StyledTextDiv = styled.div`
     float: left;
@@ -16,12 +21,21 @@ const StyledAuthDiv = styled.div`
     margin-right: 10px;
 `
 
-const UnAuthenticatedPage = (props) => {
+const UnAuthenticatedPage = ({ loginUserAction }) => {
 
     // true - render register
     // false - render login
     // probably a better way to do this but I'm drunk idc
     const [ renderRegisterModal, setRenderRegisterModal ] = useState(true)
+
+    const { data: loggedInUserData } = useQuery(GET_USER_BY_JWT)
+
+    useEffect(() => {
+        if(loggedInUserData !== undefined && loggedInUserData !== null) {
+            console.log(loggedInUserData.getUserByJWT)
+            loginUserAction(loggedInUserData.getUserByJWT)
+        }
+    }, [ loggedInUserData ])
 
     return (
         <>
@@ -52,5 +66,4 @@ const UnAuthenticatedPage = (props) => {
     )
 }
 
-export default UnAuthenticatedPage
-
+export default connect(null, { loginUserAction })(UnAuthenticatedPage)

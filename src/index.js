@@ -16,7 +16,8 @@ import App from './App'
 import reducers from './redux/reducers/index'
 
 const httpLink = new HttpLink({
-  uri: 'https://goals-graphql.herokuapp.com/'
+  //uri: 'https://goals-graphql.herokuapp.com/'
+  uri: 'http://localhost:4000/'
 })
 
 // subscription uri

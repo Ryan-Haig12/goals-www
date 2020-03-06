@@ -60,3 +60,18 @@ export const GET_USERS_BY_ID = gql`
         }
     }
 `
+
+// Get user by JWT, keeps user logged in on refresh
+export const GET_USER_BY_JWT = gql`
+    query GetUserByJWT {
+        getUserByJWT {
+            id
+            name
+            email
+            password
+            dateCreated
+            errors
+            jwt
+        }
+    }
+`

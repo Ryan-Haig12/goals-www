@@ -22,8 +22,9 @@ const mapUsersGroups = ( usersGroups ) => {
 }
 
 const Home = ({ userData, usersGroups }) => {
-
+    //const token = localStorage.getItem('token')
     const [ usersGroupsCards, setUsersGroupsCards ] = useState(null)
+
     useEffect(() => {
         if(usersGroups !== undefined && usersGroups !== null) {
             setUsersGroupsCards(mapUsersGroups(usersGroups))
@@ -33,6 +34,7 @@ const Home = ({ userData, usersGroups }) => {
     // User is authed
     if(userData !== undefined) {
         const { name, email } = userData
+        console.log(userData)
         return (
             <StyledHomePage> 
                 This is the Homepage

@@ -39,6 +39,7 @@ export const loginUserAction = ( loggedInUserData, error ) => async dispatch => 
     if(error) {
         console.log(error)
     }
+    console.log('here', loggedInUserData)
 
     localStorage.setItem('userJWT', loggedInUserData.jwt)
 
