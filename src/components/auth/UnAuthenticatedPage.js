@@ -45,7 +45,7 @@ const UnAuthenticatedPage = (props) => {
                 <p>Do what you gatta do to be the best you you can be</p>
             </StyledTextDiv>
             <StyledAuthDiv>
-                <button onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Already have a user?' : 'Need to create a user?' }</button>
+                <button onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }</button>
                 { renderRegisterModal ? <Login /> : <Register /> }
             </StyledAuthDiv>
         </>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withFormik, Form } from 'formik'
 import { useLazyQuery } from '@apollo/react-hooks'
@@ -47,6 +47,15 @@ const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleC
     const [ loginUser, { data }] = useLazyQuery(LOGIN_USER)
     const [ graphQLErrors, setGraphQLErrors ] = useState([])
     const [ queryCanFire, setQueryCanFire ] = useState(true)
+    const [ fire, setFire ] = useState(false)
+
+    useEffect(() => {
+        if(fire === true) {
+            const { email, password } = values
+            loginUser({ variables: { email, password }})
+            setFire(false)
+        }
+    }, [ fire ])
 
     // If the graphQL query has run, and there are no errors
     // load the user into redux and nav back to the homepage
@@ -69,9 +78,7 @@ const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleC
                 e.preventDefault()
                 setGraphQLErrors([])
                 setQueryCanFire(true)
-
-                const { email, password } = values
-                await loginUser({ variables: { email, password }})
+                setFire(true) 
             }}
         >
             <StyledForm>

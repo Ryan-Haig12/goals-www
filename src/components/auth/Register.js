@@ -10,7 +10,6 @@ import { createUserAction } from '../../redux/actions'
 import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../syledComponents/auth'
 
 const createInputBar = ({ type, placeholder, handleChange, values, pass }) => {
-    console.log(pass)
     return (
         <StyledInputBar 
             type={ pass ? 'password' : type.toString() }

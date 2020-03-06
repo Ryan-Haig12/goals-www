@@ -13,7 +13,7 @@ import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '..
 const renderErrors = ( errors ) => {
     return errors.map(err => {
         return (
-            <StyledErrorMessage>{ err }</StyledErrorMessage>
+            <StyledErrorMessage key={ err } >{ err }</StyledErrorMessage>
         )
     })
 }
