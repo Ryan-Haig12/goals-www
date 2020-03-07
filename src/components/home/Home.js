@@ -14,7 +14,7 @@ const StyledHomePage = styled.div`
 
 const StyledGroupCards = styled.div`
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 `
 
 const mapUsersGroups = ( usersGroups ) => {

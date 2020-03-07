@@ -34,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prodPush": "heroku repo:purge_cache -a goals-www && git commit --allow-empty -m \"Purge cache\" && git push heroku master"
   },
   "eslintConfig": {
     "extends": "react-app"
