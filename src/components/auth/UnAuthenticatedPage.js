@@ -7,7 +7,7 @@ import Login from './Login'
 import Register from './Register'
 
 import { GET_USER_BY_JWT } from '../../graphql/tags/user'
-import { loginUserAction } from '../../redux/actions/index'
+import { loginUserAction, logoutUserAction } from '../../redux/actions/index'
 
 const StyledTextDiv = styled.div`
     float: left;
@@ -21,7 +21,7 @@ const StyledAuthDiv = styled.div`
     margin-right: 10px;
 `
 
-const UnAuthenticatedPage = ({ loginUserAction }) => {
+const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
 
     // true - render register
     // false - render login
@@ -32,10 +32,15 @@ const UnAuthenticatedPage = ({ loginUserAction }) => {
 
     useEffect(() => {
         if(loggedInUserData !== undefined && loggedInUserData !== null) {
-            console.log(loggedInUserData.getUserByJWT)
-            loginUserAction(loggedInUserData.getUserByJWT)
+            if(!loggedInUserData.getUserByJWT.errors && loggedInUserData.getUserByJWT.id !== null) {
+                loginUserAction(loggedInUserData.getUserByJWT)
+            }
+            // else {
+            //     logoutUserAction()
+            //     window.location.reload()
+            // }
         }
-    }, [ loggedInUserData ])
+    }, [ loggedInUserData, loginUserAction, logoutUserAction ])
 
     return (
         <>
@@ -66,4 +71,4 @@ const UnAuthenticatedPage = ({ loginUserAction }) => {
     )
 }
 
-export default connect(null, { loginUserAction })(UnAuthenticatedPage)
+export default connect(null, { loginUserAction, logoutUserAction })(UnAuthenticatedPage)

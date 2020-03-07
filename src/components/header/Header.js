@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import HeaderChunk from './HeaderChunk'
 
@@ -26,11 +27,22 @@ const StyledLogoutButton = styled.button`
 `
 
 const Header = ({ isAuthenticated, logoutUserAction }) => {
+
+    const token = localStorage.getItem('userJWT')
+    useEffect(() => {
+        if(!token) {
+            return <Redirect to="/" />
+        }
+    }, [ token ])
+
     return (
         <StyledHeader>
             <HeaderChunk toLink="/" toText="Home" />
             <HeaderChunk toLink="/createGroup" toText="Create Group" />
-            { isAuthenticated ? <StyledLogoutButton onClick={() => { logoutUserAction() }} >Logout</StyledLogoutButton> : null }
+            { isAuthenticated ? <StyledLogoutButton onClick={() => {
+                logoutUserAction();
+                window.location.reload()
+            } } >Logout</StyledLogoutButton> : null }
         </StyledHeader>
     )
 }

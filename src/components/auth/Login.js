@@ -55,7 +55,7 @@ const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleC
             loginUser({ variables: { email, password }})
             setFire(false)
         }
-    }, [ fire ])
+    }, [ fire, loginUser, values ])
 
     // If the graphQL query has run, and there are no errors
     // load the user into redux and nav back to the homepage

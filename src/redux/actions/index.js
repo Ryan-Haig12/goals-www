@@ -39,7 +39,6 @@ export const loginUserAction = ( loggedInUserData, error ) => async dispatch => 
     if(error) {
         console.log(error)
     }
-    console.log('here', loggedInUserData)
 
     localStorage.setItem('userJWT', loggedInUserData.jwt)
 
@@ -53,6 +52,7 @@ export const loginUserAction = ( loggedInUserData, error ) => async dispatch => 
 
 // Logout a user
 export const logoutUserAction = () => async dispatch => {
+    localStorage.setItem('userJWT', '')
     try {
         dispatch({ type: LOGOUT })
     } catch(err) {

@@ -21,7 +21,8 @@ const httpLink = new HttpLink({
 })
 
 // subscription uri
-const wsClient = new SubscriptionClient('ws://goals-graphql.herokuapp.com/')
+//const wsClient = new SubscriptionClient('ws://goals-graphql.herokuapp.com/')
+const wsClient = new SubscriptionClient('ws://localhost:4000/')
 const wsLink = new WebSocketLink(wsClient)
 const subLink = split(({ query }) => {
   const { kind, operation } = getMainDefinition(query)

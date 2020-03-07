@@ -5,6 +5,9 @@ import { onGoalSelectedHandlerAction } from '../../redux/actions/index'
 
 // render portion of table for default goals
 const defaultGoalsTable = ( defaultGoals, onGoalSelectedHandlerAction ) => {
+    // get rid of potential issue of defaultGoals being null
+    if(defaultGoals[0].goals === null) return
+
     return defaultGoals.map(category => {
         return category.goals.map(goal => {
             return (

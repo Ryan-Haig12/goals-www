@@ -6,7 +6,6 @@ export const LOGIN_USER = gql`
             id
             name
             email
-            password
             dateCreated
             errors
             jwt
@@ -37,7 +36,6 @@ export const GET_USER = gql`
             id
             name
             email
-            password
             dateCreated
             errors
             jwt
@@ -53,7 +51,6 @@ export const GET_USERS_BY_ID = gql`
             id
             name
             email
-            password
             dateCreated
             errors
             jwt   
@@ -68,7 +65,6 @@ export const GET_USER_BY_JWT = gql`
             id
             name
             email
-            password
             dateCreated
             errors
             jwt

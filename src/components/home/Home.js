@@ -34,7 +34,6 @@ const Home = ({ userData, usersGroups }) => {
     // User is authed
     if(userData !== undefined) {
         const { name, email } = userData
-        console.log(userData)
         return (
             <StyledHomePage> 
                 This is the Homepage
