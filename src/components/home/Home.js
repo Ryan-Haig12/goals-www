@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import UserGroups from './UserGroups'
 import UnAuthenticatedPage from '../auth/UnAuthenticatedPage'
 
+//import usePing from '../../hooks/usePing'
+
 const StyledHomePage = styled.div`
     text-align: center;
     padding-top: 50px;
@@ -22,8 +24,12 @@ const mapUsersGroups = ( usersGroups ) => {
 }
 
 const Home = ({ userData, usersGroups }) => {
-    //const token = localStorage.getItem('token')
     const [ usersGroupsCards, setUsersGroupsCards ] = useState(null)
+
+    // const [ ping ] = usePing()
+    // useEffect(() => {
+    //     console.log(ping)
+    // }, [ ping ])
 
     useEffect(() => {
         if(usersGroups !== undefined && usersGroups !== null) {

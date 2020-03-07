@@ -52,7 +52,7 @@ export const loginUserAction = ( loggedInUserData, error ) => async dispatch => 
 
 // Logout a user
 export const logoutUserAction = () => async dispatch => {
-    localStorage.setItem('userJWT', '')
+    localStorage.setItem('userJWT', null)
     try {
         dispatch({ type: LOGOUT })
     } catch(err) {

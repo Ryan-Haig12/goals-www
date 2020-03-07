@@ -36,6 +36,7 @@ const CreateGroup = ({ isSubmitting, isAuthenticated, values, handleChange, crea
         if(data.createGroup.errors === null) {
             createGroupAction(data.createGroup) // create group action/reducer etc
             const route = `/group/${ data.createGroup.id }`
+            window.location.reload()
             return <Redirect to={ route } />
         }
     }
