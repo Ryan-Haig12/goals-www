@@ -1,4 +1,4 @@
-import { FINISHED_GOAL_SELECTED } from '../actions/types'
+import { FINISHED_GOAL_SELECTED, FINSIHED_GOAL_FORM_CLOSED } from '../actions/types'
 
 const INITIAL_STATE = {
     goalIsSelected: false,
@@ -11,6 +11,11 @@ const FinishedGoalsReducer = ( state = INITIAL_STATE, action ) => {
             return {
                 goalIsSelected: true,
                 currentGoalData: action.payload
+            }
+        case FINSIHED_GOAL_FORM_CLOSED:
+            return {
+                goalIsSelected: false,
+                currentGoalData: null
             }
         default:
             return state

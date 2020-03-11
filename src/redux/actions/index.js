@@ -14,11 +14,11 @@ import {
     GET_ALL_GROUPS_FULL_DATA,
     ADD_USER_TO_GROUP,
     FINISHED_GOAL_SELECTED,
-    //CREATE_NEW_GROUP_MESSAGE,
     GET_ALL_GROUP_MESSAGE,
     UPDATE_GROUP_SCORES,
     CREATE_CUSTOM_GOAL,
-} from '../actions/types' 
+    FINSIHED_GOAL_FORM_CLOSED,
+} from '../actions/types'
 
 // Register a user
 export const createUserAction = ( createdUserData, error ) => async dispatch => {
@@ -131,6 +131,15 @@ export const addUserToGroupAction = ( groupData ) => async dispatch => {
 export const onGoalSelectedHandlerAction = ( goalData ) => async dispatch => {
     try {
         dispatch({ type: FINISHED_GOAL_SELECTED, payload: goalData })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+// clear currently selected finished goal in redux
+export const clearGoalSelectedHandlerAction = () => async dispatch => {
+    try {
+        dispatch({ type: FINSIHED_GOAL_FORM_CLOSED })
     } catch(err) {
         console.log(err)
     }

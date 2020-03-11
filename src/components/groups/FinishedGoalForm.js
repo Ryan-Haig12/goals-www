@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { withFormik, Form } from 'formik'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
-import { Redirect } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { ADD_FINISHED_GOAL } from '../../graphql/tags/finishedGoal'
+import { clearGoalSelectedHandlerAction } from '../../redux/actions/index'
 
 import { StyledForm, StyledButton } from '../syledComponents/auth'
 
-const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selectedGoal, handleBlur }) => {
+const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selectedGoal, handleBlur, clearGoalSelectedHandlerAction }) => {
     const { userId, groupId } = groupData
     const [ CreateFinishedGoal, { error } ] = useMutation(ADD_FINISHED_GOAL)
     const [ successMessage, setSuccessMessage ] = useState()
@@ -62,6 +62,10 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selec
                 </div>
                 { successMessage && <p>{ successMessage }</p> }
                 <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
+                <br />
+                <br />
+                <br />
+                <StyledButton onClick={ () => clearGoalSelectedHandlerAction() } type="button" >Close Form</StyledButton>
             </StyledForm>
         </Form>
     )
@@ -88,4 +92,4 @@ const FormikEnhancer = withFormik({
     })
 })(FinishedGoalForm)
 
-export default connect(mapStateToProps)(FormikEnhancer)
+export default connect(mapStateToProps, { clearGoalSelectedHandlerAction })(FormikEnhancer)
