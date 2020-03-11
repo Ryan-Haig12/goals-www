@@ -1,20 +1,17 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
 import AddUserToGroup from './AddUserToGroup'
+import CreateCustomGoal from './CreateCustomGoal'
 
-const AdminOptions = ({ match, group }) => {
-    console.log(match)
+const AdminOptions = ({ match }) => {
 
     return (
         <div>
+            <h3>Admin Options</h3>
             <AddUserToGroup match={ match } />
+            <CreateCustomGoal match={ match } />
         </div>
     )
-}
-
-AdminOptions.propTypes = {
-    group: PropTypes.object
 }
 
 export default AdminOptions

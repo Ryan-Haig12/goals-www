@@ -17,7 +17,7 @@ const renderErrors = ( errors ) => {
     })
 }
 
-const AddUserToGroup = ({ match, isSubmitting, values, handleChange, group, addUserToGroupAction }) => {
+const AddUserToGroup = ({ match, isSubmitting, values, handleChange, addUserToGroupAction }) => {
     const [ AddUserToGroup, { data, error }] = useMutation(ADD_USER_TO_GROUP_BY_EMAIL)
     const [ graphQLErrors, setGraphQLErrors ] = useState([])
     const [ successAddingUser, setsuccessAddingUser ] = useState(false)

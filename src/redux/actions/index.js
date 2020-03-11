@@ -17,6 +17,7 @@ import {
     //CREATE_NEW_GROUP_MESSAGE,
     GET_ALL_GROUP_MESSAGE,
     UPDATE_GROUP_SCORES,
+    CREATE_CUSTOM_GOAL,
 } from '../actions/types' 
 
 // Register a user
@@ -148,6 +149,15 @@ export const getAllGroupMessages = ( allMessages ) => async dispatch => {
 export const loadGroupScores = ( usersScoreData ) => async dispatch => {
     try {
         dispatch({ type: UPDATE_GROUP_SCORES, payload: usersScoreData })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+// Create a custom goal
+export const createCustomGoalAction = ( newCustomGoalData ) => async dispatch => {
+    try {
+        dispatch({ type: CREATE_CUSTOM_GOAL, payload: newCustomGoalData })
     } catch(err) {
         console.log(err)
     }
