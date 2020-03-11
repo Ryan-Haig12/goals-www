@@ -25,7 +25,7 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
   // console.log(token.length)
   // const authed = token.length > 1 ? false : true
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
-  const { data: defaultGoals, loading, error } = useQuery(GET_DEFAULT_GOALS)
+  const [ getDefaultGoals, { data: defaultGoals, loading, error } ] = useLazyQuery(GET_DEFAULT_GOALS)
   const [
     getAllUsersGroupsQuery, {
     data: usersGroups,
@@ -44,8 +44,18 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
   if(usersCustomGoalsError) console.log(usersCustomGoalsError)
 
   useEffect(() => {
-    setIsAuthenticated( userData !== undefined && userData.jwt !== undefined )
-  }, [ userData ])
+    if(defaultGoals !== undefined && defaultGoals !== null) {
+      getDefaultGoalsAction(defaultGoals.getAllGoals)
+    }
+  }, [ getDefaultGoalsAction, defaultGoals ])
+
+  useEffect(() => {
+    const isAuthed = userData !== undefined && userData.jwt !== undefined
+    setIsAuthenticated( isAuthed )
+    if(isAuthed) {
+      getDefaultGoals()
+    }
+  }, [ userData, getDefaultGoals ])
 
   useEffect(() => {
     if(defaultGoals !== undefined && defaultGoals !== null && isAuthenticated) {
