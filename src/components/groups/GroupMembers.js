@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { useQuery } from '@apollo/react-hooks'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import { CALC_USER_SCORE } from '../../graphql/tags/scoring'
+import { loadGroupScores } from '../../redux/actions/index'
 
-const GroupMembers = ({ allMembers, groupId }) => {
-    const [ memberData, setMemberData ] = useState([])
+const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring }) => {
     const { data, error } = useQuery(CALC_USER_SCORE, { variables: {
         userScoreInput: {
             userIds: allMembers.map(m => m.id),
@@ -20,16 +21,20 @@ const GroupMembers = ({ allMembers, groupId }) => {
 
     useEffect(() => {
         if(data !== undefined && data !== null) {
-            setMemberData(data.calcUserScore)
+            //setMemberData(data.calcUserScore)
+            loadGroupScores(data.calcUserScore)
         }
-    }, [data])
+    }, [ data, loadGroupScores])
 
-    if(memberData !== undefined && memberData !== null) {
+    if(groupScoring.length) {
         return (
             <ol>
-                {memberData.map(member => {
+                {groupScoring.map(member => {
+                    const user = allMembers.find(m => member.userId === m.id)
+                    if(!user || !user.name) return
+
                     return (
-                        <li key={ member.userId } >{ allMembers.find(m => member.userId === m.id).name }, score: { member.score }</li>
+                        <li key={ member.userId } >{ user.name }, score: { member.score }</li>
                     )
                 })}
             </ol>
@@ -47,5 +52,10 @@ GroupMembers.propTypes = {
     groupId: PropTypes.string
 }
 
-export default GroupMembers
+const mapStateToProps = ( state ) => {
+    return {
+        groupScoring: state.Group.membersScoring
+    }
+}
 
+export default connect(mapStateToProps, { loadGroupScores })(GroupMembers)

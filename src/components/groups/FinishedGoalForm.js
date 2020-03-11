@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withFormik, Form } from 'formik'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
+import { Redirect } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { ADD_FINISHED_GOAL } from '../../graphql/tags/finishedGoal'
 
 import { StyledForm, StyledButton } from '../syledComponents/auth'
 
-const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selectedGoal, touched, handleBlur }) => {
-    const [ CreateFinishedGoal, { error } ] = useMutation(ADD_FINISHED_GOAL)
+const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selectedGoal, handleBlur }) => {
     const { userId, groupId } = groupData
+    const [ CreateFinishedGoal, { error } ] = useMutation(ADD_FINISHED_GOAL)
     const [ successMessage, setSuccessMessage ] = useState()
 
     if(error) console.log(error)

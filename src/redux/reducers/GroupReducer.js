@@ -5,6 +5,7 @@ import {
     GET_ALL_USERS_GROUPS,
     GET_ALL_GROUPS_FULL_DATA,
     ADD_USER_TO_GROUP,
+    UPDATE_GROUP_SCORES,
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -14,6 +15,7 @@ const INITIAL_STATE = {
     // rather than replace the groupMember ID array with all of the groups data and change a few spots in the app
     // I'm going to create and use groupsFullData for the full data of every group from groupsMember
     groupsFullData: [],
+    membersScoring: [], // user/score data to make rendering scores easier
     errors: null
 }
 
@@ -50,6 +52,11 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
             //console.log('akkdata ', state.groupsFullData)
             return {
                 ...state
+            }
+        case UPDATE_GROUP_SCORES:
+            return {
+                ...state,
+                membersScoring: action.payload
             }
         default:
             return state

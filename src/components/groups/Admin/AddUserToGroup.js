@@ -3,7 +3,6 @@ import { withFormik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import * as Yup from 'yup'
-import PropTypes from 'prop-types'
 
 import { ADD_USER_TO_GROUP_BY_EMAIL } from '../../../graphql/tags/groups'
 import { addUserToGroupAction } from '../../../redux/actions/index'
@@ -18,7 +17,7 @@ const renderErrors = ( errors ) => {
     })
 }
 
-const AddUserToGroup = ({ isSubmitting, values, handleChange, group, addUserToGroupAction }) => {
+const AddUserToGroup = ({ match, isSubmitting, values, handleChange, group, addUserToGroupAction }) => {
     const [ AddUserToGroup, { data, error }] = useMutation(ADD_USER_TO_GROUP_BY_EMAIL)
     const [ graphQLErrors, setGraphQLErrors ] = useState([])
     const [ successAddingUser, setsuccessAddingUser ] = useState(false)
@@ -48,7 +47,7 @@ const AddUserToGroup = ({ isSubmitting, values, handleChange, group, addUserToGr
                 setsuccessAddingUser(false)
 
                 const { newUserEmail } = values
-                await AddUserToGroup({variables:{addUserData:{ newUserEmail: newUserEmail, groupId: group.id }}})
+                await AddUserToGroup({variables:{addUserData:{ newUserEmail: newUserEmail, groupId: match.params.groupId }}})
             }}
         >
             <StyledForm>
@@ -67,10 +66,6 @@ const AddUserToGroup = ({ isSubmitting, values, handleChange, group, addUserToGr
             </StyledForm>
         </Form>
     )
-}
-
-AddUserToGroup.propTypes = {
-    group: PropTypes.object
 }
 
 const FormikEnhancer = withFormik({

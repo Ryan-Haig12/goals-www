@@ -39,13 +39,9 @@ const Home = ({ userData, usersGroups }) => {
 
     // User is authed
     if(userData !== undefined) {
-        const { name, email } = userData
+        //const { name, email } = userData
         return (
-            <StyledHomePage> 
-                This is the Homepage
-
-                { name && <p>Your name is { name } and you are logged in</p> }
-                { email && <p>Your email is { email }</p> }
+            <StyledHomePage>
                 <StyledGroupCards>{ usersGroupsCards }</StyledGroupCards>       
             </StyledHomePage>
         )

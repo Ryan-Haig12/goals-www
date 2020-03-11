@@ -3,32 +3,14 @@ import PropTypes from 'prop-types'
 
 import AddUserToGroup from './AddUserToGroup'
 
-const AdminOptions = ({ group }) => {
+const AdminOptions = ({ match, group }) => {
+    console.log(match)
 
-    const [ renderAdminOptions, setRenderAdminOptions ] = useState(false)
-
-    // Admin options are not showing
-    if(!renderAdminOptions) {
-        return (
-            <div>
-                <button onClick={ () => setRenderAdminOptions(!renderAdminOptions) } >
-                    Show Admin Options
-                </button>
-            </div>
-        )
-    }
-
-    // Admin options are not showing
-    if(renderAdminOptions) {
-        return (
-            <div>
-                <button onClick={ () => setRenderAdminOptions(!renderAdminOptions) } >
-                    Hide Admin Options
-                </button>
-                <AddUserToGroup group={ group } />
-            </div>
-        )
-    }
+    return (
+        <div>
+            <AddUserToGroup match={ match } />
+        </div>
+    )
 }
 
 AdminOptions.propTypes = {

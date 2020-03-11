@@ -15,7 +15,8 @@ import {
     ADD_USER_TO_GROUP,
     FINISHED_GOAL_SELECTED,
     //CREATE_NEW_GROUP_MESSAGE,
-    GET_ALL_GROUP_MESSAGE
+    GET_ALL_GROUP_MESSAGE,
+    UPDATE_GROUP_SCORES,
 } from '../actions/types' 
 
 // Register a user
@@ -138,6 +139,15 @@ export const onGoalSelectedHandlerAction = ( goalData ) => async dispatch => {
 export const getAllGroupMessages = ( allMessages ) => async dispatch => {
     try {
         dispatch({ type: GET_ALL_GROUP_MESSAGE, payload: allMessages })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+// set/update groups scoring data
+export const loadGroupScores = ( usersScoreData ) => async dispatch => {
+    try {
+        dispatch({ type: UPDATE_GROUP_SCORES, payload: usersScoreData })
     } catch(err) {
         console.log(err)
     }
