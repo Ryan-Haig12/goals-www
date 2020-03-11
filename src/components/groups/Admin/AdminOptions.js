@@ -26,6 +26,10 @@ const AdminOptions = ({ match, userId, allGroups }) => {
     return (
         <div>
             <h3>Admin Options</h3>
+            <button onClick={() => {
+                const link = `/group/${ match.params.groupId }`
+                history.push(link)
+            }} >Go To Group Page</button>
             <AddUserToGroup match={ match } />
             <CreateCustomGoal userId={ userId } match={ match } />
         </div>
