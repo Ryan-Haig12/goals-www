@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useQuery, useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -14,28 +14,22 @@ import GroupLandingPage from './components/groups/GroupLandingPage'
 
 import {
   GET_DEFAULT_GOALS,
-  //GET_CUSTOM_GOAL,
   GET_CUSTOM_GOALS_BY_GROUPID_ARRAY
 } from './graphql/tags/goals'
 import { GET_ALL_USERS_GROUPS } from './graphql/tags/groups'
 import { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsByGroupIdArrayAction } from './redux/actions/index'
 
 const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, groupIds, getCustomGoalsByGroupIdArrayAction }) => {
-  // const token = localStorage.getItem('token')
-  // console.log(token.length)
-  // const authed = token.length > 1 ? false : true
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
   const [ getDefaultGoals, { data: defaultGoals, loading, error } ] = useLazyQuery(GET_DEFAULT_GOALS)
   const [
     getAllUsersGroupsQuery, {
     data: usersGroups,
-    //loading: usersGroupsIsLoading,
     error: getAllGroupsError
   }] = useLazyQuery(GET_ALL_USERS_GROUPS, { variables: { userId } })
   const [
     getAllUsersCustomGoalsQuery, {
     data: usersCustomGoalsData,
-    //loading: usersCustomGoalsLoading,
     error: usersCustomGoalsError
   }] = useLazyQuery(GET_CUSTOM_GOALS_BY_GROUPID_ARRAY, { variables: { groupIds } })
 
@@ -78,7 +72,6 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
 
   useEffect(() => {
     if(usersCustomGoalsData !== undefined && usersCustomGoalsData !== null && isAuthenticated) {
-      //console.log('useEffect App.js', usersCustomGoalsData)
       getCustomGoalsByGroupIdArrayAction(usersCustomGoalsData.getAllCustomGoalsByGroupArray)
     }
   }, [usersCustomGoalsData, isAuthenticated, getCustomGoalsByGroupIdArrayAction])
