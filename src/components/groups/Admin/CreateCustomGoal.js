@@ -52,7 +52,6 @@ const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, userId, c
                     return
                 }
 
-                console.log(userId)
                 await CreateCustomGoalQuery({ variables: {
                     customGoalData: { 
                         title,
@@ -113,10 +112,4 @@ const FormikEnhancer = withFormik({
     })
 })(CreateCustomGoal)
 
-const mapStateToProps = (state) => {
-    return {
-        userId: state.User.userData.id
-    }
-} 
-
-export default connect(mapStateToProps, { createCustomGoalAction })(FormikEnhancer)
+export default connect(null, { createCustomGoalAction })(FormikEnhancer)
