@@ -39,6 +39,7 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
         <StyledHeader>
             <HeaderChunk toLink="/" toText="Home" />
             <HeaderChunk toLink="/createGroup" toText="Create Group" />
+            <HeaderChunk toLink="/user" toText="Profile" />
             { isAuthenticated ? <StyledLogoutButton onClick={() => {
                 logoutUserAction();
                 window.location.reload()

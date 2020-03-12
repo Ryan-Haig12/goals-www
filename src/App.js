@@ -7,10 +7,11 @@ import './App.css'
 
 import AdminOptions from './components/groups/Admin/AdminOptions'
 import CreateGroup from './components/groups/CreateGroup'
-import Home from './components/home/Home'
-import Header from './components/header/Header'
-import UnAuthenticatedPage from './components/auth/UnAuthenticatedPage'
 import GroupLandingPage from './components/groups/GroupLandingPage'
+import Header from './components/header/Header'
+import Home from './components/home/Home'
+import UnAuthenticatedPage from './components/auth/UnAuthenticatedPage'
+import UserLandingPage from './components/user/UserLandingPage'
 
 import {
   GET_DEFAULT_GOALS,
@@ -85,6 +86,7 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
         <Route path='/createGroup' component={ CreateGroup } />
         <Route exact path='/group/:groupId' component={ GroupLandingPage } />
         <Route exact path='/group/:groupId/adminOptions' component={ AdminOptions } />
+        <Route exact path='/user' component={ UserLandingPage } />
       </Switch>
     </BrowserRouter>
   )
