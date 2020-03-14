@@ -8,18 +8,7 @@ import Register from './Register'
 
 import { GET_USER_BY_JWT } from '../../graphql/tags/user'
 import { loginUserAction, logoutUserAction } from '../../redux/actions/index'
-
-const StyledTextDiv = styled.div`
-    float: left;
-    margin-left: 10px;
-    margin-top: 5%;
-`
-
-const StyledAuthDiv = styled.div`
-    float: right;
-    margin-top: 5%;
-    margin-right: 10px;
-`
+import { StyledTextDiv, StyledAuthDiv } from '../syledComponents/UnAuthed'
 
 const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
 
