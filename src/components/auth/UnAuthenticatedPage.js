@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 
 import Login from './Login'
 import Register from './Register'
 
 import { GET_USER_BY_JWT } from '../../graphql/tags/user'
 import { loginUserAction, logoutUserAction } from '../../redux/actions/index'
-import { StyledTextDiv, StyledAuthDiv } from '../syledComponents/UnAuthed'
+import { StyledTextDiv, StyledAuthDiv, StyledUnauthedPage, StyledAuthButton } from '../syledComponents/UnAuthed'
 
 const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
 
-    // true - render register
-    // false - render login
+    // true - render register, false - render login
     // probably a better way to do this but I'm drunk idc
     const [ renderRegisterModal, setRenderRegisterModal ] = useState(true)
 
@@ -24,15 +22,16 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
             if(!loggedInUserData.getUserByJWT.errors && loggedInUserData.getUserByJWT.id !== null) {
                 loginUserAction(loggedInUserData.getUserByJWT)
             }
-            // else {
-            //     logoutUserAction()
-            //     window.location.reload()
-            // }
         }
     }, [ loggedInUserData, loginUserAction, logoutUserAction ])
 
     return (
-        <>
+        <StyledUnauthedPage>
+            <StyledAuthButton onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }</StyledAuthButton>
+            <StyledAuthDiv>
+                { renderRegisterModal ? <Login /> : <Register /> }
+            </StyledAuthDiv>
+            <br />
             <StyledTextDiv>
                 <p>Damn, so you're struggling a bit huh?</p>
                 <p>Not really eating as healthy as you'd like?</p>
@@ -52,11 +51,7 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
                 <p>Join with your buddies or compete against yourself</p>
                 <p>Do what you gatta do to be the best you you can be</p>
             </StyledTextDiv>
-            <StyledAuthDiv>
-                <button onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }</button>
-                { renderRegisterModal ? <Login /> : <Register /> }
-            </StyledAuthDiv>
-        </>
+        </StyledUnauthedPage>
     )
 }
 
