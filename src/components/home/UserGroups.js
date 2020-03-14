@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 
 import { GET_USER } from '../../graphql/tags/user'
-
-const GroupCard = styled.div`
-    border: 1px solid black;
-    margin: 25px;
-    padding: 5px;
-    width: 350px;
-    height: 175px;
-`
+import { GroupCard, GoToGroupButton } from '../syledComponents/Group'
 
 const UserGroups = ({ groupData }) => {
     const [ userName, setUserName ] = useState('Null User Name')
@@ -37,11 +29,10 @@ const UserGroups = ({ groupData }) => {
         <GroupCard>
             <h2>{ groupData.groupName }</h2>
             <p>Created By { userName }</p>
-            <p>Last Completed Goal: REPLACE ME WITH DATA</p>
-            <button onClick={() => {
+            <GoToGroupButton onClick={() => {
                 const link = `/group/${ groupData.id }`
                 history.push(link)
-            }} >Go To Group Page</button>
+            }} >Go To Group Page</GoToGroupButton>
         </GroupCard>
     )
 }

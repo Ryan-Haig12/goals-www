@@ -1,30 +1,10 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import HeaderChunk from './HeaderChunk'
-
 import { logoutUserAction } from '../../redux/actions'
-
-const StyledHeader = styled.header`
-    height: 60px;
-    width: 100%;
-    background: #579190;
-    margin: 0px !important;
-`
-
-const StyledLogoutButton = styled.button`
-    background: #d1311f;
-    width: 150px;
-    height: 50px;
-    text-decoration: none;
-    text-align: center;
-    position: static;
-    margin-right: 5px;
-    margin-top: 5px;
-    float: right;
-`
+import { StyledHeader, StyledLogoutButton } from '../syledComponents/Header'
 
 const Header = ({ isAuthenticated, logoutUserAction }) => {
 

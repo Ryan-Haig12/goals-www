@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 
 import UserGroups from './UserGroups'
 import UnAuthenticatedPage from '../auth/UnAuthenticatedPage'
+import { StyledHomePage, StyledGroupCards } from '../syledComponents/Home'
 
 //import usePing from '../../hooks/usePing'
-
-const StyledHomePage = styled.div`
-    text-align: center;
-    padding-top: 50px;
-`
-
-const StyledGroupCards = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-`
 
 const mapUsersGroups = ( usersGroups ) => {
     return usersGroups.map(group => {
