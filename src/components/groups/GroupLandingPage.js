@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 
 import { GET_USERS_BY_ID } from '../../graphql/tags/user'
+import { GroupHeader, GroupSpan, StyledGroupMembersDiv, StyledMainGroupDiv } from '../syledComponents/Group'
 
 //import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
@@ -48,13 +49,22 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
         const adminLink = match.url + '/adminOptions'
         return (
             <div>
-                <h1>Welcome to { currentGroup.groupName }</h1>
-                { <h3>Members</h3> }
-                <GroupMembers groupId={currentGroup.id} allMembers={data.getMultipleUsersById} />
-                { /* isAdmin ? <AdminOptions group={ currentGroup } /> : '' */ }
+                <GroupHeader>Welcome to { currentGroup.groupName }</GroupHeader>
+                <GroupSpan />
+
+                <StyledMainGroupDiv>
+                    <StyledGroupMembersDiv>
+                        { <h3>Monthly Power Rankings</h3> }
+                        <GroupMembers groupId={currentGroup.id} allMembers={data.getMultipleUsersById} />
+                    </StyledGroupMembersDiv>
+
+                    { goalIsSelected && <FinishedGoalForm allMembers={data.getMultipleUsersById} groupData={{ userId, groupId: currentGroup.id }} /> }
+                </StyledMainGroupDiv>
+                
+
                 { isAdmin ? <button onClick={ () => {setRedirectToAdmin(true)} }>Go To Admin Options</button> : null}
                 { isAdmin && redirectToAdmin && <Redirect to={ adminLink } /> }
-                { goalIsSelected && <FinishedGoalForm allMembers={data.getMultipleUsersById} groupData={{ userId, groupId: currentGroup.id }} /> }
+
                 <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} />
                 <GroupMessageBoard groupData={{ userId, groupId: currentGroup.id }} />
                 <InputBar groupData={{ userId, groupId: currentGroup.id }} />

@@ -9,6 +9,7 @@ import { ADD_FINISHED_GOAL } from '../../graphql/tags/finishedGoal'
 import { clearGoalSelectedHandlerAction } from '../../redux/actions/index'
 
 import { StyledForm, StyledButton } from '../syledComponents/auth'
+import { StyledFinishedGoalForm } from '../syledComponents/Group'
 
 const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selectedGoal, handleBlur, clearGoalSelectedHandlerAction }) => {
     const { userId, groupId } = groupData
@@ -40,7 +41,7 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selec
                 }, 3000)
             }}
         >
-            <StyledForm>
+            <StyledFinishedGoalForm>
                 Log Your Completed Goal!
                 <p>Category: { selectedGoal.category }</p>
                 <p>Title: { selectedGoal.title }</p>
@@ -66,7 +67,7 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selec
                 <br />
                 <br />
                 <StyledButton onClick={ () => clearGoalSelectedHandlerAction() } type="button" >Close Form</StyledButton>
-            </StyledForm>
+            </StyledFinishedGoalForm>
         </Form>
     )
 }
