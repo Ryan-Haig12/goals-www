@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 
 import { GET_USERS_BY_ID } from '../../graphql/tags/user'
-import { GroupHeader, GroupSpan, StyledGroupMembersDiv, StyledMainGroupDiv } from '../syledComponents/Group'
+import { GroupHeader, GroupSpan, StyledGroupMembersDiv, StyledMainGroupDiv, GoToAdminButton } from '../syledComponents/Group'
 
 //import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
@@ -52,6 +52,9 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 <GroupHeader>Welcome to { currentGroup.groupName }</GroupHeader>
                 <GroupSpan />
 
+                { isAdmin ? <GoToAdminButton onClick={ () => {setRedirectToAdmin(true)} }>Go To Admin Options</GoToAdminButton> : null}
+                { isAdmin && redirectToAdmin && <Redirect to={ adminLink } /> }
+
                 <StyledMainGroupDiv>
                     <StyledGroupMembersDiv>
                         <h3>Monthly Power Rankings</h3>
@@ -60,10 +63,6 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
 
                     <FinishedGoalForm allGoals={{ defaultGoals, customGoalsAllGroups }} allMembers={data.getMultipleUsersById} groupData={{ userId, groupId: currentGroup.id }} />
                 </StyledMainGroupDiv>
-                
-
-                { isAdmin ? <button onClick={ () => {setRedirectToAdmin(true)} }>Go To Admin Options</button> : null}
-                { isAdmin && redirectToAdmin && <Redirect to={ adminLink } /> }
 
                 { /* <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} /> */ }
                 <GroupMessageBoard groupData={{ userId, groupId: currentGroup.id }} />
