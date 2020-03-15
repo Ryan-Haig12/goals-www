@@ -76,18 +76,16 @@ export const StyledFinishedGoalForm = styled.div`
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
     color: #111;
     text-align: center;
     border: 1px solid red;
 
-    float: left;
-    position: relative;
-    bottom: 375px;
+    position: absolute;
+    top: 25%;
     left: 2%;
 `
 
 export const StyledMainGroupDiv = styled.div`
-    border: 1px solid red;
-    display: block;
+    border: 1px dashed red;
+    position: relative;
 `

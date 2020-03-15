@@ -8,13 +8,13 @@ import { GroupHeader, GroupSpan, StyledGroupMembersDiv, StyledMainGroupDiv } fro
 
 //import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
-import GroupGoalsTable from './GroupGoalsTable'
+//import GroupGoalsTable from './GroupGoalsTable'
 import GroupMembers from './GroupMembers'
 import GroupMessageBoard from './Messages/GroupMessageBoard'
 import InputBar from './Messages/InputBar'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 
-const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, goalIsSelected, defaultGoals, customGoalsAllGroups }) => {
+const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, defaultGoals, customGoalsAllGroups }) => {
     const [ currentGroup, setCurrentGroup ] = useState(null)
     const [ isAdmin, setIsAdmin ] = useState(false)
     const [ redirectToAdmin, setRedirectToAdmin ] = useState(false)
@@ -54,7 +54,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
 
                 <StyledMainGroupDiv>
                     <StyledGroupMembersDiv>
-                        { <h3>Monthly Power Rankings</h3> }
+                        <h3>Monthly Power Rankings</h3>
                         <GroupMembers groupId={currentGroup.id} allMembers={data.getMultipleUsersById} />
                     </StyledGroupMembersDiv>
 
