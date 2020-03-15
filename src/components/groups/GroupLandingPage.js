@@ -14,7 +14,7 @@ import GroupMessageBoard from './Messages/GroupMessageBoard'
 import InputBar from './Messages/InputBar'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 
-const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, goalIsSelected }) => {
+const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, goalIsSelected, defaultGoals, customGoalsAllGroups }) => {
     const [ currentGroup, setCurrentGroup ] = useState(null)
     const [ isAdmin, setIsAdmin ] = useState(false)
     const [ redirectToAdmin, setRedirectToAdmin ] = useState(false)
@@ -58,14 +58,14 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                         <GroupMembers groupId={currentGroup.id} allMembers={data.getMultipleUsersById} />
                     </StyledGroupMembersDiv>
 
-                    { goalIsSelected && <FinishedGoalForm allMembers={data.getMultipleUsersById} groupData={{ userId, groupId: currentGroup.id }} /> }
+                    <FinishedGoalForm allGoals={{ defaultGoals, customGoalsAllGroups }} allMembers={data.getMultipleUsersById} groupData={{ userId, groupId: currentGroup.id }} />
                 </StyledMainGroupDiv>
                 
 
                 { isAdmin ? <button onClick={ () => {setRedirectToAdmin(true)} }>Go To Admin Options</button> : null}
                 { isAdmin && redirectToAdmin && <Redirect to={ adminLink } /> }
 
-                <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} />
+                { /* <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} /> */ }
                 <GroupMessageBoard groupData={{ userId, groupId: currentGroup.id }} />
                 <InputBar groupData={{ userId, groupId: currentGroup.id }} />
             </div>
@@ -83,7 +83,9 @@ const mapStateToProps = (state) => {
         goalIsSelected: state.FinishedGoals.goalIsSelected,
         userId,
         usersGroups,
-        groupsAdmin
+        groupsAdmin,
+        defaultGoals: state.Goals.defaultGoals,
+        customGoalsAllGroups: state.Goals.customGoals,
     }
 }
 

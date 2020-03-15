@@ -8,10 +8,35 @@ import * as Yup from 'yup'
 import { ADD_FINISHED_GOAL } from '../../graphql/tags/finishedGoal'
 import { clearGoalSelectedHandlerAction } from '../../redux/actions/index'
 
-import { StyledForm, StyledButton } from '../syledComponents/auth'
+import { StyledButton } from '../syledComponents/auth'
 import { StyledFinishedGoalForm } from '../syledComponents/Group'
 
-const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selectedGoal, handleBlur, clearGoalSelectedHandlerAction }) => {
+const mapDefaulyGoalList = ( allGoals ) => {
+    return allGoals.defaultGoals.map(category => {
+        return category.goals.map(goal => {
+            const lab = `${ category.category }: ${ goal.title }`
+            return (
+                <option key={ goal.id } value={ goal.id } label={ lab } />
+            )
+        })
+    })
+}
+
+const mapCustomGoalList = ( allGoals, groupId ) => {
+    const group = allGoals.customGoalsAllGroups.filter(group => group.groupId === groupId)[0]
+    const customGoals = group.customGoals
+    
+    if(!customGoals.length) return
+    
+    return customGoals.map(goal => {
+        const lab = `${ goal.category }: ${ goal.title }`
+        return (
+            <option key={ goal.id } value={ goal.id } label={ lab } />
+        )
+    })
+}
+
+const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handleBlur, allGoals }) => {
     const { userId, groupId } = groupData
     const [ CreateFinishedGoal, { error } ] = useMutation(ADD_FINISHED_GOAL)
     const [ successMessage, setSuccessMessage ] = useState()
@@ -22,17 +47,34 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selec
         <Form 
             onSubmit={ async e => {
                 e.preventDefault()
+                console.log(values)
 
                 // prevents sending graphql a null value for minutesLogged
                 if(!values.minutesLogged) return
 
-                const newFinishedGoal = await CreateFinishedGoal({ variables: {finishedGoalData: {
-                    goalId: selectedGoal.id,
+                let points = 0
+                allGoals.defaultGoals.map(category => {
+                    category.goals.map(goal => {
+                        if(goal.id === values.goalSelect) points = goal.points
+                    })
+                })
+
+                if(!points) {
+                    const groupId = groupData.groupId
+                    const group = allGoals.customGoalsAllGroups.filter(group => group.groupId === groupId)[0]
+                    const customGoals = group.customGoals
+                    customGoals.map(goal => {
+                        if(goal.id === values.goalSelect) points = goal.points
+                    })
+                }
+
+                const newFinishedGoal = await CreateFinishedGoal({ variables: { finishedGoalData: {
+                    goalId: values.goalSelect,
                     userId,
                     groupId,
                     timeCompleted: Date.now().toString(),
                     minutesLogged: parseInt(values.minutesLogged),
-                    points: selectedGoal.points
+                    points
                 }}})
 
                 if(newFinishedGoal) setSuccessMessage(`Goal Logged Successfully!`)
@@ -43,18 +85,25 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selec
         >
             <StyledFinishedGoalForm>
                 Log Your Completed Goal!
-                <p>Category: { selectedGoal.category }</p>
-                <p>Title: { selectedGoal.title }</p>
-                <p>Points: { selectedGoal.points }</p>
                 <div>
+                    <select
+                        name="goalSelect"
+                        value={ values.goalSelect }
+                        onChange={ handleChange }
+                        onBlur={ handleBlur }
+                    >
+                        <option disabled value="" label="Select Goal here" />
+                        { mapDefaulyGoalList(allGoals) }
+                        { mapCustomGoalList(allGoals, groupData.groupId) }
+                    </select>
+
                     <select
                         name="minutesLogged"
                         value={values.minutesLogged}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        style={{ display: 'block' }}
                     >
-                        <option value="" label="Log Time Here" />
+                        <option disabled value="" label="Log Time Here" />
                         <option value="15" label="15 Minutes" />
                         <option value="30" label="30 Minutes" />
                         <option value="45" label="45 Minutes" />
@@ -63,10 +112,6 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, selec
                 </div>
                 { successMessage && <p>{ successMessage }</p> }
                 <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
-                <br />
-                <br />
-                <br />
-                <StyledButton onClick={ () => clearGoalSelectedHandlerAction() } type="button" >Close Form</StyledButton>
             </StyledFinishedGoalForm>
         </Form>
     )
@@ -85,7 +130,8 @@ const mapStateToProps = state => {
 const FormikEnhancer = withFormik({
     mapPropsToValues: (props) => {
         return {
-            minutesLogged: ''
+            minutesLogged: '',
+            goalId: ''
         }
     },
     validationSchema: Yup.object().shape({
