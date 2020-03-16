@@ -1,29 +1,25 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import HeaderChunk from './HeaderChunk'
 import { logoutUserAction } from '../../redux/actions'
-import { StyledHeader, StyledLogoutButton } from '../syledComponents/Header'
+import { StyledHeader, StyledLogoutButton, StyledLogoText, StyledChunksGroup } from '../syledComponents/Header'
 
 const Header = ({ isAuthenticated, logoutUserAction }) => {
-
-    const token = localStorage.getItem('userJWT')
-    useEffect(() => {
-        if(!token) {
-            return <Redirect to="/" />
-        }
-    }, [ token ])
-
+    const history = useHistory()
     return (
         <StyledHeader>
-            <HeaderChunk toLink="/" toText="Home" />
-            <HeaderChunk toLink="/createGroup" toText="Create Group" />
-            <HeaderChunk toLink="/user" toText="Profile" />
+            <StyledLogoText onClick={ () => history.push('/') } >Daily Goals</StyledLogoText>
             { isAuthenticated ? <StyledLogoutButton onClick={() => {
                 logoutUserAction();
                 window.location.reload()
             } } >Logout</StyledLogoutButton> : null }
+            <StyledChunksGroup>
+                <HeaderChunk toLink="/user" toText="Profile" />
+                <HeaderChunk toLink="/createGroup" toText="Create Group" />
+                <HeaderChunk toLink="/" toText="Home" />
+            </StyledChunksGroup>
         </StyledHeader>
     )
 }

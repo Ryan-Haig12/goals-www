@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import UserGroups from './UserGroups'
 import UnAuthenticatedPage from '../auth/UnAuthenticatedPage'
-import { StyledHomePage, StyledGroupCards } from '../syledComponents/Home'
+import { StyledHomePage, StyledGroupCards, HomeHeader, HomeSpan } from '../syledComponents/Home'
 
 //import usePing from '../../hooks/usePing'
 
@@ -32,6 +32,8 @@ const Home = ({ userData, usersGroups }) => {
         //const { name, email } = userData
         return (
             <StyledHomePage>
+                <HomeHeader>Group Landing Page</HomeHeader>
+                <HomeSpan />
                 <StyledGroupCards>{ usersGroupsCards }</StyledGroupCards>       
             </StyledHomePage>
         )
