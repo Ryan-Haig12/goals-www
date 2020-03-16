@@ -10,6 +10,7 @@ import PageHeaderSpan from '../header/PageHeaderSpan'
 //import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
 //import GroupGoalsTable from './GroupGoalsTable'
+import GroupChat from './Messages/GroupChat'
 import GroupMembers from './GroupMembers'
 import GroupMessageBoard from './Messages/GroupMessageBoard'
 import InputBar from './Messages/InputBar'
@@ -62,11 +63,9 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                     </StyledGroupMembersDiv>
 
                     <FinishedGoalForm allGoals={{ defaultGoals, customGoalsAllGroups }} allMembers={data.getMultipleUsersById} groupData={{ userId, groupId: currentGroup.id }} />
-                </StyledMainGroupDiv>
 
-                { /* <GroupGoalsTable groupData={{ userId, groupId: currentGroup.id }} /> */ }
-                <GroupMessageBoard groupData={{ userId, groupId: currentGroup.id }} />
-                <InputBar groupData={{ userId, groupId: currentGroup.id }} />
+                    <GroupChat allMembers={data.getMultipleUsersById} userId={ userId } groupId={ currentGroup.id } />
+                </StyledMainGroupDiv>
             </div>
         )
     }

@@ -91,3 +91,47 @@ export const StyledMainGroupDiv = styled.div`
     border: 1px dashed red;
     position: relative;
 `
+
+export const StyledGroupChat = styled.div`
+    border: 1px solid orange;
+    width: 30%;
+
+    position: absolute;
+    top: 25%;
+    right: 10%;
+    float: right;
+
+    background: #7A9D96;
+`
+
+export const StyledGroupInputButtonDuo = styled.div`
+    display: block;
+    margin: auto;
+`
+
+export const StyledGroupChatInputBar = styled.input`
+    border-radius: 25px;
+    width: 99%;
+    height: 25px;
+    float: right;
+`
+
+export const StyledGroupChatButton = styled.button`
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #DCAE1D;
+    height: 30px;
+    float: left;
+
+    &:hover {
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    &:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+    }
+`

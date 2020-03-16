@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useQuery, useSubscription } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 import { GET_ALL_GROUP_MESSAGE, GROUP_MESSAGE_SENT } from '../../../graphql/tags/groupMessages'
 import { getAllGroupMessages } from '../../../redux/actions/index'
@@ -25,8 +26,40 @@ const mapGroupMessages = ( allMessages ) => {
     })
 }
 
+const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
+    //console.log(allMessages, allMembers)
+
+    if(!allMessages) {
+        return (
+            <tr>
+                <td>No Messages Found</td>
+            </tr>
+        )
+    }
+
+    let slots = []
+
+    let k = 0
+    slots = Array( 10 - allMessages.length ).fill((
+        <tr key={ k++ } >
+            <td></td>
+        </tr>
+    ))
+
+    allMessages.map(message => {
+        const user = allMembers.filter(mem => mem.id === message.authorId)[0]
+        slots.push((
+            <tr key={ message.id } >
+                <td>{user.name} ({moment(message.timeWritten / 1000).format('h:mm:ss')}): {message.message}</td>
+            </tr>
+        ))
+    })
+
+    return slots
+}
+
 const GroupMessageBoard = ({ groupData, getAllGroupMessages }) => {
-    const { groupId } = groupData
+    const { groupId, allMembers } = groupData
     const [ messagesToRender, setMessagesToRender ] = useState(null)
     const [ update, setUpdate ] = useState(false)
     const { data: allGroupMessageData, error } = useQuery(GET_ALL_GROUP_MESSAGE, {
@@ -63,15 +96,8 @@ const GroupMessageBoard = ({ groupData, getAllGroupMessages }) => {
     return (
         <div>
             <table>
-                <thead>
-                    <tr>
-                        <th>Message</th>
-                        <th>Author</th>
-                        <th>Time Written</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    { mapGroupMessages(messagesToRender) }
+                    { mapGroupMessagesv2(messagesToRender, allMembers) }
                 </tbody>
             </table>
         </div>

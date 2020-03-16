@@ -5,14 +5,14 @@ import { withFormik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 
-import { StyledForm, StyledInputBar, StyledButton } from '../../syledComponents/auth'
+import { StyledGroupChatInputBar } from '../../syledComponents/Group'
 import { CREATE_NEW_GROUP_MESSAGE } from '../../../graphql/tags/groupMessages'
 
-const InputBar = ({ isSubmitting, values, handleChange, groupData }) => {
+const InputBar = ({ values, handleChange, groupData }) => {
     const { userId, groupId } = groupData
     const [ createNewGroupMessage, { error }] = useMutation(CREATE_NEW_GROUP_MESSAGE, { variables: {
         newGroupMessageData: {
-            message: values.messageText,
+            message: values.messageText.substr(0, 75),
             authorId: userId,
             groupId: groupId,
             timeWritten: Date.now().toString()
@@ -30,20 +30,16 @@ const InputBar = ({ isSubmitting, values, handleChange, groupData }) => {
                 values.messageText = ''
             }}
         >
-            <StyledForm>
-                Send A New Message!
-                <div>
-                    <StyledInputBar
-                        type={ 'messageText' }
-                        name={ 'messageText' }
-                        placeholder={ 'Message' }
-                        value={ values.messageText }
-                        onChange={ handleChange }
-                        key={ 'messageText' }
-                    />
-                </div>
-                <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
-            </StyledForm>
+            <div>
+                <StyledGroupChatInputBar
+                    type={ 'messageText' }
+                    name={ 'messageText' }
+                    placeholder={ 'Message' }
+                    value={ values.messageText }
+                    onChange={ handleChange }
+                    key={ 'messageText' }
+                />
+            </div>
         </Form>
     )
 }
