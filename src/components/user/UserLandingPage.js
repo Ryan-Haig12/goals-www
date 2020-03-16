@@ -5,7 +5,9 @@ import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 
 import { CALC_USER_STAT } from '../../graphql/tags/stats'
+import PageHeaderSpan from '../header/PageHeaderSpan'
 import ShowUserStats from './ShowUserStats'
+
 
 const UserLandingPage = ({ userData }) => {
 
@@ -33,6 +35,7 @@ const UserLandingPage = ({ userData }) => {
 
     return (
         <div>
+            <PageHeaderSpan text={ name + '\'s Landing Page' } />
             <div>
                 <p>Name { name }, Email { email }</p>
                 <p>Member since { moment(dateCreated).format('MMM do, YYYY') }</p>

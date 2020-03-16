@@ -8,6 +8,7 @@ import * as Yup from 'yup'
 import { CREATE_GROUP } from '../../graphql/tags/groups'
 import { createGroupAction } from '../../redux/actions/index'
 
+import PageHeaderSpan from '../header/PageHeaderSpan'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../syledComponents/auth'
 
@@ -42,32 +43,34 @@ const CreateGroup = ({ isSubmitting, isAuthenticated, values, handleChange, crea
     }
 
     return (
-        <Form 
-            onSubmit={ async e => {
-                e.preventDefault()
-                setGraphQLErrors([])
-                setQueryCanFire(true)
+        <>
+            <PageHeaderSpan text='Create New Group' />
+            <Form 
+                onSubmit={ async e => {
+                    e.preventDefault()
+                    setGraphQLErrors([])
+                    setQueryCanFire(true)
 
-                const { groupName } = values
-                await createGroup({ variables: { newGroupData: { groupName } } })
-            }}
-        >
-            <StyledForm>
-                Create New Group
-                <p>Create a new Group to push you and your friends to be better!</p>
-                <p>(I don't have friends either, you can totally play alone)</p>
-                <StyledInputBar 
-                    type={ 'groupName' }
-                    name={ 'groupName' }
-                    placeholder={ 'Group Name' }
-                    value={ values.groupName }
-                    onChange={ handleChange }
-                    key={ 'groupName' }
-                />
-                { graphQLErrors && renderErrors(graphQLErrors) }
-                <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
-            </StyledForm>
-        </Form>
+                    const { groupName } = values
+                    await createGroup({ variables: { newGroupData: { groupName } } })
+                }}
+            >
+                <StyledForm>
+                    <p>Create a new Group to push you and your friends to be better!</p>
+                    <p>(I don't have friends either, you can totally play alone)</p>
+                    <StyledInputBar 
+                        type={ 'groupName' }
+                        name={ 'groupName' }
+                        placeholder={ 'Group Name' }
+                        value={ values.groupName }
+                        onChange={ handleChange }
+                        key={ 'groupName' }
+                    />
+                    { graphQLErrors && renderErrors(graphQLErrors) }
+                    <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
+                </StyledForm>
+            </Form>
+        </>
     )
 }
 

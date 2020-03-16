@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 import AddUserToGroup from './AddUserToGroup'
 import CreateCustomGoal from './CreateCustomGoal'
+import PageHeaderSpan from '../../header/PageHeaderSpan'
 
 const AdminOptions = ({ match, userId, allGroups }) => {
     const [ currentGroup, setCurrentGroup ] = useState()
@@ -25,7 +26,7 @@ const AdminOptions = ({ match, userId, allGroups }) => {
 
     return (
         <div>
-            <h3>Admin Options</h3>
+            <PageHeaderSpan text='Admin Options' />
             <button onClick={() => {
                 const link = `/group/${ match.params.groupId }`
                 history.push(link)

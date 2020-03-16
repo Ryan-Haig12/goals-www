@@ -4,7 +4,8 @@ import { Redirect } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 
 import { GET_USERS_BY_ID } from '../../graphql/tags/user'
-import { GroupHeader, GroupSpan, StyledGroupMembersDiv, StyledMainGroupDiv, GoToAdminButton } from '../syledComponents/Group'
+import { StyledGroupMembersDiv, StyledMainGroupDiv, GoToAdminButton } from '../syledComponents/Group'
+import PageHeaderSpan from '../header/PageHeaderSpan'
 
 //import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
@@ -49,8 +50,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
         const adminLink = match.url + '/adminOptions'
         return (
             <div>
-                <GroupHeader>Welcome to { currentGroup.groupName }</GroupHeader>
-                <GroupSpan />
+                <PageHeaderSpan text={ 'Welcome to ' + currentGroup.groupName } />
 
                 { isAdmin ? <GoToAdminButton onClick={ () => {setRedirectToAdmin(true)} }>Go To Admin Options</GoToAdminButton> : null}
                 { isAdmin && redirectToAdmin && <Redirect to={ adminLink } /> }
