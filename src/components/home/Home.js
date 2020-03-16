@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import UserGroups from './UserGroups'
 import UnAuthenticatedPage from '../auth/UnAuthenticatedPage'
-import { StyledHomePage, StyledGroupCards, HomeHeader, HomeSpan } from '../syledComponents/Home'
+import { StyledHomePage, StyledGroupCards } from '../syledComponents/Home'
 import PageHeaderSpan from '../header/PageHeaderSpan'
 
 //import usePing from '../../hooks/usePing'
