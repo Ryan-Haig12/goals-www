@@ -16,13 +16,13 @@ import App from './App'
 import reducers from './redux/reducers/index'
 
 const httpLink = new HttpLink({
-  //uri: 'https://goals-graphql.herokuapp.com/'
-  uri: 'http://localhost:4000/'
+  uri: 'https://goals-graphql.herokuapp.com/'
+  //uri: 'http://localhost:4000/'
 })
 
 // subscription uri
-//const wsClient = new SubscriptionClient('ws://goals-graphql.herokuapp.com/')
-const wsClient = new SubscriptionClient('ws://localhost:4000/')
+const wsClient = new SubscriptionClient('ws://goals-graphql.herokuapp.com/')
+//const wsClient = new SubscriptionClient('ws://localhost:4000/')
 const wsLink = new WebSocketLink(wsClient)
 const subLink = split(({ query }) => {
   const { kind, operation } = getMainDefinition(query)
