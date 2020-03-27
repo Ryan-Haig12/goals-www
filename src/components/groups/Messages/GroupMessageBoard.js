@@ -40,6 +40,8 @@ const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
     let slots = []
 
     let k = 0
+    let numOfSlots = 10 - allMessages.length
+    if(numOfSlots < 0) numOfSlots = 1
     slots = Array( 10 - allMessages.length ).fill((
         <tr key={ k++ } >
             <td></td>
