@@ -28,6 +28,7 @@ const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
                 <td>{user.name} ({moment(message.timeWritten / 1000).format('h:mm:ss')}): {message.message}</td>
             </tr>
         ))
+        return 0    // removes warning from console
     })
 
     return slots

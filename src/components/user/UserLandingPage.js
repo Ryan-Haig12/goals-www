@@ -20,7 +20,7 @@ const UserLandingPage = ({ userData }) => {
             setUserId(userData.id)
             getUserStat()
         }
-    }, [ userData ])
+    }, [ userData, getUserStat ])
 
     useEffect(() => {
         if(data !== undefined && data !== null) {

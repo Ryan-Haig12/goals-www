@@ -7,13 +7,9 @@ import { GET_USERS_BY_ID } from '../../graphql/tags/user'
 import { StyledGroupMembersDiv, StyledMainGroupDiv, GoToAdminButton } from '../syledComponents/Group'
 import PageHeaderSpan from '../header/PageHeaderSpan'
 
-//import AdminOptions from './Admin/AdminOptions'
 import FinishedGoalForm from './FinishedGoalForm'
-//import GroupGoalsTable from './GroupGoalsTable'
 import GroupChat from './Messages/GroupChat'
 import GroupMembers from './GroupMembers'
-import GroupMessageBoard from './Messages/GroupMessageBoard'
-import InputBar from './Messages/InputBar'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 
 const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, defaultGoals, customGoalsAllGroups }) => {

@@ -56,7 +56,9 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                 allGoals.defaultGoals.map(category => {
                     category.goals.map(goal => {
                         if(goal.id === values.goalSelect) points = goal.points
+                        return 0 // remove warning from console
                     })
+                    return 0 // remove warning from console
                 })
 
                 if(!points) {
@@ -65,6 +67,7 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                     const customGoals = group.customGoals
                     customGoals.map(goal => {
                         if(goal.id === values.goalSelect) points = goal.points
+                        return 0 // remove warning from console
                     })
                 }
 

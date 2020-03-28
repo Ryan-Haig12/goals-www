@@ -31,7 +31,7 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring }) =>
             <ol>
                 {groupScoring.map(member => {
                     const user = allMembers.find(m => member.userId === m.id)
-                    if(!user || !user.name) return
+                    if(!user || !user.name) return -1 // return -1 to remove warning from console
 
                     return (
                         <li key={ member.userId } >{ user.name }, score: { member.score }</li>

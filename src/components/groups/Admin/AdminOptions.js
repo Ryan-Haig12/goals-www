@@ -13,8 +13,8 @@ const AdminOptions = ({ match, userId, allGroups }) => {
     // set CurrentGroup data
     useEffect(() => {
         if(!allGroups.length) history.push('/')
-        allGroups.map(group => { if(group.id === match.params.groupId) setCurrentGroup(group) })
-    }, [ allGroups ])
+        allGroups.map(group => { if(group.id === match.params.groupId) setCurrentGroup(group); return -1 }) // <- return -1 to remove warning from console
+    }, [ allGroups, history, match ])
 
     // if user is not admin, kick them out
     useEffect(() => {
@@ -22,7 +22,7 @@ const AdminOptions = ({ match, userId, allGroups }) => {
             const isAdmin = currentGroup.groupCreator === userId
             if(!isAdmin) history.push('/')
         }
-    }, [ currentGroup ])
+    }, [ currentGroup, history, userId ])
 
     return (
         <div>
