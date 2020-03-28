@@ -7,47 +7,20 @@ import moment from 'moment'
 import { GET_ALL_GROUP_MESSAGE, GROUP_MESSAGE_SENT } from '../../../graphql/tags/groupMessages'
 import { getAllGroupMessages } from '../../../redux/actions/index'
 
-const mapGroupMessages = ( allMessages ) => {
-    if(!allMessages) {
+const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
+    if(!allMessages || !allMessages.length) {
         return (
             <tr>
                 <td>No Messages Found</td>
             </tr>
         )
     }
-    return allMessages.map(message => {
-        return (
-            <tr key={ message.id } >
-                <td>{message.message}</td>
-                <td>{message.authorId}</td>
-                <td>{message.timeWritten}</td>
-            </tr>
-        )
-    })
-}
 
-const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
-    //console.log(allMessages, allMembers)
-
-    if(!allMessages) {
-        return (
-            <tr>
-                <td>No Messages Found</td>
-            </tr>
-        )
+    if(allMessages.length > 10) {
+        allMessages = allMessages.splice(0, 1)
     }
 
     let slots = []
-
-    let k = 0
-    let numOfSlots = 10 - allMessages.length
-    if(numOfSlots < 0) numOfSlots = 1
-    slots = Array( 10 - allMessages.length ).fill((
-        <tr key={ k++ } >
-            <td></td>
-        </tr>
-    ))
-
     allMessages.map(message => {
         const user = allMembers.filter(mem => mem.id === message.authorId)[0]
         slots.push((

@@ -63,7 +63,6 @@ export const GoToAdminButton = styled.button`
 `
 
 export const StyledGroupMembersDiv = styled.div`
-    border: 1px solid red;
     width: 25%;
     margin: 0 auto;
     color: #b48608;
@@ -80,7 +79,6 @@ export const StyledFinishedGoalForm = styled.div`
     line-height: 1.6;
     color: #111;
     text-align: center;
-    border: 1px solid red;
 
     position: absolute;
     top: 25%;
@@ -88,17 +86,15 @@ export const StyledFinishedGoalForm = styled.div`
 `
 
 export const StyledMainGroupDiv = styled.div`
-    border: 1px dashed red;
     position: relative;
 `
 
 export const StyledGroupChat = styled.div`
-    border: 1px solid orange;
-    width: 30%;
+    width: 33%;
 
     position: absolute;
     top: 25%;
-    right: 10%;
+    right: 2%;
     float: right;
 
     background: #7A9D96;
