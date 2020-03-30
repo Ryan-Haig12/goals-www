@@ -61,3 +61,19 @@ export const ADD_USER_TO_GROUP_BY_EMAIL = gql`
         }
     }
 `
+
+export const GET_GROUP_POWER_RANKINGS = gql`
+    query CalcGroupPowerRanking($groupId: ID!){
+        calcGroupPowerRanking(groupId: $groupId) {
+            allTimeRankingsWeeks {
+                userId
+                recordsWon
+            }
+            allTimeRankingsMonths {
+                userId
+                recordsWon
+            }
+            errors
+        }   
+    }
+`

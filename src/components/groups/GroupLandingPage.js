@@ -10,6 +10,7 @@ import PageHeaderSpan from '../header/PageHeaderSpan'
 import FinishedGoalForm from './FinishedGoalForm'
 import GroupChat from './Messages/GroupChat'
 import GroupMembers from './GroupMembers'
+import PowerRankings from './PowerRankings/PowerRankings'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 
 const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, defaultGoals, customGoalsAllGroups }) => {
@@ -61,6 +62,8 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                     <FinishedGoalForm allGoals={{ defaultGoals, customGoalsAllGroups }} allMembers={data.getMultipleUsersById} groupData={{ userId, groupId: currentGroup.id }} />
 
                     <GroupChat allMembers={data.getMultipleUsersById} userId={ userId } groupId={ currentGroup.id } />
+
+                    <PowerRankings groupId={ currentGroup.id } allMembers={data.getMultipleUsersById} />
                 </StyledMainGroupDiv>
             </div>
         )

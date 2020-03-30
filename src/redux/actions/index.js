@@ -18,6 +18,7 @@ import {
     UPDATE_GROUP_SCORES,
     CREATE_CUSTOM_GOAL,
     FINSIHED_GOAL_FORM_CLOSED,
+    CALC_GROUP_POWER_RANKINGS
 } from '../actions/types'
 
 // Register a user
@@ -167,6 +168,15 @@ export const loadGroupScores = ( usersScoreData ) => async dispatch => {
 export const createCustomGoalAction = ( newCustomGoalData ) => async dispatch => {
     try {
         dispatch({ type: CREATE_CUSTOM_GOAL, payload: newCustomGoalData })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+// get the power rankings for a group
+export const getCalcGroupPowerRanking = ( powerRankings ) => async dispatch => {
+    try {
+        dispatch({ type: CALC_GROUP_POWER_RANKINGS, payload: powerRankings })
     } catch(err) {
         console.log(err)
     }

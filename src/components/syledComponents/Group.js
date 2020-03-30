@@ -131,3 +131,15 @@ export const StyledGroupChatButton = styled.button`
         box-shadow: 0 5px #666;
     }
 `
+
+export const StyledPowerRankings = styled.div`
+    border: 1px solid red;
+    width: 33%;
+
+    position: absolute;
+    top: 110%;
+    left: 2%;
+    float: left;
+
+    background: #7A9D96;
+`

@@ -6,6 +6,7 @@ import {
     GET_ALL_GROUPS_FULL_DATA,
     ADD_USER_TO_GROUP,
     UPDATE_GROUP_SCORES,
+    CALC_GROUP_POWER_RANKINGS
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -16,6 +17,7 @@ const INITIAL_STATE = {
     // I'm going to create and use groupsFullData for the full data of every group from groupsMember
     groupsFullData: [],
     membersScoring: [], // user/score data to make rendering scores easier
+    powerRankings: [], // stored power rankings for the group
     errors: null
 }
 
@@ -57,6 +59,11 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 membersScoring: action.payload
+            }
+        case CALC_GROUP_POWER_RANKINGS: 
+            return {
+                ...state,
+                powerRankings: action.payload
             }
         default:
             return state
