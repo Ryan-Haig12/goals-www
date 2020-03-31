@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 
 import { GET_USERS_BY_ID } from '../../graphql/tags/user'
@@ -18,6 +18,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
     const [ isAdmin, setIsAdmin ] = useState(false)
     const [ redirectToAdmin, setRedirectToAdmin ] = useState(false)
     const [ getAllUsers, { data, loading, error } ] = useLazyQuery(GET_USERS_BY_ID, { variables: { userIds: currentGroup ? currentGroup.groupMembers : [] } })
+    const history = useHistory()
 
     useEffect(() => {
         usersGroups.map(group => {
@@ -64,6 +65,10 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                     <GroupChat allMembers={data.getMultipleUsersById} userId={ userId } groupId={ currentGroup.id } />
 
                     <PowerRankings groupId={ currentGroup.id } allMembers={data.getMultipleUsersById} />
+
+                    <button onClick={() => {
+                        history.push(`/group/${ match.params.groupId }/finishedGoalsReport`)
+                    }}>Go To Finished Goal Report</button>
                 </StyledMainGroupDiv>
             </div>
         )

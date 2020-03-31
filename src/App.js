@@ -7,6 +7,7 @@ import './App.css'
 
 import AdminOptions from './components/groups/Admin/AdminOptions'
 import CreateGroup from './components/groups/CreateGroup'
+import FinishedGoalLanding from './components/groups/FinishedGoalRecords/FinishedagoalLanding'
 import GroupLandingPage from './components/groups/GroupLandingPage'
 import Header from './components/header/Header'
 import Home from './components/home/Home'
@@ -86,6 +87,7 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
         <Route path='/createGroup' component={ CreateGroup } />
         <Route exact path='/group/:groupId' component={ GroupLandingPage } />
         <Route exact path='/group/:groupId/adminOptions' component={ AdminOptions } />
+        <Route exact path='/group/:groupId/finishedGoalsReport' component={ FinishedGoalLanding } />
         <Route exact path='/user' component={ UserLandingPage } />
       </Switch>
     </BrowserRouter>

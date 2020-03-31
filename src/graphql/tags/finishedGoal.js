@@ -13,3 +13,15 @@ export const ADD_FINISHED_GOAL = gql`
     }
 `
 
+export const GET_FINISHED_GOALS = gql`
+    query GetFinishedGoals($GetFinishedGoalsData: GetFinishedGoalsInput!) {
+        getFinishedGoals(data: $GetFinishedGoalsData) {
+            id
+            goalId
+            userId
+            groupId
+            timeCompleted
+            errors
+        }
+    }
+`
