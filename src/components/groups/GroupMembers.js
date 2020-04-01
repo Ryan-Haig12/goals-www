@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import { CALC_USER_SCORE } from '../../graphql/tags/scoring'
 import { loadGroupScores } from '../../redux/actions/index'
+import { StyledFinishedGoalReportButton } from '../syledComponents/Group'
 
 const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring }) => {
     const { data, error } = useQuery(CALC_USER_SCORE, { variables: {
@@ -16,6 +18,7 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring }) =>
             endTime: (moment().endOf('month').unix() * 1000).toString()
         }
     }})
+    const history = useHistory()
 
     if(error) console.log(error)
 
@@ -28,16 +31,23 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring }) =>
 
     if(groupScoring.length) {
         return (
-            <ol>
-                {groupScoring.map(member => {
-                    const user = allMembers.find(m => member.userId === m.id)
-                    if(!user || !user.name) return -1 // return -1 to remove warning from console
+            <div>
+                <ol>
+                    {groupScoring.map(member => {
+                        const user = allMembers.find(m => member.userId === m.id)
+                        if(!user || !user.name) return -1 // return -1 to remove warning from console
 
-                    return (
-                        <li key={ member.userId } >{ user.name }, score: { member.score }</li>
-                    )
-                })}
-            </ol>
+                        return (
+                            <li key={ member.userId } >{ user.name }, score: { member.score }</li>
+                        )
+                    })}
+                </ol>
+
+                <StyledFinishedGoalReportButton onClick={() => {
+                    history.push(`/group/${ groupId }/finishedGoalsReport`)
+                }}>Go To Finished Goal Report</StyledFinishedGoalReportButton>
+            </div>
+            
         )
     }
     return (

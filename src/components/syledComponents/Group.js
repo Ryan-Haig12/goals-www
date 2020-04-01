@@ -62,10 +62,39 @@ export const GoToAdminButton = styled.button`
     }
 `
 
+export const StyledFinishedGoalReportButton = styled.button`
+    padding: 15px 25px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #DCAE1D;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 9px #999;
+
+    position: relative;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    margin-top: 25px;
+
+    &:hover {
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    &:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+    }
+`
+
 export const StyledGroupMembersDiv = styled.div`
     width: 25%;
     margin: 0 auto;
     color: #b48608;
+    text-align: center
 `
 
 export const StyledFinishedGoalForm = styled.div`
@@ -133,7 +162,6 @@ export const StyledGroupChatButton = styled.button`
 `
 
 export const StyledPowerRankings = styled.div`
-    border: 1px solid red;
     width: 33%;
 
     position: absolute;
@@ -141,5 +169,14 @@ export const StyledPowerRankings = styled.div`
     left: 2%;
     float: left;
 
+    background: #7A9D96;
+`
+
+export const StyledUserFinishedGoalsLog = styled.div`
+    width: 75%;
+    top: 20%;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
     background: #7A9D96;
 `
