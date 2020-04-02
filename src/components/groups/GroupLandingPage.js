@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
+import moment from 'moment'
 
 import { GET_USERS_BY_ID } from '../../graphql/tags/user'
 import { StyledGroupMembersDiv, StyledMainGroupDiv, GoToAdminButton } from '../syledComponents/Group'
@@ -18,7 +19,6 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
     const [ isAdmin, setIsAdmin ] = useState(false)
     const [ redirectToAdmin, setRedirectToAdmin ] = useState(false)
     const [ getAllUsers, { data, loading, error } ] = useLazyQuery(GET_USERS_BY_ID, { variables: { userIds: currentGroup ? currentGroup.groupMembers : [] } })
-    //const history = useHistory()
 
     useEffect(() => {
         usersGroups.map(group => {
@@ -56,7 +56,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
 
                 <StyledMainGroupDiv>
                     <StyledGroupMembersDiv>
-                        <h3>Monthly Standings</h3>
+                        <h3>{ moment(Date.now()).format('MMMM') } Standings</h3>
                         <GroupMembers groupId={currentGroup.id} allMembers={data.getMultipleUsersById} />
                     </StyledGroupMembersDiv>
 
