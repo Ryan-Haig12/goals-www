@@ -7,7 +7,8 @@ import moment from 'moment'
 import { CALC_USER_STAT } from '../../graphql/tags/stats'
 import PageHeaderSpan from '../header/PageHeaderSpan'
 import ShowUserStats from './ShowUserStats'
-
+import { UserPage } from '../syledComponents/User'
+import UpdateUserForm from './UpdateUserForm'
 
 const UserLandingPage = ({ userData }) => {
 
@@ -36,13 +37,16 @@ const UserLandingPage = ({ userData }) => {
     return (
         <div>
             <PageHeaderSpan text={ name + '\'s Landing Page' } />
-            <div>
-                <p>Name { name }, Email { email }</p>
-                <p>Member since { moment(dateCreated).format('MMM do, YYYY') }</p>
-            </div>
-            <div>
-                { userStatsFetched ? <ShowUserStats data={ userStats } /> : '' }
-            </div>
+            <UserPage>
+                <div>
+                    <p>Name { name }, Email { email }</p>
+                    <p>Member since { moment(dateCreated).format('MMM do, YYYY') }</p>
+                </div>
+                <UpdateUserForm userId={ userId } />
+                <div>
+                    { userStatsFetched ? <ShowUserStats data={ userStats } /> : '' }
+                </div>
+            </UserPage>
         </div>
     )
 }

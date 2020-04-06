@@ -71,3 +71,15 @@ export const GET_USER_BY_JWT = gql`
         }
     }
 `
+
+export const UPDATE_USER = gql`
+    mutation UpdateUser($UpdateUserInput: UpdateUserInput) {
+        updateUser(data: $UpdateUserInput) {
+            id
+            name
+            email
+            dateCreated
+            errors
+        }
+    }
+`
