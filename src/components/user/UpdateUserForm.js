@@ -4,9 +4,11 @@ import { withFormik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 
 import { UPDATE_USER } from '../../graphql/tags/user'
+import { updateUserDataAction } from '../../redux/actions/index'
 import { StyledUpdateUserForm } from '../syledComponents/User'
+import UserLandingPage from './UserLandingPage'
 
-const UpdateUserForm = ({ isSubmitting, values, handleChange, userId }) => {
+const UpdateUserForm = ({ isSubmitting, values, handleChange, userId, userData, updateUserDataAction }) => {
     const [ updateUserQuery, { error } ] = useMutation(UPDATE_USER)
     const [ successMessage, setSuccessMessage ] = useState()
 
@@ -16,16 +18,22 @@ const UpdateUserForm = ({ isSubmitting, values, handleChange, userId }) => {
                 e.preventDefault()
 
                 if(!(!values.name.length && !values.email.length) && !error) {
-                    const updatedUser = await updateUserQuery({ variables: { UpdateUserInput: {
-                        userId,
-                        email: values.email,
-                        name: values.name
-                    }}})
+                    try {
+                        const updatedUser = await updateUserQuery({ variables: { UpdateUserInput: {
+                            userId,
+                            email: values.email,
+                            name: values.name
+                        }}})
 
-                    if(updatedUser) setSuccessMessage(`User Updated Successfully!`)
-                    await setTimeout(() => {
-                        setSuccessMessage(null)
-                    }, 3000)
+                        updateUserDataAction({ email: values.email, name: values.name }, userData)
+    
+                        if(updatedUser) setSuccessMessage(`User Updated Successfully!`)
+                        await setTimeout(() => {
+                            setSuccessMessage(null)
+                        }, 3000)
+                    } catch(err) {
+                        console.log(err)
+                    }
                 }
             }}
         >
@@ -62,5 +70,11 @@ const FormikEnhancer = withFormik({
         }
     }
 })(UpdateUserForm)
+
+const mapPropsToState = ( state ) => {
+    return {
+        userData: state.User.userData
+    }
+}
  
-export default connect()(FormikEnhancer)
+export default connect(mapPropsToState, { updateUserDataAction })(FormikEnhancer)

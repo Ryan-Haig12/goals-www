@@ -7,6 +7,7 @@ export const USER_LOADED = 'USER_LOADED'
 export const LOGOUT = 'LOGOUT'
 export const LOGOUT_ERROR = 'LOGOUT_ERROR'
 export const GET_USER = 'GET_USER'
+export const UPDATE_USER_DATA = 'UPDATE_USER_DATA'
 
 // Goals
 export const GET_ALL_GOALS = 'GET_ALL_GOALS'

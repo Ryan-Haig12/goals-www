@@ -4,7 +4,8 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    LOGOUT_ERROR
+    LOGOUT_ERROR,
+    UPDATE_USER_DATA
 } from '../actions/types' 
 
 const INITIAL_STATE = {
@@ -24,6 +25,8 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
             return { authError: action.payload }
         case LOGOUT: 
             return INITIAL_STATE
+        case UPDATE_USER_DATA:
+            return { ...state, userData: action.payload }
         default:
             return state
     }

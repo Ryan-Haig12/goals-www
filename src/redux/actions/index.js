@@ -18,7 +18,8 @@ import {
     UPDATE_GROUP_SCORES,
     CREATE_CUSTOM_GOAL,
     FINSIHED_GOAL_FORM_CLOSED,
-    CALC_GROUP_POWER_RANKINGS
+    CALC_GROUP_POWER_RANKINGS,
+    UPDATE_USER_DATA
 } from '../actions/types'
 
 // Register a user
@@ -177,6 +178,24 @@ export const createCustomGoalAction = ( newCustomGoalData ) => async dispatch =>
 export const getCalcGroupPowerRanking = ( powerRankings ) => async dispatch => {
     try {
         dispatch({ type: CALC_GROUP_POWER_RANKINGS, payload: powerRankings })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+// update userData like email and username
+// have to pass in current userData
+export const updateUserDataAction = (newUserData, currentUserData) => async dispatch => {    
+    for(let i in currentUserData) {
+        for(let j in newUserData) {
+            if(i == j && currentUserData[i] !== newUserData[j] && newUserData[j].length) {
+                currentUserData[i] = newUserData[j]
+            }
+        }
+    }
+  
+    try {
+        dispatch({ type: UPDATE_USER_DATA, payload: currentUserData })
     } catch(err) {
         console.log(err)
     }
