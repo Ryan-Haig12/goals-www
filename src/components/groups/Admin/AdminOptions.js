@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import AddUserToGroup from './AddUserToGroup'
 import CreateCustomGoal from './CreateCustomGoal'
 import PageHeaderSpan from '../../header/PageHeaderSpan'
+import UpdateGroupForm from './UpdateGroupForm'
 
 const AdminOptions = ({ match, userId, allGroups }) => {
     const [ currentGroup, setCurrentGroup ] = useState()
@@ -24,6 +25,9 @@ const AdminOptions = ({ match, userId, allGroups }) => {
         }
     }, [ currentGroup, history, userId ])
 
+    // prevents page from crashing on refresh
+    if(!currentGroup) return (<div>Loading...</div>)
+
     return (
         <div>
             <PageHeaderSpan text='Admin Options' />
@@ -32,6 +36,7 @@ const AdminOptions = ({ match, userId, allGroups }) => {
                 history.push(link)
             }} >Go To Group Page</button>
             <AddUserToGroup match={ match } />
+            <UpdateGroupForm groupId={ currentGroup.id } />
             <CreateCustomGoal userId={ userId } match={ match } />
         </div>
     )

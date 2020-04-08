@@ -49,6 +49,17 @@ export const ADD_USER_TO_GROUP = gql`
     }
 `
 
+export const UPDATE_GROUP = gql`
+    mutation UpdateGroup($updateGroupData: UpdateGroupInput!){
+        updateGroup(data: $updateGroupData) {
+            id
+            groupCreator
+            groupName
+            groupMembers
+            errors
+        }
+    }
+`
 
 export const ADD_USER_TO_GROUP_BY_EMAIL = gql`
     mutation AddUserToGroupByEmail($addUserData: AddUserToGroupInput!){
