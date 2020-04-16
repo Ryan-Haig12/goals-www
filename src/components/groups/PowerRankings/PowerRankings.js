@@ -4,6 +4,8 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { GET_GROUP_POWER_RANKINGS } from '../../../graphql/tags/groups'
 import { StyledPowerRankings } from '../../syledComponents/Group'
 
+import ChartWrapper from './d3Chart/ChartWrapper'
+
 const mapPowerRankings = ( powerRankings, allMembers ) => {
     let mappedPowerRankings = []
 
@@ -40,20 +42,24 @@ const PowerRankings = ({ groupId, allMembers }) => {
 
     useEffect(() => {
         getPowerRankingsQuery()
-        if(error) console.log(error)
     }, [])
 
     useEffect(() => {
+        if(error) console.log(error)
+
         if(data !== undefined && data !== null) {
             setPowerRankings(data.calcGroupPowerRanking)
         }
     }, [ data ])
 
     return (
-        <StyledPowerRankings>
-            <h2>All Time Power Rankings</h2>
-            { powerRankings && mapPowerRankings(powerRankings, allMembers) }
-        </StyledPowerRankings>
+        <div>
+            <StyledPowerRankings>
+                <h2>All Time Power Rankings</h2>
+                { powerRankings && mapPowerRankings(powerRankings, allMembers) }
+            </StyledPowerRankings>
+            <ChartWrapper groupId={ groupId } allMembers={ allMembers } />
+        </div>
     )
 }
  
