@@ -29,6 +29,9 @@ const mapCustomGoalList = ( allGoals, groupId ) => {
     if(!customGoals.length) return
     
     return customGoals.map(goal => {
+        // don't show custom goals if they are not enabled
+        if(!goal.enabled) return
+
         const lab = `${ goal.category }: ${ goal.title }`
         return (
             <option key={ goal.id } value={ goal.id } label={ lab } />
