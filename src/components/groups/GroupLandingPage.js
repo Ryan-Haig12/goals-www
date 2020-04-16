@@ -52,7 +52,10 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 <PageHeaderSpan text={ 'Welcome to ' + currentGroup.groupName } />
 
                 { isAdmin ? <GoToAdminButton onClick={ () => {setRedirectToAdmin(true)} }>Go To Admin Options</GoToAdminButton> : null}
-                { isAdmin && redirectToAdmin && <Redirect to={ adminLink } /> }
+                { isAdmin && redirectToAdmin && <Redirect to={{
+                    pathname: adminLink,
+                    state: { allMembers: data.getMultipleUsersById }
+                }}/> }
 
                 <StyledMainGroupDiv>
                     <StyledGroupMembersDiv>

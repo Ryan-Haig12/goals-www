@@ -41,7 +41,20 @@ export const GET_CUSTOM_GOALS_BY_GROUPID_ARRAY = gql`
                 errors
                 points
                 title
+                enabled
             }
         }
     }
-`   
+`
+
+export const REMOVE_USERS_FROM_GROUP = gql`
+    mutation RemoveUsersFromGroupByUserId($data: RemoveUsersFromGroupInput) {
+        removeUsersFromGroupByUserId(data: $data) {
+            id
+            groupName
+            groupCreator
+            groupMembers
+            errors
+        }
+    }
+`

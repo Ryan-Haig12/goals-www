@@ -3,12 +3,15 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import AddUserToGroup from './AddUserToGroup'
+import EditCustomGoals from './EditCustomGoals'
 import CreateCustomGoal from './CreateCustomGoal'
 import PageHeaderSpan from '../../header/PageHeaderSpan'
 import UpdateGroupForm from './UpdateGroupForm'
+import UserList from './UserList'
 
-const AdminOptions = ({ match, userId, allGroups }) => {
+const AdminOptions = ({ match, userId, allGroups, location, allCustomGoals }) => {
     const [ currentGroup, setCurrentGroup ] = useState()
+    const [ groupCustomGoals, setGroupCustomGoals ] = useState([])
     const history = useHistory()
 
     // set CurrentGroup data
@@ -25,6 +28,14 @@ const AdminOptions = ({ match, userId, allGroups }) => {
         }
     }, [ currentGroup, history, userId ])
 
+    // strip the custom goals to be sent to EditCustomGoals
+    useEffect(() => {
+        if(allCustomGoals !== null && allCustomGoals !== undefined && currentGroup !== undefined) {
+            const groupGoals = allCustomGoals.find(g => g.groupId === currentGroup.id)
+            setGroupCustomGoals( groupGoals.customGoals )
+        }
+    }, [ allCustomGoals, currentGroup ])
+
     // prevents page from crashing on refresh
     if(!currentGroup) return (<div>Loading...</div>)
 
@@ -38,6 +49,8 @@ const AdminOptions = ({ match, userId, allGroups }) => {
             <AddUserToGroup match={ match } />
             <UpdateGroupForm groupId={ currentGroup.id } />
             <CreateCustomGoal userId={ userId } match={ match } />
+            <EditCustomGoals customGoals={ groupCustomGoals } groupId={ currentGroup.id } />
+            <UserList allMembers={ location.state.allMembers } groupId={ currentGroup.id } groupCreator={ currentGroup.groupCreator } />
         </div>
     )
 }
@@ -45,9 +58,11 @@ const AdminOptions = ({ match, userId, allGroups }) => {
 const mapStateToProps = (state) => {
     const userId = state.User.userData ? state.User.userData.id : ''
     const allGroups = state.Group.groupsFullData ? state.Group.groupsFullData : '' // have to pass in all groups, groupId exists in main component
+    const allCustomGoals = state.Goals.customGoals ? state.Goals.customGoals : ''
     return {
         userId,
-        allGroups
+        allGroups,
+        allCustomGoals
     }
 } 
 

@@ -180,3 +180,38 @@ export const StyledUserFinishedGoalsLog = styled.div`
     position: relative;
     background: #7A9D96;
 `
+
+export const StyledUserListAdminPage = styled.div`
+    border: 1px solid red;
+    text-align: center;
+    width: 600px;
+    background-image: linear-gradient(
+        to top, 
+        #a3b591, #e4ffc9
+    );
+    position: relative;
+    margin: 5% auto;
+`
+
+export const StyledUserListUserCard = styled.div`
+    border: 1px solid orange;
+    padding: 5px;
+    margin: 5px;
+`
+
+export const StyledGoalsListAdminPage = styled.div`
+    text-align: center;
+    width: 600px;
+    background-image: linear-gradient(
+        to top, 
+        #a3b591, #e4ffc9
+    );
+    position: relative;
+    margin: 5% auto;
+`
+
+export const StyledGoalsListGoalCard = styled.div`
+    border: 1px solid orange;
+    padding: 5px;
+    margin: 5px;
+`
