@@ -5,6 +5,8 @@ import { GET_GROUP_POWER_RANKINGS } from '../../../graphql/tags/groups'
 import { StyledPowerRankings } from '../../syledComponents/Group'
 
 import ChartWrapper from './d3Chart/ChartWrapper'
+import DatePicker from './d3Chart/DatePicker'
+import { StyledChartBody } from '../../syledComponents/d3Chart'
 
 const mapPowerRankings = ( powerRankings, allMembers ) => {
     let mappedPowerRankings = []
@@ -39,6 +41,7 @@ const mapPowerRankings = ( powerRankings, allMembers ) => {
 const PowerRankings = ({ groupId, allMembers }) => {
     const [ getPowerRankingsQuery, { data, error } ] = useLazyQuery(GET_GROUP_POWER_RANKINGS, { variables: { groupId } })
     const [ powerRankings, setPowerRankings ] = useState(null)
+    const [ dateRange, setDateRange ] = useState(null)
 
     useEffect(() => {
         getPowerRankingsQuery()
@@ -58,7 +61,10 @@ const PowerRankings = ({ groupId, allMembers }) => {
                 <h2>All Time Power Rankings</h2>
                 { powerRankings && mapPowerRankings(powerRankings, allMembers) }
             </StyledPowerRankings>
-            <ChartWrapper groupId={ groupId } allMembers={ allMembers } />
+            <StyledChartBody>
+                <DatePicker setDateRange={ setDateRange } />
+                <ChartWrapper groupId={ groupId } allMembers={ allMembers } dateRange={ dateRange } />
+            </StyledChartBody>
         </div>
     )
 }
