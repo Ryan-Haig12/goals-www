@@ -13,6 +13,7 @@
     "apollo-link-ws": "^1.0.19",
     "axios": "^0.19.1",
     "d3": "^5.15.1",
+    "date-fns": "^2.0.0-alpha.7",
     "formik": "^2.1.2",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
@@ -32,6 +33,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.0",
     "subscriptions-transport-ws": "^0.9.16",
+    "typescript": "^3.8.3",
     "yup": "^0.28.0"
   },
   "scripts": {
