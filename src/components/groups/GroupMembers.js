@@ -9,18 +9,26 @@ import { CALC_USER_SCORE } from '../../graphql/tags/scoring'
 import { loadGroupScores } from '../../redux/actions/index'
 import { StyledFinishedGoalReportButton } from '../syledComponents/Group'
 
-const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring }) => {
-    const { data, error } = useQuery(CALC_USER_SCORE, { variables: {
-        userScoreInput: {
-            userIds: allMembers.map(m => m.id),
-            groupId,
-            startTime: (moment().startOf('month').unix() * 1000).toString(),
-            endTime: (moment().endOf('month').unix() * 1000).toString()
+const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, playerScoresShouldBeFetched }) => {
+    const { data, error, refetch } = useQuery(CALC_USER_SCORE, {
+        fetchPolicy: 'no-cache',
+        variables: {
+            userScoreInput: {
+                userIds: allMembers.map(m => m.id),
+                groupId,
+                startTime: (moment().startOf('month').unix() * 1000).toString(),
+                endTime: (moment().endOf('month').unix() * 1000).toString()
+            }
         }
-    }})
+    })
     const history = useHistory()
 
     if(error) console.log(error)
+
+    // if user has logged a finished goal, update the score 
+    useEffect(() => {
+        if(playerScoresShouldBeFetched) refetch()
+    }, [ playerScoresShouldBeFetched ])
 
     useEffect(() => {
         if(data !== undefined && data !== null) {

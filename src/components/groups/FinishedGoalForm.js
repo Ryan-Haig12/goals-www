@@ -39,7 +39,7 @@ const mapCustomGoalList = ( allGoals, groupId ) => {
     })
 }
 
-const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handleBlur, allGoals }) => {
+const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handleBlur, allGoals, setPlayerScoresShouldBeFetched }) => {
     const { userId, groupId } = groupData
     const [ CreateFinishedGoal, { error } ] = useMutation(ADD_FINISHED_GOAL)
     const [ successMessage, setSuccessMessage ] = useState()
@@ -50,7 +50,6 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
         <Form 
             onSubmit={ async e => {
                 e.preventDefault()
-                console.log(values)
 
                 // prevents sending graphql a null value for minutesLogged
                 if(!values.minutesLogged) return
@@ -83,9 +82,14 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                     points
                 }}})
 
-                if(newFinishedGoal) setSuccessMessage(`Goal Logged Successfully!`)
+                // updated to trigger GroupMembers to update the player scores
+                if(newFinishedGoal) {
+                    setSuccessMessage(`Goal Logged Successfully!`)
+                    setPlayerScoresShouldBeFetched(true)
+                }
                 await setTimeout(() => {
                     setSuccessMessage(null)
+                    setPlayerScoresShouldBeFetched(false)
                 }, 3000)
             }}
         >

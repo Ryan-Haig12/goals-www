@@ -17,6 +17,7 @@ import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, defaultGoals, customGoalsAllGroups }) => {
     const [ currentGroup, setCurrentGroup ] = useState(null)
     const [ isAdmin, setIsAdmin ] = useState(false)
+    const [ playerScoresShouldBeFetched, setPlayerScoresShouldBeFetched ] = useState(false)
     const [ redirectToAdmin, setRedirectToAdmin ] = useState(false)
     const [ getAllUsers, { data, loading, error } ] = useLazyQuery(GET_USERS_BY_ID, { variables: { userIds: currentGroup ? currentGroup.groupMembers : [] } })
 
@@ -42,6 +43,10 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
         }
     }, [ loading, data, currentGroup, setIsAdmin, groupsAdmin ])
 
+    useEffect(() => {
+        console.log('yeeeeeee', playerScoresShouldBeFetched)
+    }, [ playerScoresShouldBeFetched ])
+
     if(!isAuthenticated) return <UnAuthedNavHome />
     if(!currentGroup) return <p>Loading...</p>
 
@@ -60,10 +65,19 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 <StyledMainGroupDiv>
                     <StyledGroupMembersDiv>
                         <h3>{ moment(Date.now()).format('MMMM') } Standings</h3>
-                        <GroupMembers groupId={currentGroup.id} allMembers={data.getMultipleUsersById} />
+                        <GroupMembers
+                            groupId={currentGroup.id}
+                            allMembers={data.getMultipleUsersById}
+                            playerScoresShouldBeFetched={ playerScoresShouldBeFetched }
+                        />
                     </StyledGroupMembersDiv>
 
-                    <FinishedGoalForm allGoals={{ defaultGoals, customGoalsAllGroups }} allMembers={data.getMultipleUsersById} groupData={{ userId, groupId: currentGroup.id }} />
+                    <FinishedGoalForm
+                        allGoals={{ defaultGoals, customGoalsAllGroups }}
+                        allMembers={data.getMultipleUsersById}
+                        groupData={{ userId, groupId: currentGroup.id }}
+                        setPlayerScoresShouldBeFetched={ setPlayerScoresShouldBeFetched }
+                    />
 
                     <GroupChat allMembers={data.getMultipleUsersById} userId={ userId } groupId={ currentGroup.id } />
 
