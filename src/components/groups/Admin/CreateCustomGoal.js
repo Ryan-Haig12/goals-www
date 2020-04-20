@@ -16,7 +16,7 @@ const renderErrors = ( errors ) => {
     })
 }
 
-const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, userId, createCustomGoalAction }) => {
+const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, handleBlur, userId, createCustomGoalAction }) => {
     const [ CreateCustomGoalQuery, { data, error }] = useMutation(CREATE_CUSTOM_GOAL)
     const [ graphQLErrors, setGraphQLErrors ] = useState([])
     const [ successAddingCustomGoal, setSuccessAddingCustomGoal ] = useState(false)
@@ -35,6 +35,16 @@ const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, userId, c
             setSuccessAddingCustomGoal(true)
             setQueryCanFire(false)
         }
+    }
+
+    const getOptions = () => {
+        const cats = ['Physical', 'Nutrition', 'Mental', 'Spiritual', 'Emotional']
+        return cats.map(c => {
+            console.log(c)
+            return (
+                <option value={ c } label={ c } />
+            )
+        })
     }
 
     return (
@@ -81,14 +91,15 @@ const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, userId, c
                     onChange={ handleChange }
                     key={ 'points' }
                 />
-                <StyledInputBar 
-                    type={ 'category' }
-                    name={ 'category' }
-                    placeholder={ 'Category' }
-                    value={ values.category }
-                    onChange={ handleChange }
-                    key={ 'category' }
-                />
+                <select
+                    name="category"
+                    value={values.category}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                >
+                    <option disabled value="" label="Select Category Here" />
+                    { getOptions() }
+                </select>
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 { successAddingCustomGoal && <p>Custom Goal Created!</p> }
                 <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
