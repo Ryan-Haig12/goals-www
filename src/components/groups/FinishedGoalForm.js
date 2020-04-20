@@ -102,7 +102,7 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                         onChange={ handleChange }
                         onBlur={ handleBlur }
                     >
-                        <option disabled value="" label="Select Goal here" />
+                        <option selected disabled value="" label="Select Goal here" />
                         { mapDefaulyGoalList(allGoals) }
                         { mapCustomGoalList(allGoals, groupData.groupId) }
                     </select>
