@@ -43,10 +43,6 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
         }
     }, [ loading, data, currentGroup, setIsAdmin, groupsAdmin ])
 
-    useEffect(() => {
-        console.log('yeeeeeee', playerScoresShouldBeFetched)
-    }, [ playerScoresShouldBeFetched ])
-
     if(!isAuthenticated) return <UnAuthedNavHome />
     if(!currentGroup) return <p>Loading...</p>
 

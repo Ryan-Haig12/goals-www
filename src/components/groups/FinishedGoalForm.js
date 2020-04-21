@@ -30,11 +30,12 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
         customGoals.map(c => {
             mergedGoals.map(mg => {
                 if(c.category === mg.category && !mg.goals.includes(c)) mg.goals.push(c)
-                return
+                return 0
             })
+            return 0
         })
 
-        return mergedGoals.map(category => {
+        const data = mergedGoals.map(category => {
             return category.goals.map(goal => {
                 const lab = `${ category.category }: ${ goal.title }`
                 return (
@@ -42,6 +43,10 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                 )
             })
         })
+        // TODO: CHANGE THIS TO BE THE DEFAULT
+        // IT WORKS IF DEFAULTVALUE IS SELECTED, BUT THAT'S DEPRICATED
+        data.unshift(<option defaultValue key={'yee'} disabled value="" label="Select Goal here" />)
+        return data
     }
 
     return (
@@ -100,7 +105,6 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                         onChange={ handleChange }
                         onBlur={ handleBlur }
                     >
-                        <option selected disabled value="" label="Select Goal here" />
                         { mapGoals() }
                     </select>
 

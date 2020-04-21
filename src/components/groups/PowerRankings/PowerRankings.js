@@ -14,7 +14,7 @@ const mapPowerRankings = ( powerRankings, allMembers ) => {
     mappedPowerRankings.push(<h3 key={ 'weeklyRankings' } >Weekly Rankings</h3>)
     mappedPowerRankings.push(powerRankings.allTimeRankingsWeeks.map(rankLog => {
         const member = allMembers.find(member => member.id === rankLog.userId)
-        if(!member) return <></>
+        if(!member) return 0
 
         return (
             <div key={ rankLog.userId + '_' + rankLog.recordsWon } >
@@ -26,7 +26,7 @@ const mapPowerRankings = ( powerRankings, allMembers ) => {
     mappedPowerRankings.push(<h3 key={ 'monthlyRankings' } >Monthly Rankings</h3>)
     mappedPowerRankings.push(powerRankings.allTimeRankingsMonths.map(rankLog => {
         const member = allMembers.find(member => member.id === rankLog.userId)
-        if(!member) return <></>
+        if(!member) return 0
 
         return (
             <div key={ rankLog.userId + '_' + rankLog.recordsWon } >
@@ -45,7 +45,7 @@ const PowerRankings = ({ groupId, allMembers }) => {
 
     useEffect(() => {
         getPowerRankingsQuery()
-    }, [])
+    }, [ getPowerRankingsQuery ])
 
     useEffect(() => {
         if(error) console.log(error)
@@ -53,11 +53,11 @@ const PowerRankings = ({ groupId, allMembers }) => {
         if(data !== undefined && data !== null) {
             setPowerRankings(data.calcGroupPowerRanking)
         }
-    }, [ data ])
+    }, [ data, error ])
 
     return (
         <div>
-            <StyledPowerRankings>
+            <StyledPowerRankings >
                 <h2>All Time Power Rankings</h2>
                 { powerRankings && mapPowerRankings(powerRankings, allMembers) }
             </StyledPowerRankings>

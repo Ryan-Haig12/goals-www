@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useMutation } from '@apollo/react-hooks'
 
 import { UPDATE_CUSTOM_GOAL } from '../../../graphql/tags/customGoal'
 import { StyledGoalsListAdminPage, StyledGoalsListGoalCard } from '../../syledComponents/Group'
 
-const EditCustomGoals = ({ customGoals, groupId }) => {
-    const [ UpdateCustomGoalQuery, { data } ] = useMutation(UPDATE_CUSTOM_GOAL)
+const EditCustomGoals = ({ customGoals }) => {
+    const [ UpdateCustomGoalQuery ] = useMutation(UPDATE_CUSTOM_GOAL)
 
     const mapCustomGoals = () => {
         return customGoals.map(goal => {
@@ -18,7 +18,7 @@ const EditCustomGoals = ({ customGoals, groupId }) => {
                     <p>This goal is currently { goal.enabled ? 'Enabled' : 'Disabled' }</p>
                     <button
                         onClick={ async () => {
-                            const d = await UpdateCustomGoalQuery({ variables: {
+                            await UpdateCustomGoalQuery({ variables: {
                                 customGoalData: {
                                     enabled: !goal.enabled,
                                     customGoalId: goal.id

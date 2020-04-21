@@ -28,7 +28,7 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, play
     // if user has logged a finished goal, update the score 
     useEffect(() => {
         if(playerScoresShouldBeFetched) refetch()
-    }, [ playerScoresShouldBeFetched ])
+    }, [ playerScoresShouldBeFetched, refetch ])
 
     useEffect(() => {
         if(data !== undefined && data !== null) {

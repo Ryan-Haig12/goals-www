@@ -15,14 +15,14 @@ const mapUserIds = ( finishedGoals, allUserData ) => {
     let userNames = allUserData.map(user => ({ id: user.id, name: user.name }))
 
     return userNames.map(({ name, id }) => {
-        if(!userIds.includes(id)) return
+        if(!userIds.includes(id)) return 0
         return (<option key={ id } value={ id } >{ name }</option>)
     })
 } 
 
 // return all finishedGoals for a given userId
 const mapUserGoals = ( finishedGoals, userSelected ) => {
-    if(!finishedGoals) return
+    if(!finishedGoals) return 0
     const userGoals = finishedGoals.filter(goal => goal.userId === userSelected)
 
     // reverse the goals so goals finished the most recent are placed at the top of the div
@@ -50,7 +50,7 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
         setCurrentGroup( usersGroups.find(group => {
             return group.id.toString() === match.params.groupId.toString()
         }))
-    }, [])
+    }, [ getFinishedGoalsQuery, match, usersGroups ])
 
     useEffect(() => {
         if(data !== undefined && data !== null) {
@@ -62,7 +62,7 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
         if(currentGroup !== undefined && data !== null) {
             getAllUsers()
         }
-    }, [ currentGroup, getAllUsers ])
+    }, [ currentGroup, getAllUsers, data ])
 
     if(!usersGroups.length) return <Redirect to="/" />
     

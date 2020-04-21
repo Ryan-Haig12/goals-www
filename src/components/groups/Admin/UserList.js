@@ -10,7 +10,7 @@ const UserList = ({ allMembers, groupId, groupCreator }) => {
     const mapUserCards = () => {
         return allMembers.map(member => {
             // if user is admin, don't render a user card
-            if(member.id === groupCreator) return
+            if(member.id === groupCreator) return 0
     
             return (
                 <StyledUserListUserCard key={ member.id } >

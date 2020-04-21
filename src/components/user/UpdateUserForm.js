@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { UPDATE_USER } from '../../graphql/tags/user'
 import { updateUserDataAction } from '../../redux/actions/index'
 import { StyledUpdateUserForm } from '../syledComponents/User'
-import UserLandingPage from './UserLandingPage'
+//import UserLandingPage from './UserLandingPage'
 
 const UpdateUserForm = ({ isSubmitting, values, handleChange, userId, userData, updateUserDataAction }) => {
     const [ updateUserQuery, { error } ] = useMutation(UPDATE_USER)

@@ -188,7 +188,7 @@ export const getCalcGroupPowerRanking = ( powerRankings ) => async dispatch => {
 export const updateUserDataAction = (newUserData, currentUserData) => async dispatch => {    
     for(let i in currentUserData) {
         for(let j in newUserData) {
-            if(i == j && currentUserData[i] !== newUserData[j] && newUserData[j].length) {
+            if(i === j && currentUserData[i] !== newUserData[j] && newUserData[j].length) {
                 currentUserData[i] = newUserData[j]
             }
         }
