@@ -11,40 +11,38 @@ import { clearGoalSelectedHandlerAction } from '../../redux/actions/index'
 import { StyledButton } from '../syledComponents/auth'
 import { StyledFinishedGoalForm } from '../syledComponents/Group'
 
-const mapDefaulyGoalList = ( allGoals ) => {
-    return allGoals.defaultGoals.map(category => {
-        return category.goals.map(goal => {
-            const lab = `${ category.category }: ${ goal.title }`
-            return (
-                <option key={ goal.id } value={ goal.id } label={ lab } />
-            )
-        })
-    })
-}
-
-const mapCustomGoalList = ( allGoals, groupId ) => {
-    const group = allGoals.customGoalsAllGroups.filter(group => group.groupId === groupId)[0]
-    const customGoals = group.customGoals
-    
-    if(!customGoals.length) return
-    
-    return customGoals.map(goal => {
-        // don't show custom goals if they are not enabled
-        if(!goal.enabled) return
-
-        const lab = `${ goal.category }: ${ goal.title }`
-        return (
-            <option key={ goal.id } value={ goal.id } label={ lab } />
-        )
-    })
-}
-
 const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handleBlur, allGoals, setPlayerScoresShouldBeFetched }) => {
     const { userId, groupId } = groupData
     const [ CreateFinishedGoal, { error } ] = useMutation(ADD_FINISHED_GOAL)
     const [ successMessage, setSuccessMessage ] = useState()
 
     if(error) console.log(error)
+
+    // merge custom goals and default goals together
+    const mapGoals = () => {
+
+        // strip all enabled customGoals
+        const group = allGoals.customGoalsAllGroups.filter(group => group.groupId === groupId)[0]
+        const customGoals = group.customGoals.filter(f => f.enabled)
+
+        // merge custom goals and default goals
+        let mergedGoals = allGoals.defaultGoals
+        customGoals.map(c => {
+            mergedGoals.map(mg => {
+                if(c.category === mg.category && !mg.goals.includes(c)) mg.goals.push(c)
+                return
+            })
+        })
+
+        return mergedGoals.map(category => {
+            return category.goals.map(goal => {
+                const lab = `${ category.category }: ${ goal.title }`
+                return (
+                    <option key={ goal.id } value={ goal.id } label={ lab } />
+                )
+            })
+        })
+    }
 
     return (
         <Form 
@@ -103,8 +101,7 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                         onBlur={ handleBlur }
                     >
                         <option selected disabled value="" label="Select Goal here" />
-                        { mapDefaulyGoalList(allGoals) }
-                        { mapCustomGoalList(allGoals, groupData.groupId) }
+                        { mapGoals() }
                     </select>
 
                     <select
