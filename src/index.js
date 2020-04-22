@@ -15,14 +15,15 @@ import thunk from 'redux-thunk'
 import App from './App'
 import reducers from './redux/reducers/index'
 
-const httpLink = new HttpLink({
-  //uri: 'https://goals-graphql.herokuapp.com/'
-  uri: 'http://localhost:4000/'
-})
+// grabbing env var from package.json when running locally
+// this isn't the best, I need to figure out how to run 'npm run build' in PROD to eliminate the need for this and set up env variables
+const envUri = process.env.REACT_APP_ENV === 'local' ? 'http://localhost:4000/' : 'https://goals-graphql.herokuapp.com/'
+const wsUri = process.env.REACT_APP_ENV === 'local' ? 'ws://localhost:4000/' : 'ws://goals-graphql.herokuapp.com/'
 
-// subscription uri
-//const wsClient = new SubscriptionClient('ws://goals-graphql.herokuapp.com/')
-const wsClient = new SubscriptionClient('ws://localhost:4000/')
+// subscription and ws uris
+const httpLink = new HttpLink({uri: envUri})
+const wsClient = new SubscriptionClient(wsUri)
+
 const wsLink = new WebSocketLink(wsClient)
 const subLink = split(({ query }) => {
   const { kind, operation } = getMainDefinition(query)
