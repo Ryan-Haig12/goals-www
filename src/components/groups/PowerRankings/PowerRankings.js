@@ -57,16 +57,11 @@ const PowerRankings = ({ groupId, allMembers }) => {
 
     return (
         <div>
-            <StyledPowerRankings >
-                <h2>All Time Power Rankings</h2>
+            <StyledPowerRankings style={{ textAlign: 'center', border: '1px solid black', borderRadius: '5px' }} >
+                <h2 style={{ margin: 'auto', fontSize: '5vh', borderBottom: '1px solid black', width: '90%' }} >All Time Power Rankings</h2>
                 { powerRankings && mapPowerRankings(powerRankings, allMembers) }
+                { !powerRankings && <p style={{ fontSize: '3vh', paddingTop: '25px' }} >There hasn't been a goal logged in this group. Be the first to log a goal and watch your groups power rankings change over time!</p> }
             </StyledPowerRankings>
-            {/* 
-                <StyledChartBody>
-                    <DatePicker setDateRange={ setDateRange } />
-                    <ChartWrapper groupId={ groupId } allMembers={ allMembers } dateRange={ dateRange } />
-                </StyledChartBody>
-            */}
         </div>
     )
 }
