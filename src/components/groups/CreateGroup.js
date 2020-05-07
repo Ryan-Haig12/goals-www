@@ -57,7 +57,6 @@ const CreateGroup = ({ isSubmitting, isAuthenticated, values, handleChange, crea
             >
                 <StyledForm>
                     <p>Create a new Group to push you and your friends to be better!</p>
-                    <p>(I don't have friends either, you can totally play alone)</p>
                     <StyledInputBar 
                         type={ 'groupName' }
                         name={ 'groupName' }

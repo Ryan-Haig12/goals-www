@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import UserGroups from './UserGroups'
-import UnAuthenticatedPage from '../auth/UnAuthenticatedPage'
-import { StyledHomePage, StyledGroupCards } from '../syledComponents/Home'
+import EmptyGroupStatePage from '../groups/EmptyGroupStatePage'
 import PageHeaderSpan from '../header/PageHeaderSpan'
-
-//import usePing from '../../hooks/usePing'
+import UnAuthenticatedPage from '../auth/UnAuthenticatedPage'
+import UserGroups from './UserGroups'
+import { StyledHomePage, StyledGroupCards } from '../syledComponents/Home'
 
 const mapUsersGroups = ( usersGroups ) => {
     return usersGroups.map(group => {
@@ -16,11 +15,6 @@ const mapUsersGroups = ( usersGroups ) => {
 
 const Home = ({ userData, usersGroups }) => {
     const [ usersGroupsCards, setUsersGroupsCards ] = useState(null)
-
-    // const [ ping ] = usePing()
-    // useEffect(() => {
-    //     console.log(ping)
-    // }, [ ping ])
 
     useEffect(() => {
         if(usersGroups !== undefined && usersGroups !== null) {
@@ -34,7 +28,8 @@ const Home = ({ userData, usersGroups }) => {
         return (
             <StyledHomePage>
                 <PageHeaderSpan text={ "Home" } />
-                <StyledGroupCards>{ usersGroupsCards }</StyledGroupCards>       
+                <StyledGroupCards>{ usersGroupsCards }</StyledGroupCards>
+                { usersGroupsCards.length < 1 && <EmptyGroupStatePage /> }
             </StyledHomePage>
         )
     }
