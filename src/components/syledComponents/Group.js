@@ -174,7 +174,6 @@ export const StyledUserFinishedGoalsLog = styled.div`
 `
 
 export const StyledUserListAdminPage = styled.div`
-    border: 1px solid red;
     text-align: center;
     width: 600px;
     background-image: linear-gradient(
@@ -186,7 +185,6 @@ export const StyledUserListAdminPage = styled.div`
 `
 
 export const StyledUserListUserCard = styled.div`
-    border: 1px solid orange;
     padding: 5px;
     margin: 5px;
 `
@@ -203,7 +201,6 @@ export const StyledGoalsListAdminPage = styled.div`
 `
 
 export const StyledGoalsListGoalCard = styled.div`
-    border: 1px solid orange;
     padding: 5px;
     margin: 5px;
 `

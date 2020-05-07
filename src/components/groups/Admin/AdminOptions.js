@@ -49,8 +49,8 @@ const AdminOptions = ({ match, userId, allGroups, location, allCustomGoals }) =>
             <AddUserToGroup match={ match } />
             <UpdateGroupForm groupId={ currentGroup.id } />
             <CreateCustomGoal userId={ userId } match={ match } />
-            <EditCustomGoals customGoals={ groupCustomGoals } groupId={ currentGroup.id } />
-            <UserList allMembers={ location.state.allMembers } groupId={ currentGroup.id } groupCreator={ currentGroup.groupCreator } />
+            { groupCustomGoals.length > 0 && <EditCustomGoals customGoals={ groupCustomGoals } groupId={ currentGroup.id } /> }
+            { location.state.allMembers.length > 1 && <UserList allMembers={ location.state.allMembers } groupId={ currentGroup.id } groupCreator={ currentGroup.groupCreator } /> }
         </div>
     )
 }
