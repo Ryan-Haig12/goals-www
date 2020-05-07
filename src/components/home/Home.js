@@ -23,7 +23,7 @@ const Home = ({ userData, usersGroups }) => {
     }, [usersGroups])
 
     // User is authed
-    if(userData !== undefined) {
+    if(userData !== undefined && usersGroupsCards !== null) {
         //const { name, email } = userData
         return (
             <StyledHomePage>
