@@ -3,6 +3,7 @@ import { useQuery, useSubscription } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import Modal from 'react-bootstrap/Modal'
 
 import { GET_ALL_GROUP_MESSAGE, GROUP_MESSAGE_SENT } from '../../../graphql/tags/groupMessages'
 import { getAllGroupMessages } from '../../../redux/actions/index'
@@ -10,9 +11,7 @@ import { getAllGroupMessages } from '../../../redux/actions/index'
 const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
     if(!allMessages || !allMessages.length) {
         return (
-            <tr>
-                <td>No Messages Found</td>
-            </tr>
+            <Modal.Body>No Messages Found</Modal.Body>
         )
     }
 
@@ -24,14 +23,14 @@ const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
     allMessages.map(message => {
         const user = allMembers.filter(mem => mem.id === message.authorId)[0]
         slots.push((
-            <tr key={ message.id } >
-                <td>{user.name} ({moment(message.timeWritten / 1000).format('h:mm:ss')}): {message.message}</td>
-            </tr>
+            <Modal.Body style={{ width: '98%', border: '1px solid black', borderRadius: '5px', margin: '1%' }}>
+                {user.name} ({moment(message.timeWritten / 1000).format('h:mm:ss')}): {message.message}
+            </Modal.Body>
         ))
         return 0    // removes warning from console
     })
 
-    return slots
+    return slots.reverse()
 }
 
 const GroupMessageBoard = ({ groupData, getAllGroupMessages }) => {
@@ -70,13 +69,9 @@ const GroupMessageBoard = ({ groupData, getAllGroupMessages }) => {
     }, [update])
 
     return (
-        <div>
-            <table>
-                <tbody>
-                    { mapGroupMessagesv2(messagesToRender, allMembers) }
-                </tbody>
-            </table>
-        </div>
+        <Modal.Dialog style={{ width: '100%' }}>
+            { mapGroupMessagesv2(messagesToRender, allMembers) }
+        </Modal.Dialog>
     )
 }
 

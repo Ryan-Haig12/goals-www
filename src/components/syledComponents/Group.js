@@ -49,7 +49,7 @@ export const GoToAdminButton = styled.button`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 25px;
+    margin-top: 5%;
 
     &:hover {
         opacity: 0.5;
@@ -118,34 +118,26 @@ export const StyledMainGroupDiv = styled.div`
     position: relative;
 `
 
-export const StyledGroupChat = styled.div`
-    width: 33%;
-
-    position: absolute;
-    top: 25%;
-    right: 2%;
-    float: right;
-
-    background: #7A9D96;
-`
-
 export const StyledGroupInputButtonDuo = styled.div`
     display: block;
     margin: auto;
 `
 
 export const StyledGroupChatInputBar = styled.input`
-    border-radius: 25px;
-    width: 99%;
-    height: 25px;
-    float: right;
+    border-radius: 5px;
+    width: 70%;
+    border: 1px solid black;
+    position: relative !important;
+    top: 15px;
+    left: 5px;
+    width: 97%;
 `
 
 export const StyledGroupChatButton = styled.button`
     text-align: center;
     cursor: pointer;
     outline: none;
-    color: #fff;
+    color: #7A9D96;
     background-color: #DCAE1D;
     height: 30px;
     float: left;
