@@ -1,16 +1,20 @@
 import styled from 'styled-components'
 
+import * as Theme from './Theme'
+
 // the actual header
 export const StyledHeader = styled.header`
     height: 60px;
     width: 100%;
-    background: #CAE4DB;
+    background: ${ Theme.darkBlue };
     display: inline-block;
 `
 
 // styled header link, idk why I called it a chunk
 export const StyledChunk = styled.button`
-    background: #7A9D96;
+    background: ${ Theme.purple };
+    color: ${ Theme.yellow };
+    border-radius: 5px;
     width: 150px;
     height: 50px;
     text-decoration: none;
@@ -21,7 +25,8 @@ export const StyledChunk = styled.button`
 `
 
 export const StyledLogoutButton = styled.button`
-    background: #d1311f;
+    background: ${ Theme.red };
+    border-radius: 5px;
     width: 150px;
     height: 50px;
     text-decoration: none;
@@ -35,6 +40,7 @@ export const StyledLogoutButton = styled.button`
 export const StyledLogoText = styled.h1`
     float: left;
     font-family: Georgia;
+    color: ${ Theme.yellow };
 `
 
 export const StyledChunksGroup = styled.div`

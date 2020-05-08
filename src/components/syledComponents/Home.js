@@ -7,4 +7,5 @@ export const StyledHomePage = styled.div`
 export const StyledGroupCards = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
 `

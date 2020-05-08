@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 
 import { GET_USER } from '../../graphql/tags/user'
-import { GroupCard, GoToGroupButton } from '../syledComponents/Group'
+import { GroupCard } from '../syledComponents/Group'
+import Button from 'react-bootstrap/Button'
 
 const UserGroups = ({ groupData }) => {
     const [ userName, setUserName ] = useState('Null User Name')
@@ -27,12 +28,12 @@ const UserGroups = ({ groupData }) => {
 
     return (
         <GroupCard>
-            <h2>{ groupData.groupName }</h2>
+            <h2 style={{ borderBottom: '1px solid black', color: '#F0D47E' }} >{ groupData.groupName }</h2>
             <p>Created By { userName }</p>
-            <GoToGroupButton onClick={() => {
+            <Button variant="warning" size="lg" onClick={() => {
                 const link = `/group/${ groupData.id }`
                 history.push(link)
-            }} >Go To Group Page</GoToGroupButton>
+            }} >Go To Group Page</Button>
         </GroupCard>
     )
 }
