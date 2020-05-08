@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLazyQuery } from '@apollo/react-hooks'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import './App.css'
@@ -11,6 +11,7 @@ import FinishedGoalLanding from './components/groups/FinishedGoalRecords/Finishe
 import GroupLandingPage from './components/groups/GroupLandingPage'
 import Header from './components/header/Header'
 import Home from './components/home/Home'
+import NotFoundPage from './components/home/NotFoundPage'
 import UnAuthenticatedPage from './components/auth/UnAuthenticatedPage'
 import UserLandingPage from './components/user/UserLandingPage'
 
@@ -38,11 +39,6 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
   if(error) console.log(error)
   if(getAllGroupsError) console.log(getAllGroupsError)
   if(usersCustomGoalsError) console.log(usersCustomGoalsError)
-
-
-  useEffect(() => {
-    console.log('isAuthenticated', isAuthenticated)
-  }, [ isAuthenticated ])
 
   useEffect(() => {
     if(defaultGoals !== undefined && defaultGoals !== null) {
@@ -94,6 +90,7 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
         <Route exact path='/group/:groupId/adminOptions' component={ AdminOptions } />
         <Route exact path='/group/:groupId/finishedGoalsReport' component={ FinishedGoalLanding } />
         <Route exact path='/user' component={ UserLandingPage } />
+        <Route component={ NotFoundPage } />
       </Switch>
     </BrowserRouter>
   )

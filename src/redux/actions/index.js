@@ -44,13 +44,17 @@ export const loginUserAction = ( loggedInUserData, error ) => async dispatch => 
         console.log(error)
     }
 
-    localStorage.setItem('userJWT', loggedInUserData.jwt)
+    // ensuring that jwt is only set if it is valid
+    if(loggedInUserData.jwt != null) {
+        console.log(loggedInUserData.jwt)
+        localStorage.setItem('userJWT', loggedInUserData.jwt)
 
-    try {
-        dispatch({ type: LOGIN_SUCCESS, payload: loggedInUserData })
-    } catch(err) {
-        console.log(err)
-        dispatch({ type: LOGIN_FAIL, payload: err })
+        try {
+            dispatch({ type: LOGIN_SUCCESS, payload: loggedInUserData })
+        } catch(err) {
+            console.log(err)
+            dispatch({ type: LOGIN_FAIL, payload: err })
+        }
     }
 }
 
