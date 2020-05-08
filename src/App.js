@@ -39,6 +39,11 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
   if(getAllGroupsError) console.log(getAllGroupsError)
   if(usersCustomGoalsError) console.log(usersCustomGoalsError)
 
+
+  useEffect(() => {
+    console.log('isAuthenticated', isAuthenticated)
+  }, [ isAuthenticated ])
+
   useEffect(() => {
     if(defaultGoals !== undefined && defaultGoals !== null) {
       getDefaultGoalsAction(defaultGoals.getAllGoals)

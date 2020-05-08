@@ -24,7 +24,7 @@ const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
         const user = allMembers.filter(mem => mem.id === message.authorId)[0]
         slots.push((
             <Modal.Body style={{ width: '98%', border: '1px solid black', borderRadius: '5px', margin: '1%' }}>
-                {user.name} ({moment(message.timeWritten / 1000).format('h:mm:ss')}): {message.message}
+                {user?.name} ({moment(message.timeWritten / 1000).format('h:mm:ss')}): {message.message}
             </Modal.Body>
         ))
         return 0    // removes warning from console

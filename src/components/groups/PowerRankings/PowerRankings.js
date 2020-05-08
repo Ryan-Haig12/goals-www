@@ -8,11 +8,11 @@ import { StyledPowerRankings } from '../../syledComponents/Group'
 // import DatePicker from './d3Chart/DatePicker'
 // import { StyledChartBody } from '../../syledComponents/d3Chart'
 
-const mapPowerRankings = ( powerRankings, allMembers ) => {
+const mapPowerRankings = ( powerRankings, allMembers ) => {    
     let mappedPowerRankings = []
 
     mappedPowerRankings.push(<h3 key={ 'weeklyRankings' } >Weekly Rankings</h3>)
-    mappedPowerRankings.push(powerRankings.allTimeRankingsWeeks.map(rankLog => {
+    mappedPowerRankings.push(powerRankings.allTimeRankingsWeeks?.map(rankLog => {
         const member = allMembers.find(member => member.id === rankLog.userId)
         if(!member) return 0
 
@@ -24,7 +24,7 @@ const mapPowerRankings = ( powerRankings, allMembers ) => {
     }))
 
     mappedPowerRankings.push(<h3 key={ 'monthlyRankings' } >Monthly Rankings</h3>)
-    mappedPowerRankings.push(powerRankings.allTimeRankingsMonths.map(rankLog => {
+    mappedPowerRankings.push(powerRankings.allTimeRankingsMonths?.map(rankLog => {
         const member = allMembers.find(member => member.id === rankLog.userId)
         if(!member) return 0
 
