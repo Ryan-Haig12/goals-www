@@ -46,7 +46,6 @@ export const loginUserAction = ( loggedInUserData, error ) => async dispatch => 
 
     // ensuring that jwt is only set if it is valid
     if(loggedInUserData.jwt != null) {
-        console.log(loggedInUserData.jwt)
         localStorage.setItem('userJWT', loggedInUserData.jwt)
 
         try {

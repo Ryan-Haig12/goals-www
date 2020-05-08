@@ -7,7 +7,8 @@ import * as Yup from 'yup'
 
 import { LOGIN_USER } from '../../graphql/tags/user'
 import { loginUserAction } from '../../redux/actions'
-import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../syledComponents/auth'
+import { StyledForm, StyledInputBar, StyledErrorMessage } from '../syledComponents/auth'
+import Button from 'react-bootstrap/Button'
 
 const createInputBar = ({ type, placeholder, handleChange, values }) => {
     return (
@@ -87,7 +88,7 @@ const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleC
                 { touched.email && errors.email && <p>{ errors.email }</p> }
                 { touched.password && errors.password && <p>{ errors.password }</p> }
                 { graphQLErrors && renderErrors(graphQLErrors) }
-                <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
+                <Button variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
             </StyledForm>   
         </Form>
     )

@@ -1,24 +1,25 @@
 import styled from 'styled-components'
 
+import * as Theme from './Theme'
+
 export const StyledForm = styled.div`
     position: relative;
     margin: 5% auto;
     width: 600px;
     height: 75%;
-    background-image: linear-gradient(
-        to top, 
-        #a3b591, #e4ffc9
-    );
-    border-radius: 2px;
+    padding: 25px;
+
+    border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    color: #111;
+    background-color: ${ Theme.darkBlue };
+    color: ${ Theme.yellow };
     text-align: center;
 `
 
 export const StyledInputBar = styled.input`
     display: block;
+    color: ${ Theme.yellow };
     box-sizing: border-box;
     margin-bottom: 20px;
     margin-left: auto;
@@ -27,12 +28,10 @@ export const StyledInputBar = styled.input`
     width: 220px;
     height: 32px;
     border: none;
-    border-bottom: 1px solid #AAA;
+    border-bottom: 1px solid ${ Theme.yellow };
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    font-size: 15px;
     transition: 0.2s ease;
-    color: #444;
     font-size: 1.5em;
     outline: none; 
     box-shadow: none; 
@@ -40,7 +39,7 @@ export const StyledInputBar = styled.input`
     border-radius: 0;
     border-top: none;
     border-bottom: solid 1px;
-    border-color: #bbb;
+    border-color: ${ Theme.yellow };
     background: transparent;
     display: flex;
     height: 2em;
@@ -52,6 +51,10 @@ export const StyledInputBar = styled.input`
     -moz-transition: border .25s;
     -o-transition: border .25s;
     transition: border .25s;
+
+    ::placeholder {
+        color: ${ Theme.yellow };
+    }
 `
 
 export const StyledButton = styled.button`

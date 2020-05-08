@@ -1,21 +1,19 @@
 import styled from 'styled-components'
 
+import * as Theme from './Theme'
+
 export const StyledTextDiv = styled.div`
-    border: 10px solid black;
+    position: relative;
+    border: 1px solid black;
     text-align: center;
-    background: #7A9D96;
+    background: ${ Theme.darkBlue };
+    color: ${ Theme.yellow };
+    transform: translate(-50%, -50%);
+    left: 50%;
+    font-size: 2vh;
     padding: 5px;
-    width: 400px;
-    margin: auto;
-`
-
-export const StyledAuthDiv = styled.div`
-
-`
-
-export const StyledUnauthedPage = styled.div`
-    width: 75%;
-    margin: auto;
+    margin-top: 100px;
+    width: 80%;
 `
 
 export const StyledAuthButton = styled.button`

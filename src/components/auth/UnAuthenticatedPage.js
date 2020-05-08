@@ -7,7 +7,8 @@ import Register from './Register'
 
 import { GET_USER_BY_JWT } from '../../graphql/tags/user'
 import { loginUserAction, logoutUserAction } from '../../redux/actions/index'
-import { StyledTextDiv, StyledAuthDiv, StyledUnauthedPage, StyledAuthButton } from '../syledComponents/UnAuthed'
+import { StyledTextDiv } from '../syledComponents/UnAuthed'
+import Button from 'react-bootstrap/Button'
 
 const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
 
@@ -26,17 +27,18 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
     }, [ loggedInUserData, loginUserAction, logoutUserAction ])
 
     return (
-        <StyledUnauthedPage>
-            <StyledAuthButton onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }</StyledAuthButton>
-            <StyledAuthDiv>
+        <div style={{ width: '75%', margin: 'auto' }} >
+            
+            <div>
                 { renderRegisterModal ? <Login /> : <Register /> }
-            </StyledAuthDiv>
+            </div>
+            <Button style={{ position: 'fixed', left: '50%', transform: 'translate(-50%, -50%)' }} onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }</Button>
             <br />
             <StyledTextDiv>
-                <h1>Welcome to Goals!</h1>
+                <h1 style={{ borderBottom: '1px solid black' }} >Welcome to Goals!</h1>
                 <p>In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time</p>
             </StyledTextDiv>
-        </StyledUnauthedPage>
+        </div>
     )
 }
 
