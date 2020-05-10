@@ -24,9 +24,9 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
                 window.location.reload()
             } } >Logout</StyledLogoutButton> : null }
             <StyledChunksGroup>
+                <HeaderChunk toLink="/" toText="Home" />
                 <HeaderChunk toLink="/user" toText="Profile" />
                 <HeaderChunk toLink="/createGroup" toText="Create Group" />
-                <HeaderChunk toLink="/" toText="Home" />
             </StyledChunksGroup>
         </StyledHeader>
     )

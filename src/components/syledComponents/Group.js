@@ -12,85 +12,12 @@ export const GroupCard = styled.div`
     background: ${ Theme.darkBlue };
 `
 
-export const GoToAdminButton = styled.button`
-    padding: 15px 25px;
-    font-size: 24px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #DCAE1D;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 5%;
-
-    &:hover {
-        opacity: 0.5;
-        cursor: pointer;
-    }
-
-    &:active {
-        background-color: #3e8e41;
-        box-shadow: 0 5px #666;
-    }
-`
-
-export const StyledFinishedGoalReportButton = styled.button`
-    padding: 15px 25px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #DCAE1D;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 9px #999;
-
-    position: relative;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    margin-top: 25px;
-
-    &:hover {
-        opacity: 0.5;
-        cursor: pointer;
-    }
-
-    &:active {
-        background-color: #3e8e41;
-        box-shadow: 0 5px #666;
-    }
-`
-
 export const StyledGroupMembersDiv = styled.div`
     width: 25%;
     margin: 0 auto;
+    margin-top: 25px;
     color: #b48608;
     text-align: center
-`
-
-export const StyledFinishedGoalForm = styled.div`
-    width: 33%;
-    background-image: linear-gradient(
-        to top, 
-        #a3b591, #e4ffc9
-    );
-    border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    line-height: 1.6;
-    color: #111;
-    text-align: center;
-
-    position: absolute;
-    top: 25%;
-    left: 2%;
 `
 
 export const StyledMainGroupDiv = styled.div`
@@ -130,17 +57,6 @@ export const StyledGroupChatButton = styled.button`
         background-color: #3e8e41;
         box-shadow: 0 5px #666;
     }
-`
-
-export const StyledPowerRankings = styled.div`
-    width: 33%;
-
-    position: absolute;
-    top: 110%;
-    left: 2%;
-    float: left;
-
-    background: #7A9D96;
 `
 
 export const StyledUserFinishedGoalsLog = styled.div`

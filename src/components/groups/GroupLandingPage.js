@@ -5,8 +5,9 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import moment from 'moment'
 
 import { GET_USERS_BY_ID } from '../../graphql/tags/user'
-import { StyledGroupMembersDiv, StyledMainGroupDiv, GoToAdminButton } from '../syledComponents/Group'
+import { StyledGroupMembersDiv, StyledMainGroupDiv } from '../syledComponents/Group'
 import PageHeaderSpan from '../header/PageHeaderSpan'
+import Button from 'react-bootstrap/Button'
 
 import FinishedGoalForm from './FinishedGoalForm'
 import GroupChat from './Messages/GroupChat'
@@ -19,6 +20,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
     const [ isAdmin, setIsAdmin ] = useState(false)
     const [ playerScoresShouldBeFetched, setPlayerScoresShouldBeFetched ] = useState(false)
     const [ redirectToAdmin, setRedirectToAdmin ] = useState(false)
+    const [ redirectToScoringRecords, setRedirectToScoringRecords ] = useState(false)
     const [ getAllUsers, { data, loading, error } ] = useLazyQuery(GET_USERS_BY_ID, { variables: { userIds: currentGroup ? currentGroup.groupMembers : [] } })
 
     useEffect(() => {
@@ -52,11 +54,15 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
             <div>
                 <PageHeaderSpan text={ 'Welcome to ' + currentGroup.groupName } />
 
-                { isAdmin ? <GoToAdminButton onClick={ () => {setRedirectToAdmin(true)} }>Go To Admin Options</GoToAdminButton> : null}
                 { isAdmin && redirectToAdmin && <Redirect to={{
-                    pathname: adminLink,
-                    state: { allMembers: data.getMultipleUsersById }
-                }}/> }
+                        pathname: adminLink,
+                        state: { allMembers: data.getMultipleUsersById }
+                }} /> }
+
+                { redirectToScoringRecords && <Redirect to={{
+                        pathname: `/group/${ currentGroup.id }/finishedGoalsReport`,
+                        state: { match, usersGroups }
+                }} /> }
 
                 <StyledMainGroupDiv>
                     <StyledGroupMembersDiv>
@@ -68,6 +74,20 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                         />
                     </StyledGroupMembersDiv>
 
+                    <div style={{ display: 'block', padding: '15px', textAlign: 'center' }} >
+                        { isAdmin ? 
+                            <Button
+                                onClick={ () => {setRedirectToAdmin(true)}}
+                            >Go To Admin Options</Button>
+                            : null
+                        }
+                        <Button 
+                            style={{ margin: '10px' }}
+                            onClick={() => {
+                            setRedirectToScoringRecords(true)
+                        }}>Go To Finished Goal Report</Button>
+                    </div>
+
                     <FinishedGoalForm
                         allGoals={{ defaultGoals, customGoalsAllGroups }}
                         allMembers={data.getMultipleUsersById}
@@ -75,9 +95,9 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                         setPlayerScoresShouldBeFetched={ setPlayerScoresShouldBeFetched }
                     />
 
-                    <GroupChat allMembers={data.getMultipleUsersById} userId={ userId } groupId={ currentGroup.id } />
-
                     <PowerRankings groupId={ currentGroup.id } allMembers={data.getMultipleUsersById} />
+
+                    <GroupChat allMembers={data.getMultipleUsersById} userId={ userId } groupId={ currentGroup.id } />
                 </StyledMainGroupDiv>
             </div>
         )

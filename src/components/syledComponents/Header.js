@@ -41,6 +41,8 @@ export const StyledLogoText = styled.h1`
     float: left;
     font-family: Georgia;
     color: ${ Theme.yellow };
+    position: relative;
+    top: 10px;
 `
 
 export const StyledChunksGroup = styled.div`

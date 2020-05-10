@@ -7,7 +7,6 @@ export const StyledForm = styled.div`
     margin: 5% auto;
     width: 600px;
     height: 75%;
-    padding: 25px;
 
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);

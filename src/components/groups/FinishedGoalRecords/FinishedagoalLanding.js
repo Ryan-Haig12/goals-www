@@ -102,7 +102,6 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
 
 // I coded this component poorly, I should be passing all members in through props rather
 // than having to connect to redux again. I just didn't set this component up that way
-// meh, it works, shippit
 const mapStateToProps = ( state ) => {
     const usersGroups = state.Group.groupsFullData ? state.Group.groupsFullData : []
     return {

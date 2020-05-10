@@ -7,7 +7,6 @@ import moment from 'moment'
 
 import { CALC_USER_SCORE } from '../../graphql/tags/scoring'
 import { loadGroupScores } from '../../redux/actions/index'
-import { StyledFinishedGoalReportButton } from '../syledComponents/Group'
 
 const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, playerScoresShouldBeFetched }) => {
     const { data, error, refetch } = useQuery(CALC_USER_SCORE, {
@@ -21,7 +20,6 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, play
             }
         }
     })
-    const history = useHistory()
 
     if(error) console.log(error)
 
@@ -50,10 +48,6 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, play
                         )
                     })}
                 </ol>
-
-                <StyledFinishedGoalReportButton onClick={() => {
-                    history.push(`/group/${ groupId }/finishedGoalsReport`)
-                }}>Go To Finished Goal Report</StyledFinishedGoalReportButton>
             </div>
             
         )

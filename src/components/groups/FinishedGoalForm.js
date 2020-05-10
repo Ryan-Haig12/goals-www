@@ -8,8 +8,8 @@ import * as Yup from 'yup'
 import { ADD_FINISHED_GOAL } from '../../graphql/tags/finishedGoal'
 import { clearGoalSelectedHandlerAction } from '../../redux/actions/index'
 
-import { StyledButton } from '../syledComponents/auth'
-import { StyledFinishedGoalForm } from '../syledComponents/Group'
+import { StyledForm } from '../syledComponents/auth'
+import Button from 'react-bootstrap/Button'
 
 const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handleBlur, allGoals, setPlayerScoresShouldBeFetched }) => {
     const { userId, groupId } = groupData
@@ -96,9 +96,9 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                 }, 3000)
             }}
         >
-            <StyledFinishedGoalForm>
-                Log Your Completed Goal!
-                <div>
+            <StyledForm>
+                <h2>Log Your Completed Goal!</h2>
+                <div style={{ padding: '10px' }} >
                     <select
                         name="goalSelect"
                         value={ values.goalSelect }
@@ -122,8 +122,8 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                     </select>
                 </div>
                 { successMessage && <p>{ successMessage }</p> }
-                <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
-            </StyledFinishedGoalForm>
+                <Button size="lg" style={{ margin: '10px' }} variant="warning" disabled={ isSubmitting } type="submit" >Submit</Button>
+            </StyledForm>
         </Form>
     )
 }
