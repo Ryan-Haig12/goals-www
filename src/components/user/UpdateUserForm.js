@@ -7,6 +7,8 @@ import { UPDATE_USER } from '../../graphql/tags/user'
 import { updateUserDataAction } from '../../redux/actions/index'
 import { StyledUpdateUserForm } from '../syledComponents/User'
 //import UserLandingPage from './UserLandingPage'
+import { StyledForm, StyledInputBar } from '../syledComponents/auth'
+import Button from 'react-bootstrap/Button'
 
 const UpdateUserForm = ({ isSubmitting, values, handleChange, userId, userData, updateUserDataAction }) => {
     const [ updateUserQuery, { error } ] = useMutation(UPDATE_USER)
@@ -37,9 +39,9 @@ const UpdateUserForm = ({ isSubmitting, values, handleChange, userId, userData, 
                 }
             }}
         >
-            <StyledUpdateUserForm>
-                Form
-                <input 
+            <StyledForm>
+                <h3>Update Username/Email</h3>
+                <StyledInputBar 
                     type={ 'name' }
                     name={ 'name' }
                     placeholder={ 'Name' }
@@ -47,7 +49,7 @@ const UpdateUserForm = ({ isSubmitting, values, handleChange, userId, userData, 
                     onChange={ handleChange }
                     key={ 'name' }
                 />
-                <input
+                <StyledInputBar
                     type={ 'email' }
                     name={ 'email' }
                     placeholder={ 'Email' }
@@ -55,9 +57,9 @@ const UpdateUserForm = ({ isSubmitting, values, handleChange, userId, userData, 
                     onChange={ handleChange }
                     key={ 'email' }
                 />
-                <button disabled={ isSubmitting } type="submit" >Submit</button>
+                <Button style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
                 { successMessage && <p>{ successMessage }</p> }
-            </StyledUpdateUserForm>
+            </StyledForm>
         </Form>
     )
 }

@@ -38,7 +38,7 @@ const UserLandingPage = ({ userData }) => {
         <div>
             <PageHeaderSpan text={ name + '\'s Landing Page' } />
             <UserPage>
-                <div>
+                <div style={{ border: '1px solid black' }}>
                     <p>Name { name }, Email { email }</p>
                     <p>Member since { moment(dateCreated).format('MMM do, YYYY') }</p>
                 </div>
