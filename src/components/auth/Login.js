@@ -88,7 +88,7 @@ const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleC
                 { touched.email && errors.email && <p>{ errors.email }</p> }
                 { touched.password && errors.password && <p>{ errors.password }</p> }
                 { graphQLErrors && renderErrors(graphQLErrors) }
-                <Button variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
+                <Button style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
             </StyledForm>   
         </Form>
     )

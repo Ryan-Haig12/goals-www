@@ -10,7 +10,8 @@ import { createGroupAction } from '../../redux/actions/index'
 
 import PageHeaderSpan from '../header/PageHeaderSpan'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
-import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../syledComponents/auth'
+import { StyledForm, StyledInputBar, StyledErrorMessage } from '../syledComponents/auth'
+import Button from 'react-bootstrap/Button'
 
 const renderErrors = ( errors ) => {
     return errors.map(err => {
@@ -66,7 +67,7 @@ const CreateGroup = ({ isSubmitting, isAuthenticated, values, handleChange, crea
                         key={ 'groupName' }
                     />
                     { graphQLErrors && renderErrors(graphQLErrors) }
-                    <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
+                    <Button style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
                 </StyledForm>
             </Form>
         </>
