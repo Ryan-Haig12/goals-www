@@ -34,7 +34,8 @@ const ShowUserStats = ({ data }) => {
         oneMonth,
         threeMonths,
         sixMonths,
-        oneYear
+        oneYear,
+        allTime
     } = data
 
     return (
@@ -49,7 +50,7 @@ const ShowUserStats = ({ data }) => {
             </div>
             <div>
                 <h3>Time Logs</h3>
-                { mapTimeLogs({ oneWeek, oneMonth, threeMonths, sixMonths, oneYear }) }
+                { mapTimeLogs({ oneWeek, oneMonth, threeMonths, sixMonths, oneYear, allTime }) }
             </div>
         </>
     )

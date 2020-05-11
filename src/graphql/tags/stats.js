@@ -40,6 +40,10 @@ export const CALC_USER_STAT = gql`
                 totalTimeLogged
                 totalPointsScored
             }
+            allTime {
+                totalTimeLogged
+                totalPointsScored
+            }
             errors
         }
     }
