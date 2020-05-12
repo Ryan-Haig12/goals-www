@@ -7,11 +7,12 @@ import Modal from 'react-bootstrap/Modal'
 
 import { GET_ALL_GROUP_MESSAGE, GROUP_MESSAGE_SENT } from '../../../graphql/tags/groupMessages'
 import { getAllGroupMessages } from '../../../redux/actions/index'
+import { yellow, purple, darkBlue, turquoise } from '../../syledComponents/Theme'
 
 const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
     if(!allMessages || !allMessages.length) {
         return (
-            <Modal.Body>No Messages Found</Modal.Body>
+            <Modal.Body style={{ width: '98%', border: '1px solid black', borderRadius: '5px', margin: '1%', background: turquoise, color: yellow }} >No Messages Found</Modal.Body>
         )
     }
 
@@ -23,7 +24,7 @@ const mapGroupMessagesv2 = ( allMessages, allMembers ) => {
     allMessages.map(message => {
         const user = allMembers.filter(mem => mem.id === message.authorId)[0]
         slots.push((
-            <Modal.Body style={{ width: '98%', border: '1px solid black', borderRadius: '5px', margin: '1%' }}>
+            <Modal.Body style={{ width: '98%', border: '1px solid black', borderRadius: '5px', margin: '1%', background: turquoise, color: yellow }}>
                 {user?.name} ({moment(message.timeWritten / 1000).format('h:mm:ss')}): {message.message}
             </Modal.Body>
         ))
@@ -69,8 +70,8 @@ const GroupMessageBoard = ({ groupData, getAllGroupMessages }) => {
     }, [update])
 
     return (
-        <Modal.Dialog style={{ width: '100%' }}>
-            { mapGroupMessagesv2(messagesToRender, allMembers) }
+        <Modal.Dialog style={{ width: '100%', background: purple }}>
+            <div style={{ background: darkBlue }} >{ mapGroupMessagesv2(messagesToRender, allMembers) }</div>
         </Modal.Dialog>
     )
 }

@@ -30,13 +30,20 @@ export const StyledGroupInputButtonDuo = styled.div`
 `
 
 export const StyledGroupChatInputBar = styled.input`
-    border-radius: 5px;
-    width: 70%;
+    width: 100%;
     border: 1px solid black;
-    position: relative !important;
-    top: 15px;
-    left: 5px;
-    width: 97%;
+    background: ${ Theme.gray };
+    color: ${ Theme.yellow };
+    display: block;
+    margin: 0px auto;
+
+    position: relative;
+    bottom: 3px;
+
+    ::placeholder {
+        color: ${ Theme.yellow };
+        opacity: .5;
+    }
 `
 
 export const StyledGroupChatButton = styled.button`
