@@ -7,7 +7,6 @@ import * as Yup from 'yup'
 
 import { StyledGroupChatInputBar } from '../../syledComponents/Group'
 import { CREATE_NEW_GROUP_MESSAGE } from '../../../graphql/tags/groupMessages'
-import { gray, yellow } from '../../syledComponents/Theme'
 
 const InputBar = ({ values, handleChange, groupData }) => {
     const { userId, groupId } = groupData

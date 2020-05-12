@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import PropTypes from 'prop-types'
 import moment from 'moment'
