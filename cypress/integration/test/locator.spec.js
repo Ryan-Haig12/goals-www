@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 // This block is to make sure this .js file works
 describe('Cypress', () => {
-<<<<<<< Updated upstream
     it('is working', () => {
       expect(true).to.equal(true)
     })
@@ -42,7 +41,6 @@ describe('Cypress', () => {
         // cy.get([type="name"]).type("")
     })
   })
-=======
   it('is working', () => {
     expect(true).to.equal(true)
   })
@@ -83,4 +81,3 @@ describe('Locating Elements',function() {
       // cy.get([type="name"]).type("")
   })
 })
->>>>>>> Stashed changes
