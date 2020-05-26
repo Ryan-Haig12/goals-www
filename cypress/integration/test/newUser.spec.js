@@ -7,7 +7,7 @@ describe('Cypress', () => {
   })
 
   describe('new user',function() {
-      it('makes a new user',function() {
+      it('newUser information',function() {
 
         // Opens the site
         cy.visit("http://localhost:3000/")
@@ -17,11 +17,14 @@ describe('Cypress', () => {
 
         // Creates a new user
         cy.get('[type="name"]').type("newUser") // inserts name into the "Name" field
-        cy.get('[type="email"]').type('randomEmail') // Inserts email into the "Email" field
+        cy.get('[type="email"]').type('randomEmail@email.comb') // Inserts email into the "Email" field
         cy.get('[name="password"]').type("password") // Inserts password into the "password" field
         cy.get('[name="password2"]').type("password") // Inserts password into the "Confirm Password" field
-        cy.get('.sc-AxjAm > .btn').click() // Clicks on the submit button
+        //cy.get('.sc-AxjAm > .btn').click() // Clicks on the submit button
         //cy.get('.sc-AxhCb') // gets this error "Email newUser@apple.com already exists"
 
+      })
+      it('clicking on the submit button', () => {
+        cy.get('.sc-AxjAm > .btn').click()
       })
   })
