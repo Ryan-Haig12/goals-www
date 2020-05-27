@@ -77,13 +77,13 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                     <div style={{ display: 'block', padding: '15px', textAlign: 'center' }} >
                         { isAdmin ? 
                             <Button
-                            id="directToAdmin"
+                                id="directToAdmin"
                                 onClick={ () => {setRedirectToAdmin(true)}}
                             >Go To Admin Options</Button>
                             : null
                         }
                         <Button 
-                        id="scoringRecords"
+                            id="scoringRecords"
                             style={{ margin: '10px' }}
                             onClick={() => {
                             setRedirectToScoringRecords(true)

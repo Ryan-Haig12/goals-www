@@ -93,11 +93,12 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
         <div>
             Loading...
             <button 
-            id="finishedGoal"
-            onClick={() => {
+                id="finishedGoal"
+                onClick={() => {
                     const link = `/group/${ match.params.groupId }`
                     history.push(link)
-                }} >Go To Group Page</button>
+                }}
+            >Go To Group Page</button>
         </div>
     )
 }

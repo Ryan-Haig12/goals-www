@@ -63,8 +63,10 @@ const AddUserToGroup = ({ match, isSubmitting, values, handleChange, addUserToGr
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 { successAddingUser && <p>User Added to group!</p> }
                 <StyledButton 
-                id="addUser"
-                disabled={ isSubmitting } type="submit" >Submit</StyledButton>
+                    id="addUser"
+                    disabled={ isSubmitting }
+                    type="submit"
+                >Submit</StyledButton>
             </StyledForm>
         </Form>
     )

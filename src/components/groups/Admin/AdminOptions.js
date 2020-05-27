@@ -43,11 +43,12 @@ const AdminOptions = ({ match, userId, allGroups, location, allCustomGoals }) =>
         <div>
             <PageHeaderSpan text='Admin Options' />
             <button 
-            id="adminButton"
-            onClick={() => {
-                const link = `/group/${ match.params.groupId }`
-                history.push(link)
-            }} >Go To Group Page</button>
+                id="adminButton"
+                onClick={() => {
+                    const link = `/group/${ match.params.groupId }`
+                    history.push(link)
+                }}
+            >Go To Group Page</button>
             <AddUserToGroup match={ match } />
             <UpdateGroupForm groupId={ currentGroup.id } />
             <CreateCustomGoal userId={ userId } match={ match } />

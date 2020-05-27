@@ -16,14 +16,14 @@ const UserList = ({ allMembers, groupId, groupCreator }) => {
                 <StyledUserListUserCard key={ member.id } >
                     <p>{ member.name }</p>
                     <button 
-                    id="userList"
-                    onClick={ async () => {
-                        // delete user
-                        await RemoveUserQuery({ variables: {
-                            data: {
-                                groupId,
-                                userIds: [ member.id ]
-                            }
+                        id="userList"
+                        onClick={ async () => {
+                            // delete user
+                            await RemoveUserQuery({ variables: {
+                                data: {
+                                    groupId,
+                                    userIds: [ member.id ]
+                                }
                         }})
                         allMembers.splice(allMembers.indexOf(member.id), 1)
                     }}>Remove User From Group</button>

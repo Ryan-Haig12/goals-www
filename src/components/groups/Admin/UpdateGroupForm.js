@@ -62,8 +62,9 @@ const UpdateGroupForm = ({ match, isSubmitting, values, handleChange, groupId })
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 { successUpdatingGroup && <p>Group Updated Successfully!</p> }
                 <StyledButton 
-                id="updateGroup"
-                disabled={ isSubmitting } type="submit" >Submit</StyledButton>
+                    id="updateGroup"
+                    disabled={ isSubmitting } type="submit" >Submit
+                </StyledButton>
             </StyledForm>
         </Form>
     )

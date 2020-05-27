@@ -33,9 +33,15 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
                 { renderRegisterModal ? <Login /> : <Register /> }
             </div>
             <Button 
-            id="userRedirect"
-            style={{ position: 'fixed', left: '50%', transform: 'translate(-50%, -50%)' }} onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }</Button>
+                id="userRedirect"
+                style={{ position: 'fixed', left: '50%', transform: 'translate(-50%, -50%)' }}
+                onClick={ () => setRenderRegisterModal(!renderRegisterModal) }
+            >
+                { renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }
+            </Button>
+
             <br />
+            
             <StyledTextDiv>
                 <h1 style={{ borderBottom: '1px solid black' }} >Welcome to Goals!</h1>
                 <p>In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time</p>

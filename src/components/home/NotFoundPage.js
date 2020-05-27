@@ -11,8 +11,9 @@ const NotFoundPage = () => {
         <div style={{ margin: 'auto', position: 'relative', left: '50%' }} >
             <h1 style={{ color: 'white' }} >Page Not Found</h1>
             <Button 
-            id="toHome"
-            onClick={ setSendHome(true) } >Go Home</Button>
+                id="toHome"
+                onClick={ setSendHome(true) }
+            >Go Home</Button>
         </div>
     )
 }
