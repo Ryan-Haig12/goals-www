@@ -74,18 +74,31 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
                     history.push(link)
                 }} >Go To Group Page</button>
     
-                <select
-                    name="userSelect"
-                    onChange={ e => setUserSelected(e.target.value) }
-                >
-                    <option defaultValue value="">Users</option>
-                    { mapUserIds( finishedGoals, allUserData.getMultipleUsersById ) }
-                </select>
-                
-                <StyledUserFinishedGoalsLog>
-                    <h3>{ userSelected }</h3>
-                    { mapUserGoals( finishedGoals, userSelected ) }
-                </StyledUserFinishedGoalsLog>
+                {
+                    /* 
+                        if the group has yet to finish a goal or the goals are loading
+                        return an empty state message
+                    */
+                    !finishedGoals?.length 
+                        ? <StyledUserFinishedGoalsLog>
+                            <h2>No goals have been found</h2>
+                        </StyledUserFinishedGoalsLog>
+                        : <div>
+                            <select
+                                name="userSelect"
+                                onChange={ e => setUserSelected(e.target.value) }
+                            >
+                                <option defaultValue value="">Users</option>
+                                { mapUserIds( finishedGoals, allUserData.getMultipleUsersById ) }
+                            </select>
+                            
+                            <StyledUserFinishedGoalsLog>
+                                <h3>{ userSelected }</h3>
+                                { mapUserGoals( finishedGoals, userSelected ) }
+                            </StyledUserFinishedGoalsLog>
+                        </div>
+                }
+
             </div>
         )
     }
