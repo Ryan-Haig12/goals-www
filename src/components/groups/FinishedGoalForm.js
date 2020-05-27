@@ -8,7 +8,7 @@ import * as Yup from 'yup'
 import { ADD_FINISHED_GOAL } from '../../graphql/tags/finishedGoal'
 import { clearGoalSelectedHandlerAction } from '../../redux/actions/index'
 
-import { StyledForm } from '../syledComponents/auth'
+import { StyledForm, StyledSelectBar } from '../syledComponents/auth'
 import Button from 'react-bootstrap/Button'
 
 const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handleBlur, allGoals, setPlayerScoresShouldBeFetched }) => {
@@ -98,17 +98,17 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
         >
             <StyledForm>
                 <h2>Log Your Completed Goal!</h2>
-                <div style={{ padding: '10px' }} >
-                    <select
+                <div style={{ display: 'block' }} >
+                    <StyledSelectBar
                         name="goalSelect"
                         value={ values.goalSelect }
                         onChange={ handleChange }
                         onBlur={ handleBlur }
                     >
                         { mapGoals() }
-                    </select>
+                    </StyledSelectBar>
 
-                    <select
+                    <StyledSelectBar
                         name="minutesLogged"
                         value={values.minutesLogged}
                         onChange={handleChange}
@@ -119,7 +119,7 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                         <option value="30" label="30 Minutes" />
                         <option value="45" label="45 Minutes" />
                         <option value="60" label="60 Minutes" />
-                    </select>
+                    </StyledSelectBar>
                 </div>
                 { successMessage && <p>{ successMessage }</p> }
                 <Button 

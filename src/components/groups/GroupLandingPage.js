@@ -65,30 +65,31 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 }} /> }
 
                 <StyledMainGroupDiv>
-                    <StyledGroupMembersDiv>
+
+                    <StyledGroupMembersDiv style={{ border: '1px solid black' }} >
                         <h3>{ moment(Date.now()).format('MMMM') } Standings</h3>
                         <GroupMembers
                             groupId={currentGroup.id}
                             allMembers={data.getMultipleUsersById}
                             playerScoresShouldBeFetched={ playerScoresShouldBeFetched }
                         />
-                    </StyledGroupMembersDiv>
 
-                    <div style={{ display: 'block', padding: '15px', textAlign: 'center' }} >
-                        { isAdmin ? 
-                            <Button
-                                id="directToAdmin"
-                                onClick={ () => {setRedirectToAdmin(true)}}
-                            >Go To Admin Options</Button>
-                            : null
-                        }
-                        <Button 
-                            id="scoringRecords"
-                            style={{ margin: '10px' }}
-                            onClick={() => {
-                            setRedirectToScoringRecords(true)
-                        }}>Go To Finished Goal Report</Button>
-                    </div>
+                        <div style={{ display: 'block', padding: '15px', textAlign: 'center' }} >
+                            { isAdmin ? 
+                                <Button
+                                    variant="warning"
+                                    onClick={ () => {setRedirectToAdmin(true)}}
+                                >Go To Admin Options</Button>
+                                : null
+                            }
+                            <Button 
+                                style={{ margin: '10px' }}
+                                variant="warning"
+                                onClick={() => {
+                                setRedirectToScoringRecords(true)
+                            }}>Go To Finished Goal Report</Button>
+                        </div>
+                    </StyledGroupMembersDiv>
 
                     <FinishedGoalForm
                         allGoals={{ defaultGoals, customGoalsAllGroups }}

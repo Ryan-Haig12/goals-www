@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import { CALC_USER_SCORE } from '../../graphql/tags/scoring'
 import { loadGroupScores } from '../../redux/actions/index'
+import { StyledGroupMemberListItem } from '../syledComponents/Group'
 
 const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, playerScoresShouldBeFetched }) => {
     const { data, error, refetch } = useQuery(CALC_USER_SCORE, {
@@ -37,24 +37,26 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, play
 
     if(groupScoring.length) {
         return (
-            <div>
-                <ol>
-                    {groupScoring.map(member => {
-                        const user = allMembers.find(m => member.userId === m.id)
-                        if(!user || !user.name) return -1 // return -1 to remove warning from console
+            <ul style={{ listStyle: 'none', display: 'inline-block', margin: '0px auto', paddingInlineStart: '0px', width: '50%' }} >
+                {groupScoring.map(member => {
+                    const user = allMembers.find(m => member.userId === m.id)
+                    if(!user || !user.name) return -1 // return -1 to remove warning from console
 
-                        return (
-                            <li key={ member.userId } >{ user.name }, score: { member.score }</li>
-                        )
-                    })}
-                </ol>
-            </div>
+                    return (
+                        <StyledGroupMemberListItem 
+                            key={ member.userId }
+                        >
+                            { user.name }, score: { member.score }
+                        </StyledGroupMemberListItem>
+                    )
+                })}
+            </ul>
             
         )
     }
     return (
-        <ol>
-            <li>No Member Data</li>
+        <ol style={{ listStyle: 'none', display: 'inline-block', margin: '0px auto' }}>
+            <StyledGroupMemberListItem>No Member Data</StyledGroupMemberListItem>
         </ol>
     )
 }
