@@ -84,7 +84,6 @@ const Register = ({ values, errors, touched, isSubmitting, createUserAction, han
             }}
         >
             <StyledForm>
-
                 <h1>Register</h1>
                 { renderInputBars(handleChange, values) }
                 { touched.name && errors.name && <p>{ errors.name }</p> }
@@ -94,7 +93,11 @@ const Register = ({ values, errors, touched, isSubmitting, createUserAction, han
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 <Button 
                     id="registerButton"
-                    style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit"
+                    style={{ marginBottom: '20px' }}
+                    variant="warning"
+                    size="lg"
+                    disabled={ isSubmitting }
+                    type="submit"
                 >Submit</Button>
             </StyledForm>   
         </Form>

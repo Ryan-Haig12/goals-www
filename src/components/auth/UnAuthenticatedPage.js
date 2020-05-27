@@ -32,13 +32,15 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
             <div>
                 { renderRegisterModal ? <Login /> : <Register /> }
             </div>
-            <Button 
-                id="userRedirect"
-                style={{ position: 'fixed', left: '50%', transform: 'translate(-50%, -50%)' }}
-                onClick={ () => setRenderRegisterModal(!renderRegisterModal) }
-            >
-                { renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }
-            </Button>
+
+            <div style={{ display: 'flex',  justifyContent:'center', alignItems:'center' }}>
+                <Button 
+                    id="userRedirect"
+                    onClick={ () => setRenderRegisterModal(!renderRegisterModal) }
+                >
+                    { renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }
+                </Button>
+            </div>
 
             <br />
             
