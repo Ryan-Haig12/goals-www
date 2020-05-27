@@ -32,7 +32,9 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
             <div>
                 { renderRegisterModal ? <Login /> : <Register /> }
             </div>
-            <Button style={{ position: 'fixed', left: '50%', transform: 'translate(-50%, -50%)' }} onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }</Button>
+            <Button 
+            id="userRedirect"
+            style={{ position: 'fixed', left: '50%', transform: 'translate(-50%, -50%)' }} onClick={ () => setRenderRegisterModal(!renderRegisterModal) } >{ renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }</Button>
             <br />
             <StyledTextDiv>
                 <h1 style={{ borderBottom: '1px solid black' }} >Welcome to Goals!</h1>
