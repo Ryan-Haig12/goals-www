@@ -101,7 +101,9 @@ const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, handleBlu
                 </select>
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 { successAddingCustomGoal && <p>Custom Goal Created!</p> }
-                <StyledButton disabled={ isSubmitting } type="submit" >Submit</StyledButton>
+                <StyledButton 
+                id="createCustomGoal"
+                disabled={ isSubmitting } type="submit" >Submit</StyledButton>
             </StyledForm>
         </Form>
     )

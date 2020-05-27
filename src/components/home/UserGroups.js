@@ -30,7 +30,9 @@ const UserGroups = ({ groupData }) => {
         <GroupCard>
             <h2 style={{ borderBottom: '1px solid black', color: '#F0D47E' }} >{ groupData.groupName }</h2>
             <p>Created By { userName }</p>
-            <Button variant="warning" size="lg" onClick={() => {
+            <Button 
+            id="userGroup"
+            variant="warning" size="lg" onClick={() => {
                 const link = `/group/${ groupData.id }`
                 history.push(link)
             }} >Go To Group Page</Button>

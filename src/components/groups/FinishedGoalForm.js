@@ -122,7 +122,9 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                     </select>
                 </div>
                 { successMessage && <p>{ successMessage }</p> }
-                <Button size="lg" style={{ margin: '10px' }} variant="warning" disabled={ isSubmitting } type="submit" >Submit</Button>
+                <Button 
+                id="finishGoal"
+                size="lg" style={{ margin: '10px' }} variant="warning" disabled={ isSubmitting } type="submit" >Submit</Button>
             </StyledForm>
         </Form>
     )

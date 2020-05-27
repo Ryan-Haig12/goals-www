@@ -92,7 +92,9 @@ const Register = ({ values, errors, touched, isSubmitting, createUserAction, han
                 { touched.password && errors.password && <p>{ errors.password }</p> }
                 { touched.password2 && errors.password2 && <p>{ errors.password2 }</p> }
                 { graphQLErrors && renderErrors(graphQLErrors) }
-                <Button style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
+                <Button 
+                id="registerButton"
+                style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
             </StyledForm>   
         </Form>
     )

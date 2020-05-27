@@ -42,7 +42,9 @@ const AdminOptions = ({ match, userId, allGroups, location, allCustomGoals }) =>
     return (
         <div>
             <PageHeaderSpan text='Admin Options' />
-            <button onClick={() => {
+            <button 
+            id="adminButton"
+            onClick={() => {
                 const link = `/group/${ match.params.groupId }`
                 history.push(link)
             }} >Go To Group Page</button>

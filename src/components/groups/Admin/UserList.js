@@ -15,7 +15,9 @@ const UserList = ({ allMembers, groupId, groupCreator }) => {
             return (
                 <StyledUserListUserCard key={ member.id } >
                     <p>{ member.name }</p>
-                    <button onClick={ async () => {
+                    <button 
+                    id="userList"
+                    onClick={ async () => {
                         // delete user
                         await RemoveUserQuery({ variables: {
                             data: {
