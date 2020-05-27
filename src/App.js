@@ -7,7 +7,7 @@ import './App.css'
 
 import AdminOptions from './components/groups/Admin/AdminOptions'
 import CreateGroup from './components/groups/CreateGroup'
-import FinishedGoalLanding from './components/groups/FinishedGoalRecords/FinishedagoalLanding'
+import FinishedGoalLanding from './components/groups/FinishedGoalRecords/FinishedGoalLanding'
 import GroupLandingPage from './components/groups/GroupLandingPage'
 import Header from './components/header/Header'
 import Home from './components/home/Home'

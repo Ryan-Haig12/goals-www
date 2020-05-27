@@ -69,7 +69,7 @@ export const StyledGroupChatButton = styled.button`
 
 export const StyledUserFinishedGoalsLog = styled.div`
     position: relative;
-    margin: 5% auto;
+    margin: auto;
     width: 75%;
     height: 75%;
 
