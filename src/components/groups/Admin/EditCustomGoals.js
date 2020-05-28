@@ -17,7 +17,7 @@ const EditCustomGoals = ({ customGoals }) => {
                     <p>Points: { goal.points }</p>
                     <p>This goal is currently { goal.enabled ? 'Enabled' : 'Disabled' }</p>
                     <button
-                    id="editCustomGoal"
+                        id="editCustomGoal"
                         onClick={ async () => {
                             await UpdateCustomGoalQuery({ variables: {
                                 customGoalData: {

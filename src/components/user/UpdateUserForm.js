@@ -58,8 +58,13 @@ const UpdateUserForm = ({ isSubmitting, values, handleChange, userId, userData, 
                     key={ 'email' }
                 />
                 <Button 
-                id="updateUserForm"
-                style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
+                    id="updateUserForm"
+                    style={{ marginBottom: '20px' }}
+                    variant="warning"
+                    size="lg"
+                    disabled={ isSubmitting }
+                    type="submit"
+                >Submit</Button>
                 { successMessage && <p>{ successMessage }</p> }
             </StyledForm>
         </Form>

@@ -13,7 +13,6 @@
     "apollo-link-ws": "^1.0.19",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
-    "cypress": "^4.6.0",
     "d3": "^5.16.0",
     "date-fns": "^2.13.0",
     "formik": "^2.1.2",
@@ -44,6 +43,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "cypress": "npx cypress open",
     "prodPush": "heroku repo:purge_cache -a goals-www && git commit --allow-empty -m \"Purge cache\" && git push heroku master"
   },
   "eslintConfig": {
@@ -64,5 +64,8 @@
   "engines": {
     "node": "13.11.0",
     "npm": "6.13.7"
+  },
+  "devDependencies": {
+    "cypress": "^4.7.0"
   }
 }

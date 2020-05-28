@@ -89,14 +89,15 @@ const Login = ({ values, errors, touched, loginUserAction, isSubmitting, handleC
                 { touched.password && errors.password && <p>{ errors.password }</p> }
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 <Button 
-                id="loginButton"
-                style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
+                    id="loginButton"
+                    style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit"
+                >Submit</Button>
             </StyledForm>   
         </Form>
     )
 }
 
-const FormkEnhancer = withFormik({
+const FormikEnhancer = withFormik({
     mapPropsToValues: (props) => {
         return {
             email: '',
@@ -109,4 +110,4 @@ const FormkEnhancer = withFormik({
     })
 })(Login)
 
-export default connect(null, { loginUserAction })(FormkEnhancer)
+export default connect(null, { loginUserAction })(FormikEnhancer)
