@@ -27,4 +27,9 @@ describe('Cypress', () => {
       it('clicking on the submit button', () => {
         cy.get('.sc-AxjAm > .btn').click()
       })
+      it('Identifying the create a new group page', () => {
+        cy.get('.sc-fznZeY').should('be.visible') // Identifies home at the top of the page
+        cy.get('.jumbotron').should('be.visible') // Identifies the "New Group" form
+        cy.get('.jumbotron > h1').should('be.visible') // Identifies the ""
+      })
   })

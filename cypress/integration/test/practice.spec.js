@@ -10,7 +10,7 @@ describe('Locating Elements',function() {
       // cy.visit("http://goals-www.herokuapp.com/") // This opens the URL
       cy.visit("http://localhost:3000/") // This opens the URL
       // Puts in email and password - DO NOT LOGIN
-      cy.get('[type="email"]').type("michaeldreesen90@gmail.com(opens in new tab)") // Types the email into the "email" field
+      cy.get('[type="email"]').type("michaeldreesen90@gmail.com") // Types the email into the "email" field
       // Types the password into the "password" field
       cy.get('[type="password"]').type("password")
       cy.wait(2000)
