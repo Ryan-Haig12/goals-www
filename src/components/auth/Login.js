@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 
 const createInputBar = ({ type, placeholder, handleChange, values }) => {
     return (
-        <StyledInputBar 
+        <StyledInputBar
             type={ type.toString() }
             name={ type.toString() }
             placeholder={ placeholder.toString() }
