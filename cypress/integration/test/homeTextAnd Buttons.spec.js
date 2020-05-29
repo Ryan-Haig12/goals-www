@@ -16,9 +16,9 @@ describe('Cypress', () => {
          cy.visit("http://localhost:3000/") // This opens the URL
 
         // Verifys the text on the Homepage
-        cy.get('.sc-AxjAm > h1').should('contain', "Login")
-        cy.get('.sc-fzoXzr > h1').should('contain', "Welcome to Goals!")
-        cy.get('p').should('contain', "In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time")
+        cy.get('.sc-AxjAm > h1').should('contain', 'Login')
+        cy.get('.sc-fzoXzr > h1').should('contain', 'Welcome to Goals!')
+        cy.get('p').should('contain', 'In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time')
       })
 
       it('Verifys buttons on the homepage', () => {
