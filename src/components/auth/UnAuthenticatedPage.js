@@ -43,8 +43,8 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
             <br />
             
             <StyledTextDiv>
-                <h1 style={{ borderBottom: '1px solid black' }} >Welcome to Goals!</h1>
-                <p>In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time</p>
+                <h1 id="welcomeText" style={{ borderBottom: '1px solid black' }} >Welcome to Goals!</h1>
+                <p id="description" >In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time</p>
             </StyledTextDiv>
         </div>
     )

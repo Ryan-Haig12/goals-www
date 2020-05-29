@@ -9,16 +9,16 @@ describe('Cypress', () => {
     })
   })
 
-  describe('Verifys text on homepage',function() {
-    it('verify types of locators',function() {
+  describe('Verifys text',function() {
+    it('verify text on homepage',function() {
 
          // cy.visit("http://goals-www.herokuapp.com/") // This opens the URL
          cy.visit("http://localhost:3000/") // This opens the URL
 
         // Verifys the text on the Homepage
-        cy.get('.sc-AxjAm > h1').should('contain', 'Login')
-        cy.get('.sc-fzoXzr > h1').should('contain', 'Welcome to Goals!')
-        cy.get('p').should('contain', 'In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time')
+        cy.get('#loginHeader').should('contain', 'Login')
+        cy.get('#welcomeText').should('contain', 'Welcome to Goals!')
+        cy.get('#description').should('contain', 'In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time')
       })
 
       it('Verifys buttons on the homepage', () => {
