@@ -5,7 +5,6 @@ import { useMutation } from '@apollo/react-hooks'
 
 import { UPDATE_USER } from '../../graphql/tags/user'
 import { updateUserDataAction } from '../../redux/actions/index'
-import { StyledUpdateUserForm } from '../syledComponents/User'
 //import UserLandingPage from './UserLandingPage'
 import { StyledForm, StyledInputBar } from '../syledComponents/auth'
 import Button from 'react-bootstrap/Button'

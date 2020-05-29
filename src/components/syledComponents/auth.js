@@ -70,3 +70,23 @@ export const StyledButton = styled.button`
 export const StyledErrorMessage = styled.p`
     color: red;
 `
+
+export const StyledSelectBar = styled.select`
+    width: 80%;
+    height: 35px;
+    background: ${ Theme.turquoise };
+    color: ${ Theme.yellow };
+    font-size: 3vh;
+    border: none;
+    margin: 10px;
+    text-align-last:center;
+
+    option {
+        color: black;
+        background: white;
+        display: flex;
+        white-space: pre;
+        min-height: 20px;
+        padding: 0px 2px 1px;
+    }
+`
