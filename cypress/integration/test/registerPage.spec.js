@@ -12,6 +12,7 @@ describe('Cypress', () => {
   describe('registerPage', () => {
       it('Fetches the URL', () => {
           cy.visit("http://localhost:3000/")
+
       })
 
       it('clicks the userRedirect button', () => {
@@ -34,4 +35,33 @@ describe('Cypress', () => {
         cy.get('[type="email"]').type("!@#$%^&*())(*&^%$#@!!@#$%^&*()<>?").clear() // Special characters
       })
 
+      it('completes the password field', () => {
+        // Enters the password into the password field
+        cy.get('[name="password"]').type("password")
+        cy.get('[name="password"]').type("12345678901234567890123456789012345678901234567890").clear() // 50 Chars
+        cy.get('[name="password"]').type("!@#$%^&*())(*&^%$#@!!@#$%^&*()<>?").clear() // Abnormal password
+      })
+
+      it('completes the confirm password field', () => {
+        // Enters the password into 
+        cy.get('[name="password2"]').type("password")
+        cy.get('[name="password2"]').type("12345678901234567890123456789012345678901234567890").clear() // 50 Chars
+        cy.get('[name="password2"]').type("!@#$%^&*())(*&^%$#@!!@#$%^&*()<>?").clear() // Abnormal password
+        
+      })
+
+      it('clearing cookies, clearning local storage', () => {
+        // Clearing cookies
+      cy.clearCookie('authId')
+        // Clearing local storage
+      cy.clearLocalStorage()
+      })
+
+      it('completes the form entirely together', () => {
+        // Enters name, email, password, and confirm password
+      cy.get('[type="name"]').type("name") // Around regular name length
+      cy.get('[type="email"]').type("newmemail@email.com") // around normal email length
+      cy.get('[name="password"]').type("password")
+      cy.get('[name="password2"]').type("password")
+      })
   })
