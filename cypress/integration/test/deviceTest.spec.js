@@ -16,7 +16,7 @@ describe('Cypress', () => {
   })
 
   describe('Devices', () => {
-      it('720p', () => {
+      it('iPhone-6', () => {
           // screensize "375 x 667"
           cy.viewport("iphone-6")
           cy.visit("http://localhost:3000/")

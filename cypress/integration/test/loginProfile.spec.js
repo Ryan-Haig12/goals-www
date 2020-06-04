@@ -16,9 +16,7 @@ describe('Cypress', () => {
 
       it('Logs the user in', () => {
         // Logging the user in
-        cy.get('[type="email"]').type("michaeldreesen90@gmail.com")
-        cy.get('[type="password"]').type("password")
-        cy.get("[type='submit']").click()
+        cy.login('email', 'password')
       })
   })
 
