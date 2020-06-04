@@ -17,26 +17,28 @@ describe('Cypress', () => {
 
   describe('Devices', () => {
       it('720p', () => {
-          // cy.viewport(1280, 720)
+          // screensize "375 x 667"
           cy.viewport("iphone-6")
           cy.visit("http://localhost:3000/")
           cy.wait(3000)
       })
 
       it('iPad mini', () => {
+      // screensize "768 x 1024"
         cy.viewport("ipad-mini")
         cy.visit("http://localhost:3000/")
         cy.wait(3000)
       })
 
       it('iPhone', () => {
+        // screensize "414 x 896"
         cy.viewport("iphone-xr")
         cy.visit("http://localhost:3000/")
         cy.wait(3000)
       })
 
       it('mac', () => {
-
+      // screensize "1440 x 900"
         cy.viewport("macbook-15")
         cy.visit("http://localhost:3000/")
         cy.wait(3000)
