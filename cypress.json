@@ -1,1 +1,15 @@
-{}
+{
+    "baseURL": "http://localhost:3000/",
+    "watchForFileChanges": false,
+    "viewPortWidth": 1000,
+    "viewPortHeight": 600,
+    "waitForAnimations": true,
+    "animationDistanceTreshold": 20,
+    "defualtCommandTimeout": 4000,
+    "execTimout": 60000,
+    "pageLoadTimeout": 60000,
+    "requestTimeout": 15000,
+    "responseTimeout": 15000,
+    "video": false,
+    "failOnStatusCode": false
+}

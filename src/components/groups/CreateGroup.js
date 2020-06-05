@@ -67,7 +67,9 @@ const CreateGroup = ({ isSubmitting, isAuthenticated, values, handleChange, crea
                         key={ 'groupName' }
                     />
                     { graphQLErrors && renderErrors(graphQLErrors) }
-                    <Button style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
+                    <Button 
+                    id="createGroup"
+                    style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit" >Submit</Button>
                 </StyledForm>
             </Form>
         </>
