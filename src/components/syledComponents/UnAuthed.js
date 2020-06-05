@@ -2,6 +2,11 @@ import styled from 'styled-components'
 
 import * as Theme from './Theme'
 
+export const PageHandler = styled.div`
+    width: 100%;
+    margin: auto;
+`
+
 export const StyledTextDiv = styled.div`
     position: relative;
     border: 1px solid black;

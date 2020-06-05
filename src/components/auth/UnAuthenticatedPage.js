@@ -7,7 +7,7 @@ import Register from './Register'
 
 import { GET_USER_BY_JWT } from '../../graphql/tags/user'
 import { loginUserAction, logoutUserAction } from '../../redux/actions/index'
-import { StyledTextDiv } from '../syledComponents/UnAuthed'
+import { PageHandler, StyledTextDiv } from '../syledComponents/UnAuthed'
 import Button from 'react-bootstrap/Button'
 
 const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
@@ -27,7 +27,7 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
     }, [ loggedInUserData, loginUserAction, logoutUserAction ])
 
     return (
-        <div style={{ width: '75%', margin: 'auto' }} >
+        <PageHandler>
             
             <div>
                 { renderRegisterModal ? <Login /> : <Register /> }
@@ -36,6 +36,7 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
             <div style={{ display: 'flex',  justifyContent:'center', alignItems:'center' }}>
                 <Button 
                     id="userRedirect"
+                    variant="warning"
                     onClick={ () => setRenderRegisterModal(!renderRegisterModal) }
                 >
                     { renderRegisterModal ? 'Need to create a user?' : 'Already have a user?' }
@@ -48,7 +49,7 @@ const UnAuthenticatedPage = ({ loginUserAction, logoutUserAction }) => {
                 <h1 style={{ borderBottom: '1px solid black' }} >Welcome to Goals!</h1>
                 <p>In this game, you can team up and face off against your friends to use competition as motivation to improve your life one goal at a time</p>
             </StyledTextDiv>
-        </div>
+        </PageHandler>
     )
 }
 

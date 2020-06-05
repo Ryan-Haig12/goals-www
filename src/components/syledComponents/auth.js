@@ -14,6 +14,10 @@ export const StyledForm = styled.div`
     background-color: ${ Theme.darkBlue };
     color: ${ Theme.yellow };
     text-align: center;
+
+    @media(max-width: 650px) {
+        width: 90%;
+    }
 `
 
 export const StyledInputBar = styled.input`
