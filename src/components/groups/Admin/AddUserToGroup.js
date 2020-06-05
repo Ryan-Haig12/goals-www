@@ -3,11 +3,12 @@ import { withFormik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import * as Yup from 'yup'
+import Button from 'react-bootstrap/Button'
 
 import { ADD_USER_TO_GROUP_BY_EMAIL } from '../../../graphql/tags/groups'
 import { addUserToGroupAction } from '../../../redux/actions/index'
 
-import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../../syledComponents/auth'
+import { StyledForm, StyledInputBar, StyledErrorMessage } from '../../syledComponents/auth'
 
 const renderErrors = ( errors ) => {
     return errors.map(err => {
@@ -51,7 +52,7 @@ const AddUserToGroup = ({ match, isSubmitting, values, handleChange, addUserToGr
             }}
         >
             <StyledForm>
-                Add New User via Email
+                <h3 style={{ margin: '5%' }}>Add New User via Email</h3>
                 <StyledInputBar 
                     type={ 'newUserEmail' }
                     name={ 'newUserEmail' }
@@ -62,11 +63,10 @@ const AddUserToGroup = ({ match, isSubmitting, values, handleChange, addUserToGr
                 />
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 { successAddingUser && <p>User Added to group!</p> }
-                <StyledButton 
+                <Button 
                     id="addUser"
-                    disabled={ isSubmitting }
-                    type="submit"
-                >Submit</StyledButton>
+                    style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit"
+                >Submit</Button>
             </StyledForm>
         </Form>
     )

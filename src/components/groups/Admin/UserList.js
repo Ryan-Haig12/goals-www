@@ -1,8 +1,11 @@
 import React from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
 
 import { REMOVE_USERS_FROM_GROUP } from '../../../graphql/tags/goals'
-import { StyledUserListAdminPage, StyledUserListUserCard } from '../../syledComponents/Group'
+import { StyledForm } from '../../syledComponents/auth'
+import * as Theme from '../../syledComponents/Theme'
 
 const UserList = ({ allMembers, groupId, groupCreator }) => {
     const [ RemoveUserQuery ] = useMutation(REMOVE_USERS_FROM_GROUP)
@@ -13,10 +16,11 @@ const UserList = ({ allMembers, groupId, groupCreator }) => {
             if(member.id === groupCreator) return undefined
     
             return (
-                <StyledUserListUserCard key={ member.id } >
-                    <p>{ member.name }</p>
-                    <button 
+                <tr key={ member.id } style={{ color: `${ Theme.yellow }` }} >
+                    <td>{ member.name }</td>
+                    <td><Button 
                         id="userList"
+                        variant="warning"
                         onClick={ async () => {
                             // delete user
                             await RemoveUserQuery({ variables: {
@@ -26,16 +30,21 @@ const UserList = ({ allMembers, groupId, groupCreator }) => {
                                 }
                         }})
                         allMembers.splice(allMembers.indexOf(member.id), 1)
-                    }}>Remove User From Group</button>
-                </StyledUserListUserCard>
+                    }}>Remove</Button></td>
+                </tr>
             )
         })
     }
 
     return (
-        <StyledUserListAdminPage>
-            { allMembers && mapUserCards() }
-        </StyledUserListAdminPage>
+        <StyledForm>
+            <h3 style={{ margin: '5%' }}>Remove Users from Group</h3>
+            <Table>
+                <tbody>
+                    { allMembers && mapUserCards() }
+                </tbody>
+            </Table>
+        </StyledForm>
     )
 }
 

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { withFormik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
+import Button from 'react-bootstrap/Button'
 
-import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../../syledComponents/auth'
+import { StyledForm, StyledInputBar, StyledErrorMessage } from '../../syledComponents/auth'
 import { UPDATE_GROUP } from '../../../graphql/tags/groups'
 
 const renderErrors = ( errors ) => {
@@ -50,7 +51,7 @@ const UpdateGroupForm = ({ match, isSubmitting, values, handleChange, groupId })
             }}
         >
             <StyledForm>
-                Update Group Name
+                <h3 style={{ margin: '5%' }} >Update Group Name</h3>
                 <StyledInputBar 
                     type={ 'groupName' }
                     name={ 'groupName' }
@@ -61,10 +62,10 @@ const UpdateGroupForm = ({ match, isSubmitting, values, handleChange, groupId })
                 />
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 { successUpdatingGroup && <p>Group Updated Successfully!</p> }
-                <StyledButton 
-                    id="updateGroup"
-                    disabled={ isSubmitting } type="submit" >Submit
-                </StyledButton>
+                <Button 
+                    id="updatGroup"
+                    style={{ marginBottom: '20px' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit"
+                >Submit</Button>
             </StyledForm>
         </Form>
     )

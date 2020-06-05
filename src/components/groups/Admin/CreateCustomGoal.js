@@ -3,10 +3,11 @@ import { withFormik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import * as Yup from 'yup'
+import Button from 'react-bootstrap/Button'
 
 import { createCustomGoalAction } from '../../../redux/actions/index'
 import { CREATE_CUSTOM_GOAL } from '../../../graphql/tags/customGoal'
-import { StyledForm, StyledInputBar, StyledButton, StyledErrorMessage } from '../../syledComponents/auth'
+import { StyledForm, StyledInputBar, StyledErrorMessage, StyledSelectBar } from '../../syledComponents/auth'
 
 const renderErrors = ( errors ) => {
     return errors.map(err => {
@@ -73,7 +74,7 @@ const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, handleBlu
             }}
         >
             <StyledForm>
-                Create new custom Goal
+                <h3 style={{ margin: '5%' }}>Create new custom Goal</h3>
                 <StyledInputBar 
                     type={ 'title' }
                     name={ 'title' }
@@ -90,7 +91,7 @@ const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, handleBlu
                     onChange={ handleChange }
                     key={ 'points' }
                 />
-                <select
+                <StyledSelectBar
                     name="category"
                     value={values.category}
                     onChange={handleChange}
@@ -98,14 +99,13 @@ const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, handleBlu
                 >
                     <option disabled value="" label="Select Category Here" />
                     { getOptions() }
-                </select>
+                </StyledSelectBar>
                 { graphQLErrors && renderErrors(graphQLErrors) }
                 { successAddingCustomGoal && <p>Custom Goal Created!</p> }
-                <StyledButton 
+                <Button 
                     id="createCustomGoal"
-                    disabled={ isSubmitting }
-                    type="submit"
-                >Submit</StyledButton>
+                    style={{ marginBottom: '20px', margin: '5%' }} variant="warning" size="lg" disabled={ isSubmitting } type="submit"
+                >Submit</Button>
             </StyledForm>
         </Form>
     )

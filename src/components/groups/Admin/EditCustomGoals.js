@@ -1,8 +1,11 @@
 import React from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
 
 import { UPDATE_CUSTOM_GOAL } from '../../../graphql/tags/customGoal'
-import { StyledGoalsListAdminPage, StyledGoalsListGoalCard } from '../../syledComponents/Group'
+import { StyledForm } from '../../syledComponents/auth'
+import * as Theme from '../../syledComponents/Theme'
 
 const EditCustomGoals = ({ customGoals }) => {
     const [ UpdateCustomGoalQuery ] = useMutation(UPDATE_CUSTOM_GOAL)
@@ -11,12 +14,11 @@ const EditCustomGoals = ({ customGoals }) => {
         return customGoals.map(goal => {
             const buttonText = goal.enabled ? 'Disable' : 'Enable'
             return (
-                <StyledGoalsListGoalCard key={ goal.id } >
-                    <p>Category: { goal.category }</p>
-                    <p>Title: { goal.title } </p>
-                    <p>Points: { goal.points }</p>
-                    <p>This goal is currently { goal.enabled ? 'Enabled' : 'Disabled' }</p>
-                    <button
+                <tr key={ goal.id } style={{ color: `${ Theme.yellow }` }} >
+                    <td>{ goal.category }</td>
+                    <td>{ goal.title } </td>
+                    <td>{ goal.points }</td>
+                    <td
                         id="editCustomGoal"
                         onClick={ async () => {
                             await UpdateCustomGoalQuery({ variables: {
@@ -26,17 +28,31 @@ const EditCustomGoals = ({ customGoals }) => {
                                 }
                             }})
                         }}
-                    >{ buttonText + ' Goal' }</button>
-                </StyledGoalsListGoalCard>
+                    ><Button variant="warning" >{ buttonText }</Button></td>
+                </tr>
             )
         })
     }
 
     return (
-        <StyledGoalsListAdminPage>
-            { customGoals.length && mapCustomGoals() }
-        </StyledGoalsListAdminPage>
+        <StyledForm>
+            <h3 style={{ margin: '5%' }}>All Custom Goals</h3>
+            <Table>
+                <thead style={{ color: `${ Theme.yellow }` }} >
+                    <tr>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Points</th>
+                        <th>Enable/Disable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { customGoals.length && mapCustomGoals() }
+                </tbody>
+            </Table>
+        </StyledForm>
     )
 }
 
 export default EditCustomGoals
+ 

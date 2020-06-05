@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+import * as Theme from '../../syledComponents/Theme'
 
 import AddUserToGroup from './AddUserToGroup'
 import EditCustomGoals from './EditCustomGoals'
@@ -8,6 +10,19 @@ import CreateCustomGoal from './CreateCustomGoal'
 import PageHeaderSpan from '../../header/PageHeaderSpan'
 import UpdateGroupForm from './UpdateGroupForm'
 import UserList from './UserList'
+import styled from 'styled-components'
+
+const StyledForm = styled.div`
+    position: relative;
+    margin: 5% auto;
+    height: 75%;
+    color: ${ Theme.yellow };
+    text-align: center;
+
+    @media(max-width: 650px) {
+        width: 90%;
+    }
+`
 
 const AdminOptions = ({ match, userId, allGroups, location, allCustomGoals }) => {
     const [ currentGroup, setCurrentGroup ] = useState()
@@ -42,13 +57,19 @@ const AdminOptions = ({ match, userId, allGroups, location, allCustomGoals }) =>
     return (
         <div>
             <PageHeaderSpan text='Admin Options' />
-            <button 
-                id="adminButton"
-                onClick={() => {
-                    const link = `/group/${ match.params.groupId }`
-                    history.push(link)
-                }}
-            >Go To Group Page</button>
+            <StyledForm>
+                <Button 
+                    id="adminButton"
+                    onClick={() => {
+                        const link = `/group/${ match.params.groupId }`
+                        history.push(link)
+                    }}
+                    style={{ margin: 'auto' }}
+                    size="lg"
+                    variant="warning"
+                >Go To Group Page</Button>
+            </StyledForm>
+
             <AddUserToGroup match={ match } />
             <UpdateGroupForm groupId={ currentGroup.id } />
             <CreateCustomGoal userId={ userId } match={ match } />

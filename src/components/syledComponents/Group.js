@@ -101,17 +101,9 @@ export const StyledUserListUserCard = styled.div`
 export const StyledGoalsListAdminPage = styled.div`
     text-align: center;
     width: 600px;
-    background-image: linear-gradient(
-        to top, 
-        #a3b591, #e4ffc9
-    );
+
     position: relative;
     margin: 5% auto;
-`
-
-export const StyledGoalsListGoalCard = styled.div`
-    padding: 5px;
-    margin: 5px;
 `
 
 export const StyledGroupMemberListItem = styled.li`
@@ -121,7 +113,6 @@ export const StyledGroupMemberListItem = styled.li`
     margin-left: auto;
     margin-right: auto;
 
-    padding: 5%;
     margin: 5px;
     width: 100%;
 `

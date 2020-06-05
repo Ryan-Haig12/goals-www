@@ -21,7 +21,7 @@ const Header = ({ logoutUserAction }) => {
 
     return (
         <Navbar style={{ background: `${ Theme.darkBlue }` }} expand="lg">
-            <Navbar.Brand onClick={ () => history.push('/') } style={{ color: `${ Theme.yellow }`, borderBottom: `1px solid ${ Theme.yellow }` }}>Daily Goals</Navbar.Brand>
+            <Navbar.Brand onClick={ () => history.push('/') } style={{ color: `${ Theme.yellow }`, borderBottom: `1px solid ${ Theme.yellow }`, fontSize: '3vh' }}>Daily Goals</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav>
