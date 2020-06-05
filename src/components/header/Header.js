@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import { useHistory } from 'react-router-dom'
 
-import HeaderChunk from './HeaderChunk'
 import { logoutUserAction } from '../../redux/actions'
-import { StyledHeader, StyledLogoutButton, StyledLogoText, StyledChunksGroup } from '../syledComponents/Header'
+import * as Theme from '../syledComponents/Theme'
 
-const Header = ({ isAuthenticated, logoutUserAction }) => {
+const Header = ({ logoutUserAction }) => {
     const [ sendHome, setSendHome ] = useState(false)
+    const history = useHistory()
 
     // send user back to homepage if this is clicked
     // setTimeout is to re-render header after user is back on the homepage 
@@ -15,20 +18,20 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
         setTimeout(() => setSendHome(false), 1)
         return <Redirect to="/" />
     }
-    
+
     return (
-        <StyledHeader>
-            <StyledLogoText onClick={ () => setSendHome(true) } >Daily Goals</StyledLogoText>
-            { isAuthenticated ? <StyledLogoutButton onClick={() => {
-                logoutUserAction();
-                window.location.reload()
-            } } >Logout</StyledLogoutButton> : null }
-            <StyledChunksGroup>
-                <HeaderChunk toLink="/" toText="Home" />
-                <HeaderChunk toLink="/user" toText="Profile" />
-                <HeaderChunk toLink="/createGroup" toText="Create Group" />
-            </StyledChunksGroup>
-        </StyledHeader>
+        <Navbar style={{ background: `${ Theme.darkBlue }` }} expand="lg">
+            <Navbar.Brand onClick={ () => history.push('/') } style={{ color: `${ Theme.yellow }`, borderBottom: `1px solid ${ Theme.yellow }` }}>Daily Goals</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav>
+                    <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={ () => history.push('/') } className="ml-auto">Dashboard</Nav.Link>
+                    <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={ () => history.push('/user') } className="ml-auto">Profile Page</Nav.Link>
+                    <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={ () => history.push('/createGroup') } className="ml-auto">Create Group</Nav.Link>
+                    <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={() => { logoutUserAction(); window.location.reload(); }} className="ml-auto" >Logout</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
     )
 }
 

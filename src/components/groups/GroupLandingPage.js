@@ -5,7 +5,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import moment from 'moment'
 
 import { GET_USERS_BY_ID } from '../../graphql/tags/user'
-import { StyledGroupMembersDiv, StyledMainGroupDiv } from '../syledComponents/Group'
+import { StyledGroupMembersDiv } from '../syledComponents/Group'
 import PageHeaderSpan from '../header/PageHeaderSpan'
 import Button from 'react-bootstrap/Button'
 
