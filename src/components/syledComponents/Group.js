@@ -13,16 +13,17 @@ export const GroupCard = styled.div`
 `
 
 export const StyledGroupMembersDiv = styled.div`
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
     margin-top: 25px;
     color: ${ Theme.yellow };
     background: ${ Theme.darkBlue };
-    text-align: center
-`
+    text-align: center;
+    border-radius: 5px;
 
-export const StyledMainGroupDiv = styled.div`
-    position: relative;
+    @media(max-width: 650px) {
+        width: 90%;
+    }
 `
 
 export const StyledGroupInputButtonDuo = styled.div`
@@ -115,13 +116,12 @@ export const StyledGoalsListGoalCard = styled.div`
 
 export const StyledGroupMemberListItem = styled.li`
     background: ${ Theme.turquoise };
-    border: 1px solid black;
     border-radius: 5px;
 
-    padding: 20px;
     margin-left: auto;
     margin-right: auto;
 
+    padding: 5%;
     margin: 5px;
     width: 100%;
 `

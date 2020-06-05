@@ -70,7 +70,7 @@ const GroupMessageBoard = ({ groupData, getAllGroupMessages }) => {
     }, [update])
 
     return (
-        <Modal.Dialog style={{ width: '100%', background: purple }}>
+        <Modal.Dialog style={{ width: '95%', background: purple }}>
             <div style={{ background: darkBlue }} >{ mapGroupMessagesv2(messagesToRender, allMembers) }</div>
         </Modal.Dialog>
     )

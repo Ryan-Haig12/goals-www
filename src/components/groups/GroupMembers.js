@@ -37,7 +37,7 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, play
 
     if(groupScoring.length) {
         return (
-            <ul style={{ listStyle: 'none', display: 'inline-block', margin: '0px auto', paddingInlineStart: '0px', width: '50%' }} >
+            <ul style={{ listStyle: 'none', display: 'inline-block', margin: '0px auto', paddingInlineStart: '0px', width: '50%', fontSize: '2vh' }} >
                 {groupScoring.map(member => {
                     const user = allMembers.find(m => member.userId === m.id)
                     if(!user || !user.name) return -1 // return -1 to remove warning from console
@@ -55,7 +55,7 @@ const GroupMembers = ({ allMembers, groupId, loadGroupScores, groupScoring, play
         )
     }
     return (
-        <ol style={{ listStyle: 'none', display: 'inline-block', margin: '0px auto' }}>
+        <ol style={{ display: 'flex' }}>
             <StyledGroupMemberListItem>No Member Data</StyledGroupMemberListItem>
         </ol>
     )

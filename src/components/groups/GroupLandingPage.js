@@ -64,8 +64,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                         state: { match, usersGroups }
                 }} /> }
 
-                <StyledMainGroupDiv>
-
+                <div>
                     <StyledGroupMembersDiv style={{ border: '1px solid black' }} >
                         <h3>{ moment(Date.now()).format('MMMM') } Standings</h3>
                         <GroupMembers
@@ -101,7 +100,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                     <PowerRankings groupId={ currentGroup.id } allMembers={data.getMultipleUsersById} />
 
                     <GroupChat allMembers={data.getMultipleUsersById} userId={ userId } groupId={ currentGroup.id } />
-                </StyledMainGroupDiv>
+                </div>
             </div>
         )
     }

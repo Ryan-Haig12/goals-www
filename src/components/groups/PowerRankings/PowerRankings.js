@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { useLazyQuery } from '@apollo/react-hooks'
+import styled from 'styled-components'
 
 import { GET_GROUP_POWER_RANKINGS } from '../../../graphql/tags/groups'
 
 // import ChartWrapper from './d3Chart/ChartWrapper'
 // import DatePicker from './d3Chart/DatePicker'
 // import { StyledChartBody } from '../../syledComponents/d3Chart'
+
+const StyledPowerRanking = styled.div`
+    width: 70%;
+
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: #2B8083;
+    color: #F0D47E;
+    display: block;
+    margin: auto;
+
+    @media(max-width: 650px) {
+        width: 90%;
+    }
+`
 
 const mapPowerRankings = ( powerRankings, allMembers ) => {    
     let mappedPowerRankings = []
@@ -55,11 +72,11 @@ const PowerRankings = ({ groupId, allMembers }) => {
     }, [ data, error ])
 
     return (
-        <div style={{ textAlign: 'center', border: '1px solid black', borderRadius: '5px', width: '33%', background: '#2B8083', color: '#F0D47E', display: 'block', margin: 'auto' }} >
+        <StyledPowerRanking>
             <h2 style={{ margin: 'auto', fontSize: '5vh', borderBottom: '1px solid black', width: '90%' }} >All Time Power Rankings</h2>
             <div style={{ marginTop: '10px' }} >{ powerRankings && mapPowerRankings(powerRankings, allMembers) }</div>
             { !powerRankings && <p style={{ fontSize: '3vh', paddingTop: '25px' }} >There hasn't been a goal logged in this group. Be the first to log a goal and watch your groups power rankings change over time!</p> }
-        </div>
+        </StyledPowerRanking>
     )
 }
  
