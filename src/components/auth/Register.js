@@ -85,7 +85,7 @@ const Register = ({ values, errors, touched, isSubmitting, createUserAction, han
         >
             <StyledForm>
 
-                <h1>Register</h1>
+                <h1 id="register">Register</h1>
                 { renderInputBars(handleChange, values) }
                 { touched.name && errors.name && <p>{ errors.name }</p> }
                 { touched.email && errors.email && <p>{ errors.email }</p> }

@@ -17,7 +17,7 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
     }
     
     return (
-        <StyledHeader>
+        <StyledHeader id="header">
             <StyledLogoText onClick={ () => setSendHome(true) } >Daily Goals</StyledLogoText>
             { isAuthenticated ? <StyledLogoutButton onClick={() => {
                 logoutUserAction();
