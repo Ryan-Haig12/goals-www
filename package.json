@@ -39,6 +39,7 @@
   },
   "scripts": {
     "local": "REACT_APP_ENV=local npm start",
+    "local-windows": "Set REACT_APP_ENV=dev npm start && npm run start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
