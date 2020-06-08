@@ -3,12 +3,25 @@ import { connect } from 'react-redux'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
+import styled from 'styled-components'
 
 import { CALC_USER_STAT } from '../../graphql/tags/stats'
 import PageHeaderSpan from '../header/PageHeaderSpan'
 import ShowUserStats from './ShowUserStats'
 import { UserPage } from '../syledComponents/User'
 import UpdateUserForm from './UpdateUserForm'
+import * as Theme from '../syledComponents/Theme'
+
+const StyledUserInfo = styled.div`
+    border-radius: 5px;
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    color: ${ Theme.yellow };
+    background: ${ Theme.darkBlue };
+    font-size: 3vh;
+`
 
 const UserLandingPage = ({ userData }) => {
 
@@ -38,10 +51,10 @@ const UserLandingPage = ({ userData }) => {
         <div>
             <PageHeaderSpan text={ name + '\'s Landing Page' } />
             <UserPage>
-                <div style={{ border: '1px solid black' }}>
-                    <p>Name { name }, Email { email }</p>
+                <StyledUserInfo>
+                    <p>{ name }, { email }</p>
                     <p>Member since { moment(dateCreated).format('MMM do, YYYY') }</p>
-                </div>
+                </StyledUserInfo>
                 <UpdateUserForm userId={ userId } />
                 <div>
                     { userStatsFetched ? <ShowUserStats data={ userStats } /> : '' }

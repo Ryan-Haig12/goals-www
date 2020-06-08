@@ -26,7 +26,7 @@ const Header = ({ logoutUserAction }) => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav>
                     <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={ () => history.push('/') } className="ml-auto">Dashboard</Nav.Link>
-                    <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={ () => history.push('/user') } className="ml-auto">Profile Page</Nav.Link>
+                    <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={ () => history.push('/user') } className="ml-auto">Profile</Nav.Link>
                     <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={ () => history.push('/createGroup') } className="ml-auto">Create Group</Nav.Link>
                     <Nav.Link style={{ color: `${ Theme.yellow }` }} onClick={() => { logoutUserAction(); window.location.reload(); }} className="ml-auto" >Logout</Nav.Link>
                 </Nav>

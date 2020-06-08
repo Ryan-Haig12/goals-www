@@ -58,6 +58,10 @@ export const StyledInputBar = styled.input`
     ::placeholder {
         color: ${ Theme.yellow };
     }
+
+    @media(max-width: 600px) {
+        width: 90%;
+    }
 `
 
 export const StyledButton = styled.button`
