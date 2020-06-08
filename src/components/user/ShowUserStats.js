@@ -21,6 +21,7 @@ const ShowUserStats = ({ data }) => {
     const {
         lastFiveFinishedGoals,
         favoriteGoal,
+        favoriteGoalCount,
         oneWeek,
         oneMonth,
         threeMonths,
@@ -56,7 +57,7 @@ const ShowUserStats = ({ data }) => {
             </div>
             <div style={{ border: '1px solid black', background: darkBlue, width: '80%', margin: 'auto', borderRadius: '5px', marginTop: '40px' }} >
                 <h3 style={{ margin: '30px', borderBottom: '3px solid black', width: '80%', display: 'inline-block' }}>Favorite Goal</h3>
-                <Card style={{ width: '70%', display: 'inline-block', background: turquoise, margin: '20px' }} body>{ favoriteGoal.title } : { favoriteGoal.category }</Card>
+                <Card style={{ width: '70%', display: 'inline-block', background: turquoise, margin: '20px' }} body>{ favoriteGoal.title } : { favoriteGoal.category }, Logged { favoriteGoalCount } times</Card>
             </div>
             <div style={{ border: '1px solid black', background: darkBlue, width: '80%', margin: 'auto', borderRadius: '5px', marginTop: '40px' }}>
                 <h3 style={{ margin: '30px', borderBottom: '3px solid black', width: '80%', display: 'inline-block' }} >Time Logs</h3>

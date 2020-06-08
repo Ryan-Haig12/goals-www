@@ -20,6 +20,7 @@ export const CALC_USER_STAT = gql`
                 category
                 errors
             }
+            favoriteGoalCount
             oneWeek {
                 totalTimeLogged
                 totalPointsScored
