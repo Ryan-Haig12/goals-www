@@ -22,7 +22,7 @@ import {
 import { GET_ALL_USERS_GROUPS } from './graphql/tags/groups'
 import { getDefaultGoalsAction, getAllUserGroupsAction, getCustomGoalsByGroupIdArrayAction } from './redux/actions/index'
 
-const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, groupIds, getCustomGoalsByGroupIdArrayAction }) => {
+const App = ({ userJWT, userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, groupIds, getCustomGoalsByGroupIdArrayAction }) => {
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
   const [ getDefaultGoals, { data: defaultGoals, loading, error } ] = useLazyQuery(GET_DEFAULT_GOALS)
   const [
@@ -81,7 +81,8 @@ const App = ({ userData, userId, getDefaultGoalsAction, getAllUserGroupsAction, 
 
   return (
     <BrowserRouter>
-      { isAuthenticated ? <Header /> : null }
+      { isAuthenticated  ? <Header /> : null }
+      { /* isAuthenticated || userJWT != null ? <Header /> : null */ }
       <Switch>
         <Route exact path='/' component={ Home } />
         <Route path='/unauthed' component={ UnAuthenticatedPage } />

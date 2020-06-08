@@ -1,40 +1,43 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
 import { useHistory, Redirect } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 import Button from 'react-bootstrap/Button'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Table from 'react-bootstrap/Table'
 import moment from 'moment'
 
 import { GET_FINISHED_GOALS } from '../../../graphql/tags/finishedGoal'
 import { GET_USERS_BY_ID } from '../../../graphql/tags/user'
 import { StyledUserFinishedGoalsLog } from '../../syledComponents/Group'
+import * as Theme from '../../syledComponents/Theme'
 
-// return all finishedGoals for a given userId
-const mapUserGoals = ( finishedGoals, userSelected ) => {
-    if(!finishedGoals) return 0
-    const userGoals = finishedGoals.filter(goal => goal.userId === userSelected)
+const FinishedGoalLanding = props => {
+    const { match, usersGroups, allGoals, groupId, isAuthenticated } = props.location.state
 
-    // reverse the goals so goals finished the most recent are placed at the top of the div
-    return userGoals.reverse().map(fg => {
-        return (
-            <div key={ fg.id } >
-                <h4 style={{ "textDecoration": "underline" }} >{ fg.goalId + ' ' + moment(parseInt(fg.timeCompleted)).format('LLLL') }</h4>
-            </div>
-        )
-    })
-}
-
-const FinishedGoalLanding = ({ match, usersGroups }) => {
     const [ currentGroup, setCurrentGroup ] = useState()
     const [ getFinishedGoalsQuery, { data } ] = useLazyQuery(GET_FINISHED_GOALS, { variables: { GetFinishedGoalsData: { groupId: match.params.groupId } } })
-    const [ getAllUsers, { data: allUserData } ] = useLazyQuery(GET_USERS_BY_ID, { variables: { 
-        userIds: currentGroup ? currentGroup.groupMembers : [] 
-    }})
+    const [ getAllUsers, { data: allUserData } ] = useLazyQuery(GET_USERS_BY_ID, { variables: { userIds: currentGroup ? currentGroup.groupMembers : [] }})
     const [ finishedGoals, setFinishedGoals ] = useState()
     const [ userSelected, setUserSelected ] = useState('no user selected')
     const history = useHistory()
+
+    // strip all enabled customGoals
+    const group = allGoals.customGoalsAllGroups.filter(group => group.groupId === groupId)[0]
+    const customGoals = group.customGoals.filter(f => f)
+
+    // merge custom goals and default goals
+    let groupGoals = []
+    let mergedGoals = allGoals.defaultGoals
+
+    // add all default goals to groupGoals array
+    for(let category in mergedGoals) {
+        mergedGoals[category].goals.map(goal => {
+            groupGoals.push(goal)
+        })
+    }
+    // add custom goals to groupGoals array
+    customGoals.map(goal => { groupGoals.push(goal) })
 
     useEffect(() => {
         getFinishedGoalsQuery()
@@ -57,7 +60,7 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
 
     // return unique userNames for select user dropdown
     const mapUserIdsV2 = () => {
-        if(!finishedGoals || !allUserData) return 
+        if(!finishedGoals || !allUserData) return
 
         let userIds = Array.from(new Set(finishedGoals.map(goal => goal.userId)))
         let userNames = allUserData.getMultipleUsersById.map(user => ({ id: user.id, name: user.name }))
@@ -75,6 +78,48 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
         })
     } 
 
+    // return all finishedGoals for a given userId
+    const mapUserGoalsV2 = userSelected => {
+        if(!finishedGoals || !allUserData || !userSelected) return <div><h3>Found no finished goals</h3></div>
+
+        let userGoals = finishedGoals.filter(goal => goal.userId === userSelected)
+        let userNames = allUserData.getMultipleUsersById.map(user => ({ id: user.id, name: user.name }))
+        const userSelectedName = userNames.find(user => user.id === userSelected)
+
+        return (
+            <div>
+                <h3 style={{ padding: '20px' }} >{ userSelectedName ? userSelectedName.name : 'No User Selected'  }</h3>
+
+                { userSelectedName !== undefined && 
+                    <Table style={{ color: `${ Theme.yellow }` }} >
+                        <thead>
+                            <tr>
+                                <th onClick={ () => userGoals = userGoals.sort((a, b) => a.title > b.title) } >Title</th>
+                                <th onClick={ () => console.log('categoru') } >Category</th>
+                                <th>Points</th>
+                                <th>Minutes</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {userGoals.reverse().map(fg => {
+                                const goalDetail = groupGoals.find(goal => fg.goalId === goal.id)
+                                return (
+                                    <tr key={ fg.id } >
+                                        <td>{ goalDetail.title }</td>
+                                        <td>{ goalDetail.category }</td>
+                                        <td>{ goalDetail.points * ((parseInt(fg.minutesLogged) / 15) * .25) }</td>
+                                        <td>{ fg.minutesLogged }</td>
+                                        <td>{ moment(parseInt(fg.timeCompleted)).format('L') }</td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </Table>
+                }
+            </div>
+        )
+    }
 
     // render button to return user to home page
     const GroupPageButton = (
@@ -114,8 +159,7 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
                             </DropdownButton>
                             
                             <StyledUserFinishedGoalsLog>
-                                <h3>{ userSelected }</h3>
-                                { mapUserGoals( finishedGoals, userSelected ) }
+                                { mapUserGoalsV2(userSelected) }
                             </StyledUserFinishedGoalsLog>
                         </div>
                 }
@@ -130,13 +174,4 @@ const FinishedGoalLanding = ({ match, usersGroups }) => {
     )
 }
 
-// I coded this component poorly, I should be passing all members in through props rather
-// than having to connect to redux again. I just didn't set this component up that way
-const mapStateToProps = ( state ) => {
-    const usersGroups = state.Group.groupsFullData ? state.Group.groupsFullData : []
-    return {
-        usersGroups
-    }
-}
-
-export default connect( mapStateToProps )(FinishedGoalLanding)
+export default FinishedGoalLanding

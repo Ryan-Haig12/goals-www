@@ -21,6 +21,7 @@ export const GET_FINISHED_GOALS = gql`
             userId
             groupId
             timeCompleted
+            minutesLogged
             errors
         }
     }

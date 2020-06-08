@@ -71,7 +71,7 @@ export const StyledGroupChatButton = styled.button`
 export const StyledUserFinishedGoalsLog = styled.div`
     position: relative;
     margin: auto;
-    width: 75%;
+    width: 80%;
     height: 75%;
 
     border-radius: 5px;
@@ -80,6 +80,14 @@ export const StyledUserFinishedGoalsLog = styled.div`
     background-color: ${ Theme.darkBlue };
     color: ${ Theme.yellow };
     text-align: center;
+
+    @media(max-width: 800px) {
+        width: 100%;
+    }
+
+    @media(max-width: 400px) {
+        width: 125%;
+    }
 `
 
 export const StyledUserListAdminPage = styled.div`

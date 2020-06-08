@@ -15,13 +15,15 @@ import GroupMembers from './GroupMembers'
 import PowerRankings from './PowerRankings/PowerRankings'
 import UnAuthedNavHome from '../auth/UnAuthedNavHome'
 
-const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userId, defaultGoals, customGoalsAllGroups }) => {
+const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, userData, defaultGoals, customGoalsAllGroups }) => {
     const [ currentGroup, setCurrentGroup ] = useState(null)
     const [ isAdmin, setIsAdmin ] = useState(false)
     const [ playerScoresShouldBeFetched, setPlayerScoresShouldBeFetched ] = useState(false)
     const [ redirectToAdmin, setRedirectToAdmin ] = useState(false)
     const [ redirectToScoringRecords, setRedirectToScoringRecords ] = useState(false)
     const [ getAllUsers, { data, loading, error } ] = useLazyQuery(GET_USERS_BY_ID, { variables: { userIds: currentGroup ? currentGroup.groupMembers : [] } })
+
+    const userId = userData.id
 
     useEffect(() => {
         usersGroups.map(group => {
@@ -55,13 +57,13 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
                 <PageHeaderSpan text={ 'Welcome to ' + currentGroup.groupName } />
 
                 { isAdmin && redirectToAdmin && <Redirect to={{
-                        pathname: adminLink,
-                        state: { allMembers: data.getMultipleUsersById }
+                    pathname: adminLink,
+                    state: { allMembers: data.getMultipleUsersById }
                 }} /> }
 
                 { redirectToScoringRecords && <Redirect to={{
-                        pathname: `/group/${ currentGroup.id }/finishedGoalsReport`,
-                        state: { match, usersGroups }
+                    pathname: `/group/${ currentGroup.id }/finishedGoalsReport`,
+                    state: { match, usersGroups, allGoals: { defaultGoals, customGoalsAllGroups }, groupId: currentGroup.id, isAuthenticated }
                 }} /> }
 
                 <div>
@@ -108,13 +110,13 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
 }
 
 const mapStateToProps = (state) => {
-    const userId = state.User.userData ? state.User.userData.id : ''
+    const userData = state.User.userData ? state.User.userData : ''
     const usersGroups = state.Group.groupsFullData ? state.Group.groupsFullData : []
     const groupsAdmin = state.Group.groupsAdmin ? state.Group.groupsAdmin : []
     return {
         isAuthenticated: state.User.isAuthenticated,
         goalIsSelected: state.FinishedGoals.goalIsSelected,
-        userId,
+        userData,
         usersGroups,
         groupsAdmin,
         defaultGoals: state.Goals.defaultGoals,

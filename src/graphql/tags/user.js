@@ -53,7 +53,6 @@ export const GET_USERS_BY_ID = gql`
             email
             dateCreated
             errors
-            jwt   
         }
     }
 `
