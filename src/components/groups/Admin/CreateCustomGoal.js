@@ -40,11 +40,7 @@ const CreateCustomGoal = ({ match, values, isSubmitting, handleChange, handleBlu
 
     const getOptions = () => {
         const cats = ['Physical', 'Nutrition', 'Mental', 'Spiritual', 'Emotional']
-        return cats.map(c => {
-            return (
-                <option value={ c } label={ c } />
-            )
-        })
+        return cats.map(c => <option key={ c } value={ c } label={ c } />)
     }
 
     return (

@@ -8,7 +8,7 @@ const mapLastFiveGoals = ( lastFiveGoals ) => {
     let g = 0
     return lastFiveGoals.map(goal => {
         return (
-            <div style={{ margin: '20px' }}>
+            <div key={ goal.id + `_${ g++ }` } style={{ margin: '20px' }}>
                 <Card style={{ width: '70%', display: 'inline-block', background: turquoise }} key={ goal.id + `_${ g++ }` } body>
                     { goal.title } : { goal.category }
                 </Card>

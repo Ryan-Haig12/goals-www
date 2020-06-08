@@ -13,7 +13,7 @@ import { StyledUserFinishedGoalsLog } from '../../syledComponents/Group'
 import * as Theme from '../../syledComponents/Theme'
 
 const FinishedGoalLanding = props => {
-    const { match, usersGroups, allGoals, groupId, isAuthenticated } = props.location.state
+    const { match, usersGroups, allGoals, groupId } = props.location.state
 
     const [ currentGroup, setCurrentGroup ] = useState()
     const [ getFinishedGoalsQuery, { data } ] = useLazyQuery(GET_FINISHED_GOALS, { variables: { GetFinishedGoalsData: { groupId: match.params.groupId } } })
@@ -34,10 +34,11 @@ const FinishedGoalLanding = props => {
     for(let category in mergedGoals) {
         mergedGoals[category].goals.map(goal => {
             groupGoals.push(goal)
+            return goal
         })
     }
     // add custom goals to groupGoals array
-    customGoals.map(goal => { groupGoals.push(goal) })
+    customGoals.map(goal => { groupGoals.push(goal); return goal })
 
     useEffect(() => {
         getFinishedGoalsQuery()

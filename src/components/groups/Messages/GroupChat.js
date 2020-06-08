@@ -8,7 +8,7 @@ import { darkBlue, yellow } from '../../syledComponents/Theme'
 
 const GroupChat = ({ userId, groupId, allMembers }) => {
     return (
-        <Modal.Dialog style={{ display: 'box', borderRadius: '5px', padding: '0px auto', margin: '0px auto', paddingTop: '50px' }}>
+        <Modal.Dialog style={{ display: 'box', borderRadius: '5px', padding: '0px auto', margin: '0px auto', paddingTop: '50px', marginBottom: '20px' }}>
             <Modal.Header style={{ background: darkBlue }} >
                 <Modal.Title style={{ color: yellow }} >Group Chat</Modal.Title>
             </Modal.Header>
