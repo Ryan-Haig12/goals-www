@@ -33,3 +33,4 @@ describe('Cypress', () => {
         cy.get('.jumbotron > h1').should('be.visible') // Identifies the ""
       })
   })
+  

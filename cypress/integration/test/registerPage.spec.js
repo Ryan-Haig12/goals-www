@@ -65,3 +65,4 @@ describe('Cypress', () => {
       cy.get('[name="password2"]').type("password")
       })
   })
+  
