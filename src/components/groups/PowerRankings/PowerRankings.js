@@ -30,7 +30,7 @@ const mapPowerRankings = ( powerRankings, allMembers ) => {
     mappedPowerRankings.push(<h3 key={ 'weeklyRankings' } >Weekly Rankings</h3>)
     mappedPowerRankings.push(powerRankings.allTimeRankingsWeeks?.map(rankLog => {
         const member = allMembers.find(member => member.id === rankLog.userId)
-        if(!member) return 0
+        if(!member) return ''
 
         return (
             <div key={ rankLog.userId + '_' + rankLog.recordsWon }>
