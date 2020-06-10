@@ -43,9 +43,9 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                 )
             })
         })
-        // TODO: CHANGE THIS TO BE THE DEFAULT
-        // IT WORKS IF DEFAULTVALUE IS SELECTED, BUT THAT'S DEPRICATED
-        data.unshift(<option defaultValue key={'yee'} disabled value="" label="Select Goal here" />)
+
+        // default value
+        data.unshift(<option key={'default'} disabled value="default" label="Select Goal here" />)
         return data
     }
 
@@ -104,6 +104,7 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                         value={ values.goalSelect }
                         onChange={ handleChange }
                         onBlur={ handleBlur }
+                        defaultValue={ 'default' }
                     >
                         { mapGoals() }
                     </StyledSelectBar>
