@@ -1,6 +1,4 @@
-/// <reference types="cypress" />
-
-import { getKey } from "apollo-link/lib/linkUtils"
+// TODO fix and update spec
 
 // This block is to make sure this .js file works
 describe('Cypress', () => {
@@ -9,40 +7,57 @@ describe('Cypress', () => {
     })
   })
 
-  describe('Getting the URL', () => {
-      it('Fetches the URL', () => {
-        cy.visit("http://localhost:3000/")
-      })
+  class basepage {
+    static visit() {
+      cy.visit("http://localhost:3000/")
+    }
 
-      it('Logs the user in', () => {
-        // Logging the user in
-        cy.login('email', 'password')
-      })
+    static login() {
+      // Logging the user in
+      cy.login('email', 'password')
+    }
 
-      it('Clicks on "Testing Group Mofo"', () => {
-        // Clicks on the group
-        cy.get(':nth-child(1) > #userGroup').click()
-      })
+    static clickGroup() {
+      // Clicks on the group
+      cy.get(':nth-child(1) > #userGroup').click()
+    }
 
-      it('Checks group name', () => {
-        // gchecks group name
-        cy.get('.sc-fzqBZW').should('contain', "Welcome to Testing Group Mofo")
-      })
+    static groupNameCheck() {
+      // gchecks group name
+      cy.get('.sc-fzqBZW').should('contain', "Welcome to Testing Group Mofo")
+    }
 
-      it('Checks month standings modal', () => {
-        // Makes sure the modal is visible
-        cy.get('AxheI').should('be.visible')
-      })
-      
-      it('Checks the goal modal', () => {
-        // Makes sure its visible
-        cy.get('.sc-AxjAm').should('be.visible')
+    static monthModalCheck() {
+      // Makes sure the modal is visible
+      cy.get('AxheI').should('be.visible')
+    }
 
-        // Checks the "Log Your Completed Goal!" text
-        cy.get('.sc-AxjAm > h2').should('contain', "Log Your Completed Goal!")
+    static goalsModalCheck() {
+      // Makes sure its visible
+      cy.get('.sc-AxjAm').should('be.visible')
+    }
 
-        // Clicks on the goals dropdown
-        cy.get('[name="goalSelect"]').click()
-      })
+    static completedGoal() {
+      // Checks the "Log Your Completed Goal!" text
+      cy.get('.sc-AxjAm > h2').should('contain', "Log Your Completed Goal!")
+    }
+
+    static goalDropdown() {
+      // Clicks on the goals dropdown
+      cy.get('[name="goalSelect"]').click()
+    }
+  }
+
+  describe('functions',() => {
+    it('checks logged in profile',() => {
+      basepage.visit()
+      basepage.login()
+      basepage.clickGroup()
+      basepage.groupNameCheck()
+      basepage.monthModalCheck()
+      basepage.goalsModalCheck()
+      basepage.completedGoal()
+      basepage.goalDropdown()
+    })
   })
 
