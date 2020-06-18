@@ -1,21 +1,31 @@
-describe('keyboard press simulation', () => {
-    it('should submit searchbox with pressing enter', () => {
+import { isMainThread } from "worker_threads"
 
-        cy.visit("http://localhost:3000/")
+    class basepage {
+        static visit() {
+            cy.visit("http://localhost:3000/")
+        }
 
-        // Logging in
-        cy.login('email', 'password')
+        static login() {
+            // Logging in
+            cy.login('email', 'password')
+        }
 
-    })
-    it('clicls on the group name', () => {
+        static userGroup() {
+            // Going to the group page
+            cy.get('#userGroup').click()
+        }
 
-    // Going to the group page
-    cy.get('#userGroup').click()
-        })
-
-        it('goes to the message box to type something', () => {
-
+        static messageBox() {
             // Types text into the messagebox
             cy.get('.sc-fzozJi').type('this is some text {enter}')
+        }
+    }
+
+describe('functions',() => {
+    it('uses the messageBox',() => {
+        basepage.visit()
+        basepage.login()
+        basepage.userGroup()
+        basepage.messageBox()
     })
 })
