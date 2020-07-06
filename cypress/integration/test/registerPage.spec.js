@@ -66,7 +66,7 @@ describe('Cypress', () => {
     }
   }
 
-describe('functions', () => {
+describe('registerPage', () => {
   it('checks the register page', () => {
     basepage.visit()
     basepage.userRedirect()

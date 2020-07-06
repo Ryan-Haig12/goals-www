@@ -38,7 +38,7 @@ describe('Cypress', () => {
     }
   }
   
-describe('functions',() => {
+describe('newUser',() => {
   it('looks at new user page',() => {
     basepage.visit()
     basepage.clickCreateUser()

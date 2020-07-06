@@ -48,7 +48,7 @@ describe('Cypress', () => {
     }
   }
 
-  describe('functions',() => {
+  describe('loginProfile',() => {
     it('checks logged in profile',() => {
       basepage.visit()
       basepage.login()

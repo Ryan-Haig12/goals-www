@@ -25,7 +25,7 @@ describe('Cypress', () => {
     }
   }
 
-describe('functions', () => {
+describe('homeAndTextButtons', () => {
   it('tests the homepage', () => {
     basepage.loadPage()
     basepage.verifyText()

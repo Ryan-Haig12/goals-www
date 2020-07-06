@@ -21,7 +21,7 @@ import { isMainThread } from "worker_threads"
         }
     }
 
-describe('functions',() => {
+describe('keyboard',() => {
     it('uses the messageBox',() => {
         basepage.visit()
         basepage.login()
