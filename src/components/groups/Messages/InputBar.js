@@ -31,6 +31,7 @@ const InputBar = ({ values, handleChange, groupData }) => {
             }}
         >
             <StyledGroupChatInputBar
+            id="messageInput"
                 type={ 'messageText' }
                 name={ 'messageText' }
                 placeholder={ 'Type Message Here' }

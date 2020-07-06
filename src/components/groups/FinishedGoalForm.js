@@ -96,7 +96,7 @@ const FinishedGoalForm = ({ groupData, isSubmitting, values, handleChange, handl
                 }, 3000)
             }}
         >
-            <StyledForm>
+            <StyledForm id="goalSelector">
                 <h2>Log Your Completed Goal!</h2>
                 <div style={{ display: 'block' }} >
                     <StyledSelectBar

@@ -66,7 +66,7 @@ const GroupLandingPage = ({ match, usersGroups, isAuthenticated, groupsAdmin, us
 
                 <StyledMainGroupDiv>
 
-                    <StyledGroupMembersDiv style={{ border: '1px solid black' }} >
+                    <StyledGroupMembersDiv id="standingModal" style={{ border: '1px solid black' }} >
                         <h3>{ moment(Date.now()).format('MMMM') } Standings</h3>
                         <GroupMembers
                             groupId={currentGroup.id}

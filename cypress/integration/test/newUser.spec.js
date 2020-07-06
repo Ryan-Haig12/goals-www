@@ -1,3 +1,6 @@
+// TODO - Need to research and figure out how to add in a new user email, maybe using the $ method?
+// TODO - Need to reasearch how to get rid of the new user from the db
+
 // This block is to make sure this .js file works
 describe('Cypress', () => {
     it('is working', () => {
@@ -29,12 +32,8 @@ describe('Cypress', () => {
     static clickSubmit() {
       // clicks the submit button
         cy.get('.sc-AxjAm > .btn').click()
-    }
-
-    static identifying() {
-        cy.get('.sc-fznZeY').should('be.visible') // Identifies home at the top of the page
-        cy.get('.jumbotron').should('be.visible') // Identifies the "New Group" form
-        cy.get('.jumbotron > h1').should('be.visible') // Identifies the ""
+        // Should get the "Email randomEmail@email.comb already exists"
+        cy.get('.sc-AxhCb').should('be.visible')
     }
   }
   
@@ -44,6 +43,5 @@ describe('newUser',() => {
     basepage.clickCreateUser()
     basepage.createNewUser()
     basepage.clickSubmit()
-    basepage.identifying()
   })
 })

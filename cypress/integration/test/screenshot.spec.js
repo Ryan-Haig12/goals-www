@@ -4,6 +4,9 @@ describe('takes screenshots', () => {
 
     })
 
+// Commenting this out so that it does not keep taking screenshots
+
+   /*
     it('full page screenshot', () => {
         cy.screenshot({ capture: 'fullPage' })
     })
@@ -13,4 +16,5 @@ describe('takes screenshots', () => {
 
         cy.get('#loginButton').screenshot()
   })
+  */
 })
